@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { StoreProvider, useStore } from "./lib/store";
 import { streak } from "./lib/state";
 import { dueCards } from "./lib/srs";
+import { dismissSpeechIssue, getSpeechIssue, subscribeSpeechIssue } from "./lib/speech";
 import { Icon, type IconName } from "./components/Icon";
 import { ReadTab } from "./components/ReadTab";
 import { SavedTab } from "./components/SavedTab";
@@ -23,6 +24,7 @@ function Shell() {
   const now = Date.now();
   const days = streak(state.days, now);
   const due = dueCards(state.vocab, now).length;
+  const soundIssue = useSyncExternalStore(subscribeSpeechIssue, getSpeechIssue);
 
   return (
     <div className="app">
@@ -36,6 +38,18 @@ function Shell() {
           🔥 {days}
         </div>
       </header>
+
+      {soundIssue && (
+        <div className="notice" role="alert">
+          <div>
+            <strong>The sound didn’t start.</strong> On iPhone: switch off Silent mode (the switch on the side), turn up the volume, and check that a
+            Dutch voice is installed (Settings → Accessibility → Spoken Content → Voices → Dutch). Then tap a speaker again.
+          </div>
+          <button className="btn btn-text" onClick={dismissSpeechIssue}>
+            Dismiss
+          </button>
+        </div>
+      )}
 
       <main className="screen">
         {tab === "read" && <ReadTab goTo={setTab} />}

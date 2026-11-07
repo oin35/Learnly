@@ -17,8 +17,9 @@ being able to handle basic daily situations: ordering a coffee, shopping, asking
   shortcuts (Space to flip, 1 = not yet, 2 = got it).
 - **Grammar pills**: 18 bite-sized pills (de/het, verb in second place, niet/geen, questions, "ik wil graag…",
   u vs. je, numbers & prices, time, …), highlighted inline in the stories and collected in the Grammar tab.
-- **Extras**: show/hide English translation per story, a 2-question comprehension check, listen buttons
-  (browser text-to-speech, `nl-NL`), a daily streak, dark mode.
+- **Listen to the whole story**: a read-aloud player (play / pause / stop, *Slow* mode) that highlights the
+  paragraph being read; every paragraph, word and example also has its own listen button.
+- **Extras**: show/hide English translation per story, a 2-question comprehension check, a daily streak, dark mode.
 - Everything is stored in the browser (`localStorage`). No account, no backend.
 
 ## Develop
@@ -41,3 +42,11 @@ is missing, any unknown pill id, and any story that is too long for a 3-minute r
 ## Roadmap
 
 Writing, listening and speaking sections come next (the listen buttons are a first step towards listening).
+
+## Sound
+
+Audio uses the browser's built-in text-to-speech (`nl-NL`, no network needed), see `src/lib/speech.ts`.
+It is written defensively for iOS/Safari (utterances kept referenced, no needless `cancel()`, audio session set to
+`playback`, explicit Dutch voice). If nothing starts within ~2.5 s the app shows a notice with what to check
+(Silent mode, volume, an installed Dutch voice). Pre-recorded audio files would be the next step if a device has
+no Dutch voice at all.

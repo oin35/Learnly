@@ -1,16 +1,18 @@
-import { useState, type ReactNode } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import type { Story } from "../types";
 import { lookup, entryId } from "../data/dictionary";
 import { pillById } from "../data/pills";
 import { parseSegments, readingMinutes, stripMarkup, tokenize, countWords } from "../lib/text";
 import { useStore } from "../lib/store";
-import { canSpeak, speak } from "../lib/speech";
+import { stopSpeaking } from "../lib/speech";
+import { useNarration } from "../lib/narration";
 import { Icon } from "./Icon";
 import { Sheet } from "./Sheet";
 import { PillBody } from "./PillBody";
 import { WordSheet } from "./WordSheet";
 import { Quiz } from "./Quiz";
 import { IntroView } from "./IntroView";
+import { StoryPlayer } from "./StoryPlayer";
 
 type Selection = { kind: "word"; token: string; paragraph: string } | { kind: "pill"; id: string } | null;
 
@@ -57,6 +59,8 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
   const [showEn, setShowEn] = useState(false);
   const [sel, setSel] = useState<Selection>(null);
   const minutes = readingMinutes(story.paragraphs);
+  const texts = useMemo(() => story.paragraphs.map((p) => stripMarkup(p.nl)), [story]);
+  const narration = useNarration(texts);
 
   const openPill = (id: string) => {
     dispatch({ type: "pillSeen", id });
@@ -75,7 +79,10 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
         header={header}
         onSkip={onSkip}
         onBack={onBack}
-        onStart={() => setPhase("story")}
+        onStart={() => {
+          stopSpeaking();
+          setPhase("story");
+        }}
       />
     );
   }
@@ -111,9 +118,14 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
             </p>
           </div>
 
+          <StoryPlayer n={narration} total={story.paragraphs.length} />
+
           <div className="story-text" lang="nl">
             {story.paragraphs.map((p, pi) => (
-              <div className="para" key={pi}>
+              <div
+                className={`para${narration.status !== "idle" && narration.index === pi ? " speaking" : ""}`}
+                key={pi}
+              >
                 <p>
                   {parseSegments(p.nl).map((seg, si) =>
                     seg.kind === "text" ? (
@@ -131,11 +143,11 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
                       </span>
                     ),
                   )}
-                  {canSpeak() && (
+                  {narration.supported && (
                     <button
                       className="icon-btn small para-audio"
-                      aria-label="Listen to this paragraph"
-                      onClick={() => speak(stripMarkup(p.nl))}
+                      aria-label={`Listen to paragraph ${pi + 1}`}
+                      onClick={() => narration.play(pi, true)}
                     >
                       <Icon name="speaker" size={16} />
                     </button>
