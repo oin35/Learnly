@@ -7,6 +7,8 @@ being able to handle basic daily situations: ordering a coffee, shopping, asking
 
 ## Features (reading milestone)
 
+- **Entry page**: before every story, a short "Before you read" page with up to 5 key words (each with a
+  pronunciation button, plus *Play all*) and 1–2 key grammar pills. The story opens only after **To the story**.
 - **Story deck**: read one story at a time, then **Like & save** it or **Skip** it.
 - **Saved stories**: recall any saved story later, with your quiz score.
 - **Tap-a-word dictionary**: inflected forms resolve to the dictionary word (`kijkt` → `kijken`), with the
@@ -32,7 +34,8 @@ npm run build:single # one self-contained dist-single/index.html
 ## Adding a story
 
 Stories live in `src/data/stories.ts`. Mark grammar pills inline with `{{phrase|pill-id}}` (ids are in
-`src/data/pills.ts`). Every word must exist in `src/data/dictionary.ts`: `npm test` lists any word that
+`src/data/pills.ts`). Give each story an `intro` with up to 5 key words (dictionary ids) and 1–2 key pills;
+they must occur in the story. Every word must exist in `src/data/dictionary.ts`: `npm test` lists any word that
 is missing, any unknown pill id, and any story that is too long for a 3-minute read.
 
 ## Roadmap

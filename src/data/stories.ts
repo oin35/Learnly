@@ -12,6 +12,10 @@ export const stories: Story[] = [
     emoji: "🐰",
     topic: "Animals",
     level: "A1",
+    intro: {
+      words: ["wortel", "tuin", "vogel", "honger", "blij"],
+      pills: ["dim", "have"],
+    },
     paragraphs: [
       {
         nl: "Het is ochtend. {{Het konijntje|dim}} heet Bram. {{Bram heeft honger.|have}} {{Hij wil een wortel.|modal}}",
@@ -42,6 +46,10 @@ export const stories: Story[] = [
     emoji: "🌍",
     topic: "Geography",
     level: "A1",
+    intro: {
+      words: ["hoofdstad", "land", "stad", "mens", "wonen"],
+      pills: ["plural", "erzijn"],
+    },
     paragraphs: [
       {
         nl: "Europa heeft veel {{landen|plural}}. Elk land heeft een hoofdstad. Dat is de grote stad van het land.",
@@ -72,6 +80,10 @@ export const stories: Story[] = [
     emoji: "☕",
     topic: "Daily life",
     level: "A1",
+    intro: {
+      words: ["koffie", "ober", "alstublieft", "kosten", "betalen"],
+      pills: ["modal", "polite"],
+    },
     paragraphs: [
       {
         nl: "Sara zit in een café. {{Ze heeft dorst.|have}} De ober komt naar haar tafel.",
@@ -98,6 +110,10 @@ export const stories: Story[] = [
     emoji: "🚲",
     topic: "Daily life",
     level: "A1",
+    intro: {
+      words: ["werk", "middag", "avond", "koken", "fietsen"],
+      pills: ["sep", "time"],
+    },
     paragraphs: [
       {
         nl: "{{Emma staat om zeven uur op.|sep}} Ze drinkt thee en eet brood met kaas.",
@@ -128,6 +144,10 @@ export const stories: Story[] = [
     emoji: "🍎",
     topic: "Shopping",
     level: "A1",
+    intro: {
+      words: ["markt", "kopen", "duur", "lekker", "hoeveel"],
+      pills: ["q", "plural"],
+    },
     paragraphs: [
       {
         nl: "Tom is op de markt. {{Hij wil appels, kaas en brood kopen.|modal}}",
@@ -154,6 +174,10 @@ export const stories: Story[] = [
     emoji: "👨‍👩‍👧‍👦",
     topic: "People",
     level: "A1",
+    intro: {
+      words: ["familie", "vader", "moeder", "broer", "zus"],
+      pills: ["be", "poss"],
+    },
     paragraphs: [
       {
         nl: "Ik heet Lisa. {{Ik ben twintig jaar oud.|be}} {{Ik woon in Utrecht.|present}} Dit is mijn familie.",
@@ -184,6 +208,10 @@ export const stories: Story[] = [
     emoji: "🌧️",
     topic: "Daily life",
     level: "A1",
+    intro: {
+      words: ["regen", "koud", "warm", "zon", "paraplu"],
+      pills: ["weather", "neg"],
+    },
     paragraphs: [
       {
         nl: "Het is maandag. {{Buiten regent het.|weather}} Het is koud en er is veel wind.",
@@ -210,6 +238,10 @@ export const stories: Story[] = [
     emoji: "🚉",
     topic: "Daily life",
     level: "A1",
+    intro: {
+      words: ["station", "rechtdoor", "links", "naast", "ver"],
+      pills: ["imp", "q"],
+    },
     paragraphs: [
       {
         nl: "Ali is nieuw in de stad. Hij zoekt het station. Hij vraagt een vrouw: \"Pardon, {{waar is het station?|q}}\"",

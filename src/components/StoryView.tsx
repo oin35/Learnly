@@ -10,13 +10,15 @@ import { Sheet } from "./Sheet";
 import { PillBody } from "./PillBody";
 import { WordSheet } from "./WordSheet";
 import { Quiz } from "./Quiz";
+import { IntroView } from "./IntroView";
 
 type Selection = { kind: "word"; token: string; paragraph: string } | { kind: "pill"; id: string } | null;
 
 interface Props {
   story: Story;
   mode: "deck" | "saved";
-  intro?: ReactNode;
+  /** Shown above the entry page (e.g. today's stats) */
+  header?: ReactNode;
   onSkip?: () => void;
   onLike?: () => void;
   onBack?: () => void;
@@ -49,8 +51,9 @@ function Words({
   );
 }
 
-export function StoryView({ story, mode, intro, onSkip, onLike, onBack, onUnsave }: Props) {
+export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsave }: Props) {
   const { dispatch } = useStore();
+  const [phase, setPhase] = useState<"intro" | "story">("intro");
   const [showEn, setShowEn] = useState(false);
   const [sel, setSel] = useState<Selection>(null);
   const minutes = readingMinutes(story.paragraphs);
@@ -64,10 +67,22 @@ export function StoryView({ story, mode, intro, onSkip, onLike, onBack, onUnsave
 
   const pill = sel?.kind === "pill" ? pillById.get(sel.id) : undefined;
 
+  if (phase === "intro") {
+    return (
+      <IntroView
+        story={story}
+        mode={mode}
+        header={header}
+        onSkip={onSkip}
+        onBack={onBack}
+        onStart={() => setPhase("story")}
+      />
+    );
+  }
+
   return (
     <>
       <div className="scroll">
-        {intro}
         <article className="story">
           {mode === "saved" && onBack && (
             <button className="btn btn-text" onClick={onBack}>
@@ -84,6 +99,9 @@ export function StoryView({ story, mode, intro, onSkip, onLike, onBack, onUnsave
           <p className="story-sub">{story.titleEn}</p>
 
           <div className="story-tools">
+            <button className="btn btn-text" onClick={() => setPhase("intro")}>
+              <Icon name="back" size={18} /> Key words &amp; grammar
+            </button>
             <label className="switch">
               <input type="checkbox" checked={showEn} onChange={(e) => setShowEn(e.target.checked)} />
               <span>Show English</span>

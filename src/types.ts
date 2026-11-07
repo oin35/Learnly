@@ -42,6 +42,8 @@ export interface Story {
   emoji: string;
   topic: string;
   level: "A1";
+  /** Entry page shown before the story: up to 5 key words (dictionary ids) and 1–2 key grammar pills */
+  intro: { words: string[]; pills: string[] };
   paragraphs: Paragraph[];
   quiz: QuizQuestion[];
 }

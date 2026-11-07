@@ -67,7 +67,7 @@ export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
         key={next.id}
         story={next}
         mode="deck"
-        intro={
+        header={
           <>
             {strip}
             <p className="left">

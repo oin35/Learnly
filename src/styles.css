@@ -309,3 +309,29 @@ button.w.saved { background: var(--saved-soft); border-bottom-style: solid; bord
   background: var(--text); color: var(--bg); padding: 10px 16px; border-radius: 999px; font-weight: 600;
   box-shadow: var(--shadow); max-width: calc(100% - 32px); text-align: center; animation: rise 0.2s ease-out;
 }
+
+/* ── Entry page ─────────────────────────── */
+.intro { padding: 12px 16px 28px; display: grid; gap: 20px; }
+.intro-head { display: flex; gap: 14px; align-items: center; }
+.intro-emoji { font-size: 3rem; line-height: 1; }
+.intro-title { font-size: 1.7rem; line-height: 1.15; letter-spacing: -0.02em; }
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 8px; }
+.section-title { font-size: 1.05rem; margin-bottom: 8px; }
+.section-head .section-title { margin-bottom: 0; }
+.btn-small { min-height: 36px; padding: 0 12px; font-size: 0.85rem; }
+.kw-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.kw { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 10px 8px 10px 10px; }
+.kw-play {
+  flex: none; width: 48px; height: 48px; border-radius: 50%; border: 0; cursor: pointer;
+  background: var(--accent); color: var(--accent-ink); display: grid; place-items: center;
+}
+.kw-play.off { background: var(--surface-2); cursor: default; }
+.kw-play:active { transform: scale(0.94); }
+.kw-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.kw-nl { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.01em; }
+.kw-en { color: var(--text); }
+.kw-ex { color: var(--muted); font-size: 0.85rem; font-style: italic; margin-top: 2px; }
+.icon-btn.on { color: var(--good); background: var(--good-soft); }
+.intro-pills { display: grid; gap: 10px; }
+.intro-pill { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.intro-pill .pill-title { padding-right: 0; }
