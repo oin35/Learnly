@@ -419,14 +419,13 @@ button.w.saved { background: var(--saved-soft); border-bottom-style: solid; bord
 /* ── Level mark: a footnote-style tag + a hairline difficulty ruler ───── */
 .lvl {
   all: unset; box-sizing: border-box; display: inline-flex; flex-direction: column; gap: 0.18em; vertical-align: top;
-  font-size: 0.34em; line-height: 1; position: relative; top: 0.5em; cursor: pointer; white-space: nowrap; letter-spacing: 0.04em;
+  font-size: 0.34em; line-height: 1; position: relative; top: 0.5em; cursor: default; white-space: nowrap; letter-spacing: 0.04em;
   --lvl: var(--accent);
 }
-span.lvl { cursor: default; font-size: 0.55em; top: 0.1em; }
+.story-card-title .lvl { font-size: 0.55em; top: 0.1em; }
 .nw { white-space: nowrap; }
 .nw > .lvl { margin-left: 0.35em; }
 .lvl-a2 { --lvl: var(--pill); }
-.lvl:focus-visible { outline: 2px solid var(--lvl); outline-offset: 3px; border-radius: 3px; }
 .lvl-tag { font-weight: 800; color: var(--lvl); opacity: 0.85; }
 .lvl-tag::before { content: attr(data-level); }
 .lvl-ruler { display: flex; align-items: flex-end; gap: 0.2em; height: 0.5em; }

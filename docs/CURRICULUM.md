@@ -57,21 +57,28 @@ Also, every time:
   points, 2–3 examples, tip). Every pill must be used in at least one story.
 - Record the audio (see `docs/DAILY-RUN.md`). Tests fail until every paragraph, word and example has a recording.
 
-## Names (decided by the owner: always Tom and Lisa)
+## Names (decided by the owner)
 
-Use **only two first names for people in every new story: Tom for a man or boy, Lisa for a woman or girl. Always.**
-The Dutch voice cannot pronounce other names well (Turkish names in particular come out wrong), so no other first names,
-no nicknames, and no names for animals or objects.
+The Dutch voice cannot pronounce most foreign names well (Turkish ones in particular), so names are strictly limited.
 
+**People: only Tom (a man or boy) and Lisa (a woman or girl). Always.** No other first names, no nicknames.
 - Need a second person of the same gender? Use a role instead: *de ober, de buurman, de buurvrouw, de leraar, de verkoper,
   de vrouw, de man, de dokter, de agent*.
-- Never use names of real people, celebrities, politicians or religious figures, except where a culture insight is about a
-  place or an artwork and the name is part of its official name (for example the *Van Gogh Museum*, *Rijksmuseum*); keep those
-  out of the story text and in the English insight where possible.
-- Places (Amsterdam, Utrecht, Friesland …) are fine and are added to the dictionary as names *without* "(a name)".
-- A **person's first name** is added to `src/data/dictionary.ts` as `name("Tom", "Tom (a name)")`: the English text ends with
-  "(a name)". `npm test` checks that new stories use no person's name other than Tom and Lisa.
-- The 8 baseline stories keep the names they have.
+- Never use real people, celebrities, politicians or religious figures in the story text. Famous artists or buildings belong in the
+  English culture insight, where the name is part of a fact (the *Van Gogh Museum*, *Rembrandt*), not in the Dutch text.
+
+**Animals and things may have names (owner's rule):**
+- **A cat is Leo. A dog is Coco.**
+- **Any other animal or thing** (a rabbit, a bird, a horse, a bike, a car, a teddy bear …): be creative. Choose a short, friendly name
+  that is easy for the Dutch voice and for an English speaker, clearly not a person's name, and not controversial.
+  Examples: *Snuf* (rabbit), *Pip* (bird), *Blits* (bike), *Knuffel* (teddy bear). Real Dutch words make good names.
+
+**Places** (Amsterdam, Utrecht, Friesland …) are fine.
+
+**Dictionary and test:** add every name to `src/data/dictionary.ts` with `name(...)`. A person's name uses the English text
+`"Tom (a name)"`; an animal or thing uses a different text such as `"Leo (a cat's name)"` or `"Pip (a bird's name)"`; a place uses
+its English name. `npm test` checks that new stories use no person's name other than Tom and Lisa (it looks for "(a name)").
+The 8 baseline stories keep the names they have.
 
 ## Dutch insights: topics (one per story, paired with a daily-life theme)
 

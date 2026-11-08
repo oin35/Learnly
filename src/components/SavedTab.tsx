@@ -50,7 +50,7 @@ export function SavedTab({ goRead }: { goRead: () => void }) {
                     <span className="story-card-emoji" aria-hidden="true">{s.emoji}</span>
                     <span className="story-card-main">
                       <span className="story-card-title">
-                        <MarkedTitle title={s.title} level={s.level} difficulty={s.difficulty} interactive={false} />
+                        <MarkedTitle title={s.title} level={s.level} difficulty={s.difficulty} />
                       </span>
                       <span className="story-card-sub">{s.titleEn}</span>
                       <span className="story-card-meta">

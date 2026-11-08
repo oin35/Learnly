@@ -342,8 +342,8 @@ export const stories: Story[] = [
         en: "This weekend she goes to a museum in Amsterdam. It is a big museum with beautiful paintings. In the small shop she buys a card for her mother.",
       },
       {
-        nl: "\"Ik wil elke week naar een museum gaan,\" zegt Lisa. Ze heeft nu een jaar lang tijd voor kunst.",
-        en: "\"I want to go to a museum every week,\" says Lisa. Now she has a whole year of time for art.",
+        nl: "\"Ik wil elke week naar een museum gaan,\" zegt Lisa. Nu kan ze een jaar lang naar de musea.",
+        en: "\"I want to go to a museum every week,\" says Lisa. Now she can go to the museums for a whole year.",
       },
     ],
     quiz: [

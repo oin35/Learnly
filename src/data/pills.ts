@@ -282,7 +282,7 @@ export const pills: Pill[] = [
       { nl: "de kleine winkel", en: "the small shop" },
       { nl: "mooie schilderijen", en: "beautiful paintings" },
     ],
-    tip: "Two words ending in -e (de grote …) are the default; only het-word + een/no article drops the -e.",
+    tip: "The -e is the default (de grote zaal, mijn kleine zus). Only a het-word with een or no article drops it (een groot museum).",
   },
 ];
 
