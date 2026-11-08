@@ -46,8 +46,8 @@ function Shell() {
       {soundIssue && (
         <div className="notice" role="alert">
           <div>
-            <strong>The sound didn’t start.</strong> On iPhone: switch off Silent mode (the switch on the side), turn up the volume, and check that a
-            Dutch voice is installed (Settings → Accessibility → Spoken Content → Voices → Dutch). Then tap a speaker again.{" "}
+            <strong>The sound didn’t start.</strong> The recorded audio couldn’t play and the phone’s own voice didn’t start either. Turn up the volume. On iPhone the
+            phone’s voice also needs Silent mode off and a Dutch voice installed (Settings → Accessibility → Spoken Content → Voices → Dutch). Then tap a speaker again.{" "}
             <button className="link" onClick={() => setSoundCheckOpen(true)}>
               Run the sound check
             </button>

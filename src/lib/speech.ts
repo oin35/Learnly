@@ -1,7 +1,11 @@
 /**
- * Read Dutch aloud with the browser's built-in speech synthesis (no network needed).
+ * Play Dutch audio.
  *
- * Written defensively for iOS/Safari, where speech synthesis is fragile:
+ * 1. Recorded clips (public/audio, made with Piper, see scripts/make-audio.py) are played through a normal
+ *    <audio> element. That sounds natural and, unlike speech synthesis, keeps playing in iPhone silent mode.
+ * 2. Anything without a recording falls back to the browser's built-in speech synthesis (no network needed).
+ *
+ * The speech-synthesis path is written defensively for iOS/Safari, where it is fragile:
  *  - utterances are kept referenced until they finish (iOS/Chrome can drop garbage-collected ones),
  *  - the queue is only cancelled when something is actually speaking,
  *  - the engine is resumed before speaking, and the page's audio session is set to "playback"
@@ -10,11 +14,24 @@
  *  - if nothing starts within a couple of seconds we flag an issue the UI can show.
  */
 
+import audioIndex from "../data/audio-index.json";
+import { audioId } from "./audioId";
+
+const recorded = new Set<string>(audioIndex as string[]);
+export const clipCount = recorded.size;
+export const hasClip = (text: string): boolean => recorded.has(audioId(text));
+export const clipUrl = (text: string): string => `audio/${audioId(text)}.mp3`;
+
 export const RATE_NORMAL = 0.85; // a little slower than native speed, for learners
 export const RATE_SLOW = 0.6;
 
-export function canSpeak(): boolean {
+export function ttsSupported(): boolean {
   return typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
+}
+
+/** True if we can make sound at all: recorded clips or the browser's voice. */
+export function canSpeak(): boolean {
+  return clipCount > 0 || ttsSupported();
 }
 
 /* ── "Sound didn't start" issue flag (observable by the UI) ───────────────── */
@@ -72,7 +89,7 @@ function makeUtterance(text: string, rate: number): SpeechSynthesisUtterance {
 }
 
 // Some browsers only fill the voice list asynchronously: ask for it early.
-if (canSpeak()) {
+if (ttsSupported()) {
   try {
     window.speechSynthesis.getVoices();
     window.speechSynthesis.addEventListener?.("voiceschanged", () => void pickVoice());
@@ -93,21 +110,117 @@ export interface QueueOptions {
   onError?: () => void;
 }
 
+/* ── Recorded clips ────────────────────────────────────────────────────────── */
+let mode: "audio" | "tts" | null = null;
+let audioEl: HTMLAudioElement | null = null;
+
+/** One shared element, reused for every clip: once iOS has unlocked it with a tap, later clips can chain on their own. */
+function getAudio(): HTMLAudioElement {
+  if (!audioEl) {
+    audioEl = new Audio();
+    audioEl.preload = "auto";
+    audioEl.setAttribute("playsinline", "");
+  }
+  return audioEl;
+}
+
+function detachAudio() {
+  if (!audioEl) return;
+  audioEl.onplaying = audioEl.onended = audioEl.onerror = null;
+  try {
+    audioEl.pause();
+    audioEl.removeAttribute("src");
+    audioEl.load();
+  } catch {
+    /* ignore */
+  }
+}
+
+function playClips(texts: string[], opts: QueueOptions, gen: number): void {
+  const a = getAudio();
+  mode = "audio";
+  onInterrupt = opts.onInterrupt;
+  const playbackRate = (opts.rate ?? RATE_NORMAL) / RATE_NORMAL; // slow mode: ~0.7x
+  let i = 0;
+  let started = false;
+
+  // If a clip cannot be played (blocked, missing, undecodable), say the rest with the browser's voice.
+  const fallback = () => {
+    if (gen !== generation) return;
+    detachAudio();
+    mode = null;
+    if (!ttsSupported()) {
+      setIssue(true);
+      onInterrupt = undefined;
+      opts.onError?.();
+      return;
+    }
+    const from = i;
+    speakTts(texts.slice(from), { ...opts, onStart: (j) => opts.onStart?.(from + j) }, gen);
+  };
+
+  const load = () => {
+    a.src = clipUrl(texts[i]);
+    a.defaultPlaybackRate = playbackRate;
+    a.playbackRate = playbackRate;
+    a.play()?.catch(fallback);
+  };
+
+  a.onplaying = () => {
+    if (gen !== generation) return;
+    started = true;
+    setIssue(false);
+    opts.onStart?.(i);
+  };
+  a.onended = () => {
+    if (gen !== generation) return;
+    i++;
+    if (i < texts.length) {
+      load();
+    } else {
+      onInterrupt = undefined;
+      mode = null;
+      opts.onEnd?.();
+    }
+  };
+  a.onerror = fallback;
+  window.setTimeout(() => {
+    if (gen === generation && mode === "audio" && !started) fallback();
+  }, 4000);
+  load();
+}
+
 /** Speak several texts one after another. Must be called from a user gesture (click/tap) on iOS. */
 export function speakQueue(texts: string[], opts: QueueOptions = {}): void {
   const interrupted = onInterrupt;
   onInterrupt = undefined;
   interrupted?.();
+  const gen = ++generation;
+  detachAudio();
+  mode = null;
 
-  if (!canSpeak() || texts.length === 0) {
-    if (!canSpeak()) setIssue(true);
+  if (texts.length === 0) {
+    opts.onError?.();
+    return;
+  }
+  unlockAudioSession();
+  if (texts.every(hasClip)) {
+    playClips(texts, opts, gen);
+  } else {
+    speakTts(texts, opts, gen);
+  }
+}
+
+/** Browser speech synthesis. Everything is queued up front, inside the tap, which iOS needs. */
+function speakTts(texts: string[], opts: QueueOptions, gen: number): void {
+  if (!ttsSupported()) {
+    setIssue(true);
     opts.onError?.();
     return;
   }
   const synth = window.speechSynthesis;
-  const gen = ++generation;
+  mode = "tts";
   try {
-    unlockAudioSession();
     if (synth.speaking || synth.pending) synth.cancel();
     synth.resume?.();
     let started = false;
@@ -129,6 +242,7 @@ export function speakQueue(texts: string[], opts: QueueOptions = {}): void {
         if (gen === generation && t0 && text.length >= 4 && performance.now() - t0 < 60) setIssue(true);
         if (gen === generation && i === texts.length - 1) {
           onInterrupt = undefined;
+          mode = null;
           opts.onEnd?.();
         }
       };
@@ -170,8 +284,10 @@ export function stopSpeaking(): void {
   const interrupted = onInterrupt;
   onInterrupt = undefined;
   interrupted?.();
+  detachAudio();
+  mode = null;
   try {
-    if (canSpeak()) window.speechSynthesis.cancel();
+    if (ttsSupported()) window.speechSynthesis.cancel();
   } catch {
     /* ignore */
   }
@@ -180,7 +296,8 @@ export function stopSpeaking(): void {
 
 export function pauseSpeaking(): void {
   try {
-    window.speechSynthesis.pause();
+    if (mode === "audio") audioEl?.pause();
+    else window.speechSynthesis.pause();
   } catch {
     /* ignore */
   }
@@ -188,7 +305,8 @@ export function pauseSpeaking(): void {
 
 export function resumeSpeaking(): void {
   try {
-    window.speechSynthesis.resume();
+    if (mode === "audio") void audioEl?.play()?.catch(() => undefined);
+    else window.speechSynthesis.resume();
   } catch {
     /* ignore */
   }

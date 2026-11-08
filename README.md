@@ -18,7 +18,8 @@ being able to handle basic daily situations: ordering a coffee, shopping, asking
 - **Grammar pills**: 18 bite-sized pills (de/het, verb in second place, niet/geen, questions, "ik wil graag…",
   u vs. je, numbers & prices, time, …), highlighted inline in the stories and collected in the Grammar tab.
 - **Listen to the whole story**: a read-aloud player (play / pause / stop, *Slow* mode) that highlights the
-  paragraph being read; every paragraph, word and example also has its own listen button.
+  paragraph being read, in a natural pre-recorded voice that also works in iPhone silent mode. Every paragraph,
+  word and example has its own listen button.
 - **Extras**: show/hide English translation per story, a 2-question comprehension check, a daily streak, dark mode.
 - Everything is stored in the browser (`localStorage`). No account, no backend.
 
@@ -45,8 +46,26 @@ Writing, listening and speaking sections come next (the listen buttons are a fir
 
 ## Sound
 
-Audio uses the browser's built-in text-to-speech (`nl-NL`, no network needed), see `src/lib/speech.ts`.
-It is written defensively for iOS/Safari (utterances kept referenced, no needless `cancel()`, audio session set to
-`playback`, explicit Dutch voice). If nothing starts within ~2.5 s the app shows a notice with what to check
-(Silent mode, volume, an installed Dutch voice). Pre-recorded audio files would be the next step if a device has
-no Dutch voice at all.
+Natural Dutch audio is **pre-recorded**: 271 small MP3 clips in `public/audio/` (every story paragraph, every dictionary
+word with its article, and every grammar-pill example), about 3.4 MB. They were rendered with
+[Piper](https://github.com/OHF-Voice/piper1-gpl) and the `nl_NL-ronnie-medium` voice (CC0, no attribution required), and
+are played through a normal `<audio>` element, which sounds natural and keeps playing when an iPhone is on **silent
+mode** (speech synthesis does not). `src/data/audio-index.json` lists which clips exist; a clip is found by a hash of
+its text (`src/lib/audioId.ts`).
+
+If a clip is missing or can't play, the app falls back to the browser's built-in speech synthesis (`nl-NL`), written
+defensively for iOS/Safari (see `src/lib/speech.ts`). If neither starts, a notice explains what to check. The **Sound
+check** panel (Words tab) tests the beep, the recorded clips and the phone voice step by step.
+
+### Recording clips for new stories
+
+`npm test` fails when a story, word or grammar example has no recording. To add them:
+
+```bash
+python3 -m venv .venv-audio && .venv-audio/bin/pip install piper-tts numpy   # needs ffmpeg on the PATH
+# download nl_NL-ronnie-medium.onnx and .onnx.json from https://huggingface.co/rhasspy/piper-voices (nl/nl_NL/ronnie/medium)
+npm run audio:texts
+.venv-audio/bin/python scripts/make-audio.py --model path/to/nl_NL-ronnie-medium.onnx
+```
+
+Only missing clips are rendered (`--force` redoes all).

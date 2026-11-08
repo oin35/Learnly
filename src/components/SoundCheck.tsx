@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { speakQueue } from "../lib/speech";
+import { clipCount, clipUrl, hasClip, speakQueue } from "../lib/speech";
 
 const TEST_NL = "Hallo, dit is een test.";
 const TEST_EN = "Hello, this is a test.";
@@ -59,7 +59,8 @@ export function SoundCheck() {
   const info = useMemo(() => {
     const as = (navigator as unknown as { audioSession?: { type: string } }).audioSession;
     return [
-      `Speech synthesis: ${supported ? "available" : "NOT available"}`,
+      `Recorded clips shipped: ${clipCount}`,
+      `Speech synthesis (fallback): ${supported ? "available" : "NOT available"}`,
       `Dutch voices reported: ${supported ? dutchVoices().map((v) => `${v.name} (${v.lang})`).join(", ") || "none" : "n/a"}`,
       `All voices reported: ${supported ? window.speechSynthesis.getVoices().length : "n/a"}`,
       `Inside a frame: ${inFrame()}`,
@@ -102,8 +103,22 @@ export function SoundCheck() {
     window.setTimeout(() => !started && add(`${label}: no start event after 4 s`), 4000);
   };
 
+  const clip = () => {
+    const url = clipUrl("de wortel");
+    add(`Clip: loading ${url}`);
+    const a = new Audio(url);
+    a.onloadeddata = () => add(`Clip: loaded (${a.duration.toFixed(2)} s)`);
+    a.onplaying = () => add("Clip: playing (you should hear “de wortel”)");
+    a.onended = () => add("Clip: finished");
+    a.onerror = () => add(`Clip: error (code ${a.error?.code ?? "?"} ${a.error?.message ?? ""})`);
+    a.play().then(
+      () => add("Clip: play() accepted"),
+      (e: unknown) => add(`Clip: play() rejected (${e instanceof Error ? e.name : String(e)})`),
+    );
+  };
+
   const appWay = () => {
-    add("App: speak() called");
+    add(`App: speak() called, using ${hasClip(TEST_NL) ? "the recorded clip" : "the phone voice"}`);
     speakQueue([TEST_NL], {
       onStart: () => add("App: started"),
       onEnd: () => add("App: ended"),
@@ -140,7 +155,10 @@ export function SoundCheck() {
           4. Say English (default voice)
         </button>
         <button className="btn btn-ghost" onClick={appWay}>
-          5. Say Dutch (the app’s way)
+          5. Say a sentence (the app’s way)
+        </button>
+        <button className="btn btn-ghost" onClick={clip}>
+          6. Play a recorded word
         </button>
       </div>
       <pre className="sc-log" aria-live="polite">{log.length ? log.join("\n") : "Results appear here."}</pre>

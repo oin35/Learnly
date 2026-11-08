@@ -43,7 +43,7 @@ export function StoryPlayer({ n, total }: { n: Narration; total: number }) {
       <p className="player-status" aria-live="polite">
         {idle ? (
           <>
-            No sound? Switch off Silent mode and turn up the volume, or{" "}
+            No sound? Turn up the volume, or{" "}
             <button className="link" onClick={() => setSoundCheckOpen(true)}>
               run the sound check
             </button>
