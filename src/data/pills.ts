@@ -267,6 +267,23 @@ export const pills: Pill[] = [
       { nl: "Het is warm vandaag.", en: "It is warm today." },
     ],
   },
+  {
+    id: "adj",
+    title: "Adjectives: groot or grote?",
+    summary: "een groot museum · mooie schilderijen",
+    points: [
+      "An adjective before a noun usually gets an -e: de grote zaal, mooie schilderijen, mijn kleine zus.",
+      "No -e when the noun is a het-word singular with een, or with no article: een groot museum, groot water.",
+      "After the verb zijn the adjective never changes: Het museum is groot.",
+      "Mind the spelling: groot → grote, mooi → mooie, klein → kleine.",
+    ],
+    examples: [
+      { nl: "een groot museum", en: "a big museum" },
+      { nl: "de kleine winkel", en: "the small shop" },
+      { nl: "mooie schilderijen", en: "beautiful paintings" },
+    ],
+    tip: "Two words ending in -e (de grote …) are the default; only het-word + een/no article drops the -e.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

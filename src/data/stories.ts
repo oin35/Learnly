@@ -273,4 +273,82 @@ export const stories: Story[] = [
       { q: "How far is it?", options: ["5 minutes", "15 minutes", "50 minutes"], answer: 0 },
     ],
   },
+  {
+    id: "het-rijksmuseum",
+    title: "Het Rijksmuseum",
+    titleEn: "The Rijksmuseum",
+    emoji: "🖼️",
+    topic: "Museums",
+    level: "A1",
+    difficulty: 2.5,
+    insight: {
+      title: "The Night Watch hangs in the Rijksmuseum",
+      text: "Rembrandt finished The Night Watch (De Nachtwacht) in 1642. Today it hangs in the Rijksmuseum in Amsterdam, in the Gallery of Honour. Since 2021 you can see the whole painting again, because missing parts have been added around the original.",
+    },
+    intro: {
+      words: ["museum", "schilderij", "kaartje", "zaal", "rij"],
+      pills: ["time", "modal"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn in Amsterdam. Ze gaan naar het Rijksmuseum. {{Het museum is open om negen uur.|time}} Er is al een rij.",
+        en: "Tom and Lisa are in Amsterdam. They are going to the Rijksmuseum. The museum is open at nine o'clock. There is already a queue.",
+      },
+      {
+        nl: "Tom koopt twee kaartjes. \"Alstublieft,\" zegt de vrouw. \"De zaal met De Nachtwacht is links.\" \"Dank u wel!\" zegt Tom.",
+        en: "Tom buys two tickets. \"Here you are,\" says the woman. \"The room with The Night Watch is on the left.\" \"Thank you very much!\" says Tom.",
+      },
+      {
+        nl: "In de zaal hangt een groot schilderij. Het is De Nachtwacht. {{Je kunt de mensen op het schilderij goed zien.|modal}} Het schilderij is heel oud.",
+        en: "In the room hangs a big painting. It is The Night Watch. You can see the people in the painting well. The painting is very old.",
+      },
+      {
+        nl: "Lisa maakt een foto. \"Wat mooi!\" zegt ze. Om twaalf uur eten ze een broodje in het café van het museum.",
+        en: "Lisa takes a photo. \"How beautiful!\" she says. At twelve o'clock they eat a sandwich in the café of the museum.",
+      },
+    ],
+    quiz: [
+      { q: "When is the museum open?", options: ["At nine o'clock", "At twelve o'clock", "At ten o'clock"], answer: 0 },
+      { q: "What is the big painting called?", options: ["The Night Watch", "The Girl", "The Sunflowers"], answer: 0 },
+    ],
+  },
+  {
+    id: "de-museumkaart",
+    title: "De Museumkaart",
+    titleEn: "The Museum card",
+    emoji: "🎟️",
+    topic: "Museums",
+    level: "A1",
+    difficulty: 3,
+    insight: {
+      title: "One card, more than 400 museums",
+      text: "With a Dutch Museumkaart you get free entry to more than 400 museums in the Netherlands for one year. Some special exhibitions can still cost extra. Many Dutch people have one, so they visit museums often.",
+    },
+    intro: {
+      words: ["museumkaart", "kunst", "vriend", "klein", "weekend"],
+      pills: ["adj", "modal"],
+    },
+    paragraphs: [
+      {
+        nl: "Lisa woont in Utrecht. Ze houdt van kunst. {{Ze wil veel musea zien,|modal}} maar de kaartjes zijn duur.",
+        en: "Lisa lives in Utrecht. She loves art. She wants to see many museums, but the tickets are expensive.",
+      },
+      {
+        nl: "Een vriend zegt: \"Koop een Museumkaart! Met de kaart ga je een jaar lang naar meer dan vierhonderd musea.\" Lisa koopt de kaart. Ze is blij.",
+        en: "A friend says: \"Buy a Museum card! With the card you go to more than four hundred museums for a year.\" Lisa buys the card. She is happy.",
+      },
+      {
+        nl: "Dit weekend gaat ze naar een museum in Amsterdam. {{Het is een groot museum met mooie schilderijen.|adj}} In de kleine winkel koopt ze een kaart voor haar moeder.",
+        en: "This weekend she goes to a museum in Amsterdam. It is a big museum with beautiful paintings. In the small shop she buys a card for her mother.",
+      },
+      {
+        nl: "\"Ik wil elke week naar een museum gaan,\" zegt Lisa. Ze heeft nu een jaar lang tijd voor kunst.",
+        en: "\"I want to go to a museum every week,\" says Lisa. Now she has a whole year of time for art.",
+      },
+    ],
+    quiz: [
+      { q: "Why does Lisa buy a Museumkaart?", options: ["Tickets are expensive", "Her mother asks her", "She works in a museum"], answer: 0 },
+      { q: "Where does she go this weekend?", options: ["A shop", "A museum in Amsterdam", "A café"], answer: 1 },
+    ],
+  },
 ];
