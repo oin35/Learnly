@@ -1,10 +1,11 @@
-import { useMemo, useState, type ReactNode } from "react";
+import { useEffect, useMemo, useState, type ReactNode } from "react";
 import type { Story } from "../types";
 import { lookup, entryId } from "../data/dictionary";
 import { pillById } from "../data/pills";
 import { parseSegments, readingMinutes, stripMarkup, tokenize, countWords } from "../lib/text";
 import { useStore } from "../lib/store";
-import { stopSpeaking } from "../lib/speech";
+import { stopSpeaking, warmClips } from "../lib/speech";
+import { storyClipTexts } from "../lib/warm";
 import { useNarration } from "../lib/narration";
 import { Icon } from "./Icon";
 import { Sheet } from "./Sheet";
@@ -61,6 +62,7 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
   const minutes = readingMinutes(story.paragraphs);
   const texts = useMemo(() => story.paragraphs.map((p) => stripMarkup(p.nl)), [story]);
   const narration = useNarration(texts);
+  useEffect(() => warmClips(storyClipTexts(story), true), [story]);
 
   const openPill = (id: string) => {
     dispatch({ type: "pillSeen", id });

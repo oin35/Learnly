@@ -1,10 +1,13 @@
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import { StoreProvider, useStore } from "./lib/store";
 import { streak } from "./lib/state";
 import { dueCards } from "./lib/srs";
 import { Sheet } from "./components/Sheet";
 import { SoundCheck } from "./components/SoundCheck";
 import { getSoundCheckOpen, setSoundCheckOpen, subscribeUi } from "./lib/ui";
+import { stories } from "./data/stories";
+import { allClipTexts, storyClipTexts } from "./lib/warm";
+import { warmClips } from "./lib/speech";
 import { dismissSpeechIssue, getSpeechIssue, subscribeSpeechIssue } from "./lib/speech";
 import { Icon, type IconName } from "./components/Icon";
 import { ReadTab } from "./components/ReadTab";
@@ -29,6 +32,12 @@ function Shell() {
   const due = dueCards(state.vocab, now).length;
   const soundIssue = useSyncExternalStore(subscribeSpeechIssue, getSpeechIssue);
   const checkOpen = useSyncExternalStore(subscribeUi, getSoundCheckOpen);
+
+  // Download the audio in the background so taps play instantly: words first, then every story.
+  useEffect(() => {
+    const t = window.setTimeout(() => warmClips([...allClipTexts(), ...stories.flatMap(storyClipTexts)]), 1500);
+    return () => window.clearTimeout(t);
+  }, []);
 
   return (
     <div className="app">

@@ -53,6 +53,10 @@ are played through a normal `<audio>` element, which sounds natural and keeps pl
 mode** (speech synthesis does not). `src/data/audio-index.json` lists which clips exist; a clip is found by a hash of
 its text (`src/lib/audioId.ts`).
 
+To make taps instant, the app downloads the clips in the background as soon as it opens (the current story
+first, then everything else, about 3.4 MB in total) and plays them from memory; a tap before its clip has arrived
+simply streams it. Repeated taps reuse one shared audio player, so sounds never overlap.
+
 If a clip is missing or can't play, the app falls back to the browser's built-in speech synthesis (`nl-NL`), written
 defensively for iOS/Safari (see `src/lib/speech.ts`). If neither starts, a notice explains what to check. The **Sound
 check** panel (Words tab) tests the beep, the recorded clips and the phone voice step by step.

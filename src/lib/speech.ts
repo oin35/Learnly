@@ -110,6 +110,41 @@ export interface QueueOptions {
   onError?: () => void;
 }
 
+/* ── Warm cache: download clips ahead of time so a tap plays immediately ──── */
+const cache = new Map<string, string>(); // clip id → blob: URL
+const waiting: string[] = [];
+const queued = new Set<string>();
+let active = 0;
+const CONCURRENCY = 4;
+
+function pumpWarm() {
+  while (active < CONCURRENCY && waiting.length) {
+    const id = waiting.shift()!;
+    active++;
+    fetch(`audio/${id}.mp3`)
+      .then((r) => (r.ok ? r.blob() : Promise.reject(new Error(String(r.status)))))
+      .then((b) => void cache.set(id, URL.createObjectURL(b)))
+      .catch(() => undefined) // not cached: the tap just streams the file instead
+      .finally(() => {
+        queued.delete(id);
+        active--;
+        pumpWarm();
+      });
+  }
+}
+
+/** Start downloading clips in the background. `first` puts them at the front of the line. */
+export function warmClips(texts: string[], first = false): void {
+  if (typeof fetch === "undefined" || typeof URL.createObjectURL === "undefined") return;
+  const ids = [...new Set(texts.filter(hasClip).map(audioId))].filter((id) => !cache.has(id) && !queued.has(id));
+  ids.forEach((id) => queued.add(id));
+  if (first) waiting.unshift(...ids);
+  else waiting.push(...ids);
+  pumpWarm();
+}
+
+const srcFor = (text: string): string => cache.get(audioId(text)) ?? clipUrl(text);
+
 /* ── Recorded clips ────────────────────────────────────────────────────────── */
 let mode: "audio" | "tts" | null = null;
 let audioEl: HTMLAudioElement | null = null;
@@ -124,13 +159,16 @@ function getAudio(): HTMLAudioElement {
   return audioEl;
 }
 
-function detachAudio() {
+/** Silence the shared player. With `full`, also drop its source (frees the connection). */
+function detachAudio(full = true) {
   if (!audioEl) return;
   audioEl.onplaying = audioEl.onended = audioEl.onerror = null;
   try {
     audioEl.pause();
-    audioEl.removeAttribute("src");
-    audioEl.load();
+    if (full) {
+      audioEl.removeAttribute("src");
+      audioEl.load();
+    }
   } catch {
     /* ignore */
   }
@@ -160,7 +198,8 @@ function playClips(texts: string[], opts: QueueOptions, gen: number): void {
   };
 
   const load = () => {
-    a.src = clipUrl(texts[i]);
+    warmClips(texts.slice(i + 1, i + 3), true); // the next paragraphs, so they follow without a gap
+    a.src = srcFor(texts[i]);
     a.defaultPlaybackRate = playbackRate;
     a.playbackRate = playbackRate;
     a.play()?.catch(fallback);
@@ -196,7 +235,7 @@ export function speakQueue(texts: string[], opts: QueueOptions = {}): void {
   onInterrupt = undefined;
   interrupted?.();
   const gen = ++generation;
-  detachAudio();
+  detachAudio(false); // a new source replaces the old one: no need to reset the element (saves time)
   mode = null;
 
   if (texts.length === 0) {

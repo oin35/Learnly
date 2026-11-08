@@ -53,6 +53,7 @@ export function SoundCheck() {
   const [log, setLog] = useState<string[]>([]);
   const t00 = useRef(performance.now());
   const keep = useRef<SpeechSynthesisUtterance[]>([]);
+  const clipEl = useRef<HTMLAudioElement | null>(null);
   const add = (line: string) => setLog((l) => [...l, `${((performance.now() - t00.current) / 1000).toFixed(1)}s  ${line}`]);
 
   const supported = typeof window !== "undefined" && "speechSynthesis" in window && typeof SpeechSynthesisUtterance !== "undefined";
@@ -106,7 +107,9 @@ export function SoundCheck() {
   const clip = () => {
     const url = clipUrl("de wortel");
     add(`Clip: loading ${url}`);
+    clipEl.current?.pause(); // never play two on top of each other
     const a = new Audio(url);
+    clipEl.current = a;
     a.onloadeddata = () => add(`Clip: loaded (${a.duration.toFixed(2)} s)`);
     a.onplaying = () => add("Clip: playing (you should hear “de wortel”)");
     a.onended = () => add("Clip: finished");
