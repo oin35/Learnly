@@ -11,6 +11,7 @@ import { warmClips } from "./lib/speech";
 import { dismissSpeechIssue, getSpeechIssue, subscribeSpeechIssue } from "./lib/speech";
 import { Icon, type IconName } from "./components/Icon";
 import { Logo } from "./components/Logo";
+import { PhiMark } from "./components/PhiMark";
 import { ReadTab } from "./components/ReadTab";
 import { SavedTab } from "./components/SavedTab";
 import { WordsTab } from "./components/WordsTab";
@@ -43,6 +44,7 @@ function Shell() {
   return (
     <div className="app">
       <header className="topbar">
+        <PhiMark />
         <div className="brand">
           <Logo size={34} />
           <span className="brand-name">Don Pablo’s Dutch Class</span>
