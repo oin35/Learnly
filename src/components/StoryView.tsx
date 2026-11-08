@@ -13,8 +13,8 @@ import { PillBody } from "./PillBody";
 import { WordSheet } from "./WordSheet";
 import { Quiz } from "./Quiz";
 import { IntroView } from "./IntroView";
+import { MarkedTitle } from "./LevelMark";
 import { StoryPlayer } from "./StoryPlayer";
-import { formatDifficulty } from "../lib/text";
 
 type Selection = { kind: "word"; token: string; paragraph: string } | { kind: "pill"; id: string } | null;
 
@@ -103,9 +103,11 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
             {story.emoji}
           </div>
           <p className="eyebrow">
-            {story.level} · Difficulty {formatDifficulty(story.difficulty)} · {story.topic} · {minutes} min read · {countWords(story.paragraphs)} words
+            {story.topic} · {minutes} min read · {countWords(story.paragraphs)} words
           </p>
-          <h1 className="story-title">{story.title}</h1>
+          <h1 className="story-title">
+            <MarkedTitle title={story.title} level={story.level} difficulty={story.difficulty} />
+          </h1>
           <p className="story-sub">{story.titleEn}</p>
 
           <div className="story-tools">

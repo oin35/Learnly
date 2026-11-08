@@ -3,7 +3,7 @@ import { reducer, initialState, streak, dayKey, loadState, saveState } from "./s
 import { schedule, dueCards, INTERVAL_DAYS, level, KNOWN_AFTER } from "./srs";
 import { buildQuiz } from "./quiz";
 import { dictionary } from "../data/dictionary";
-import { parseSegments, tokenize, sentenceWith, stripMarkup } from "./text";
+import { parseSegments, tokenize, sentenceWith, stripMarkup, tickStates } from "./text";
 
 const DAY = 24 * 3600 * 1000;
 const t0 = new Date(2026, 5, 10, 9, 30).getTime(); // local time
@@ -184,5 +184,18 @@ describe("word quiz", () => {
     const verb = real.find((d) => d.nl === "kijken")!;
     const q = buildQuiz({ id: "kijken", nl: verb.nl, en: verb.en, pos: verb.pos }, "nl-en", seeded(3));
     expect(q.options.every((o) => o.startsWith("to "))).toBe(true);
+  });
+});
+
+describe("difficulty ruler", () => {
+  it("fills one tick per point and a half tick for .5", () => {
+    const count = (d: number) => {
+      const t = tickStates(d);
+      return { n: t.length, full: t.filter((x) => x === "full").length, half: t.filter((x) => x === "half").length };
+    };
+    expect(count(1)).toEqual({ n: 10, full: 1, half: 0 });
+    expect(count(2.5)).toEqual({ n: 10, full: 2, half: 1 });
+    expect(count(10)).toEqual({ n: 10, full: 10, half: 0 });
+    expect(tickStates(2.5).slice(0, 4)).toEqual(["full", "full", "half", "off"]);
   });
 });

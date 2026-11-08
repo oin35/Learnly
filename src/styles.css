@@ -415,3 +415,21 @@ button.w.saved { background: var(--saved-soft); border-bottom-style: solid; bord
 .insight p { line-height: 1.5; }
 .insight-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 8px; }
 .flag-nl { display: inline-block; width: 20px; height: 14px; border-radius: 2px; border: 1px solid var(--line); background: linear-gradient(#ae1c28 33.3%, #fff 33.3% 66.6%, #21468b 66.6%); }
+
+/* ── Level mark: a footnote-style tag + a hairline difficulty ruler ───── */
+.lvl {
+  all: unset; box-sizing: border-box; display: inline-flex; flex-direction: column; gap: 0.18em; vertical-align: top;
+  font-size: 0.34em; line-height: 1; position: relative; top: 0.5em; cursor: pointer; white-space: nowrap; letter-spacing: 0.04em;
+  --lvl: var(--accent);
+}
+span.lvl { cursor: default; font-size: 0.55em; top: 0.1em; }
+.nw { white-space: nowrap; }
+.nw > .lvl { margin-left: 0.35em; }
+.lvl-a2 { --lvl: var(--pill); }
+.lvl:focus-visible { outline: 2px solid var(--lvl); outline-offset: 3px; border-radius: 3px; }
+.lvl-tag { font-weight: 800; color: var(--lvl); opacity: 0.85; }
+.lvl-tag::before { content: attr(data-level); }
+.lvl-ruler { display: flex; align-items: flex-end; gap: 0.2em; height: 0.5em; }
+.tick { display: block; width: 0.16em; min-width: 1.5px; border-radius: 1px; background: var(--line); height: 45%; }
+.tick.t-full { background: var(--lvl); opacity: 0.45; height: 100%; }
+.tick.t-half { background: var(--lvl); opacity: 0.45; height: 60%; }

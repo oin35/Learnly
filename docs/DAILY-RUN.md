@@ -17,7 +17,8 @@ Read `docs/CURRICULUM.md` (the rules), `docs/TEACHER-NOTES.md` (lessons so far),
 and the last 4 stories in `src/data/stories.ts`.
 
 ## 2. Plan the two stories
-- Difficulty: the last story's `difficulty` + 0.5 for the first new story, +0.5 again for the second. Cap at 10.
+- Level and difficulty: the last story's difficulty + 0.5 for the first new story, +0.5 again for the second. After A1 10 the next
+  story is A2 1 (see "Levels and difficulty" in `docs/CURRICULUM.md`); cap at A2 10. When you start A2, do the A2 research first.
 - Pick the next unused topics from the list in `docs/CURRICULUM.md` (a culture insight and a daily-life theme per story).
   Check `topic` and `insight` of existing stories so nothing repeats.
 - Research the culture facts (see "How a good teacher works"). Note the sources.
@@ -54,4 +55,4 @@ All three must pass. If something fails, fix it. If you cannot fix it, **do not 
   unsure about, and how you checked it. Add lessons to `docs/TEACHER-NOTES.md`.
 - `git add -A && git commit` (clear message) and `git push origin claude/zen-faraday-5mk9rj`. Do not open a pull request.
 - Finish with a short report to the owner (this becomes the notification): the two titles, difficulty, the culture insight in one
-  line each, and any warning. If a story reached difficulty 10, say: *"A1 scale complete. Waiting for your go to start A2."*
+  line each, and any warning. If this run moved from A1 to A2, say so. If a story reached A2 10, say: *"A2 scale complete. Waiting for your go to start B1."*

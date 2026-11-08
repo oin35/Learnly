@@ -104,16 +104,23 @@ describe("story entry page (intro)", () => {
 });
 
 describe("difficulty ramp (docs/CURRICULUM.md)", () => {
-  const BASELINE = 8; // the first stories, all at difficulty 1–2
+  const BASELINE = 8; // the first stories, all A1 at difficulty 1–2
 
-  it("starts with the baseline stories at difficulty 1 or 2", () => {
-    for (const s of stories.slice(0, BASELINE)) expect([1, 2], s.id).toContain(s.difficulty);
+  it("starts with the baseline stories at A1, difficulty 1 or 2", () => {
+    for (const s of stories.slice(0, BASELINE)) {
+      expect(s.level, s.id).toBe("A1");
+      expect([1, 2], s.id).toContain(s.difficulty);
+    }
   });
 
-  it("then rises by 0.5 with every new story, up to 10 (the top of A1)", () => {
+  it("then rises by 0.5 with every new story; after A1 10 comes A2 1; A2 stops at 10", () => {
     for (let i = BASELINE; i < stories.length; i++) {
-      const expected = Math.min(10, stories[i - 1].difficulty + 0.5);
-      expect(stories[i].difficulty, `${stories[i].id} (story ${i + 1})`).toBe(expected);
+      const prev = stories[i - 1];
+      const expected =
+        prev.level === "A1" && prev.difficulty === 10
+          ? { level: "A2", difficulty: 1 }
+          : { level: prev.level, difficulty: Math.min(10, prev.difficulty + 0.5) };
+      expect({ level: stories[i].level, difficulty: stories[i].difficulty }, `${stories[i].id} (story ${i + 1})`).toEqual(expected);
     }
   });
 

@@ -68,3 +68,12 @@ export function sentenceWith(raw: string, word: string): string {
 export function formatDifficulty(d: number): string {
   return Number.isInteger(d) ? String(d) : d.toFixed(1);
 }
+
+export type Tick = "full" | "half" | "off";
+
+/** The 10 marks of the little difficulty ruler: 2.5 → full, full, half, then off. */
+export function tickStates(difficulty: number): Tick[] {
+  const whole = Math.floor(difficulty);
+  const half = difficulty - whole >= 0.5;
+  return Array.from({ length: 10 }, (_, i) => (i < whole ? "full" : i === whole && half ? "half" : "off"));
+}

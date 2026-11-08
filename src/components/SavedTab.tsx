@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { stories } from "../data/stories";
 import { useStore } from "../lib/store";
-import { formatDifficulty, readingMinutes } from "../lib/text";
+import { readingMinutes } from "../lib/text";
+import { MarkedTitle } from "./LevelMark";
 import { StoryView } from "./StoryView";
 
 export function SavedTab({ goRead }: { goRead: () => void }) {
@@ -48,10 +49,12 @@ export function SavedTab({ goRead }: { goRead: () => void }) {
                   <button className="card story-card" onClick={() => setOpenId(s.id)}>
                     <span className="story-card-emoji" aria-hidden="true">{s.emoji}</span>
                     <span className="story-card-main">
-                      <span className="story-card-title">{s.title}</span>
+                      <span className="story-card-title">
+                        <MarkedTitle title={s.title} level={s.level} difficulty={s.difficulty} interactive={false} />
+                      </span>
                       <span className="story-card-sub">{s.titleEn}</span>
                       <span className="story-card-meta">
-                        Difficulty {formatDifficulty(s.difficulty)} · {s.topic} · {readingMinutes(s.paragraphs)} min
+                        {s.topic} · {readingMinutes(s.paragraphs)} min
                         {q ? ` · quiz ${q.score}/${q.total}` : ""}
                       </span>
                     </span>

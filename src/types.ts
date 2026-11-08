@@ -35,16 +35,19 @@ export interface QuizQuestion {
   answer: number;
 }
 
+/** European CEFR levels used so far. B1 comes only when the owner says so. */
+export type Level = "A1" | "A2";
+
 export interface Story {
   id: string;
   title: string;
   titleEn: string;
   emoji: string;
   topic: string;
-  level: "A1";
+  level: Level;
   /**
-   * Difficulty within A1, from 1 (first words) to 10 (top of A1). The first 8 stories sit at 1–2;
-   * after that each new story is 0.5 harder than the one before, up to 10 (see docs/CURRICULUM.md).
+   * Difficulty within the level, from 1 (easiest) to 10 (hardest). The first 8 stories sit at A1 1–2; after that each
+   * new story is 0.5 harder than the one before. After A1 10 comes A2 1 (the two levels overlap): see docs/CURRICULUM.md.
    */
   difficulty: number;
   /** A short "Dutch insight" about the culture, places or habits behind the story (English, A1 learners read it with help) */

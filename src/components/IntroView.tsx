@@ -5,8 +5,9 @@ import { pillById } from "../data/pills";
 import { introWords } from "../lib/intro";
 import { useStore } from "../lib/store";
 import { canSpeak, speak, speakAll } from "../lib/speech";
-import { formatDifficulty, readingMinutes } from "../lib/text";
+import { readingMinutes } from "../lib/text";
 import { Icon } from "./Icon";
+import { MarkedTitle } from "./LevelMark";
 import { PillBody } from "./PillBody";
 
 interface Props {
@@ -45,9 +46,11 @@ export function IntroView({ story, mode, header, onSkip, onBack, onStart }: Prop
               {story.emoji}
             </span>
             <div>
-              <h1 className="intro-title">{story.title}</h1>
+              <h1 className="intro-title">
+            <MarkedTitle title={story.title} level={story.level} difficulty={story.difficulty} />
+          </h1>
               <p className="story-sub">
-                {story.titleEn} · Difficulty {formatDifficulty(story.difficulty)} · {story.topic} · {readingMinutes(story.paragraphs)} min read
+                {story.titleEn} · {story.topic} · {readingMinutes(story.paragraphs)} min read
               </p>
             </div>
           </div>
