@@ -114,15 +114,19 @@ export function speakQueue(texts: string[], opts: QueueOptions = {}): void {
     const rate = opts.rate ?? RATE_NORMAL;
     texts.forEach((text, i) => {
       const u = makeUtterance(text, rate);
+      let t0 = 0;
       alive.add(u);
       u.onstart = () => {
         if (gen !== generation) return;
+        t0 = performance.now();
         started = true;
         setIssue(false);
         opts.onStart?.(i);
       };
       u.onend = () => {
         alive.delete(u);
+        // A real word takes a while to say. Finishing almost instantly means nothing was played.
+        if (gen === generation && t0 && text.length >= 4 && performance.now() - t0 < 60) setIssue(true);
         if (gen === generation && i === texts.length - 1) {
           onInterrupt = undefined;
           opts.onEnd?.();
@@ -139,12 +143,13 @@ export function speakQueue(texts: string[], opts: QueueOptions = {}): void {
       synth.speak(u);
     });
     onInterrupt = opts.onInterrupt;
+    // iOS can report speaking=true without ever starting, so only the start event counts.
     window.setTimeout(() => {
-      if (gen === generation && !started && !synth.speaking) {
+      if (gen === generation && !started) {
         setIssue(true);
         opts.onError?.();
       }
-    }, 2500);
+    }, 3000);
   } catch {
     setIssue(true);
     opts.onError?.();

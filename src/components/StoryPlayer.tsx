@@ -1,4 +1,5 @@
 import type { useNarration } from "../lib/narration";
+import { setSoundCheckOpen } from "../lib/ui";
 import { Icon } from "./Icon";
 
 type Narration = ReturnType<typeof useNarration>;
@@ -40,7 +41,17 @@ export function StoryPlayer({ n, total }: { n: Narration; total: number }) {
         </label>
       </div>
       <p className="player-status" aria-live="polite">
-        {idle ? "No sound? Switch off Silent mode and turn up the volume." : `Paragraph ${Math.max(1, n.index + 1)} of ${total}`}
+        {idle ? (
+          <>
+            No sound? Switch off Silent mode and turn up the volume, or{" "}
+            <button className="link" onClick={() => setSoundCheckOpen(true)}>
+              run the sound check
+            </button>
+            .
+          </>
+        ) : (
+          `Paragraph ${Math.max(1, n.index + 1)} of ${total}`
+        )}
       </p>
     </div>
   );

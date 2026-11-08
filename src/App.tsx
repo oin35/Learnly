@@ -2,6 +2,9 @@ import { useState, useSyncExternalStore } from "react";
 import { StoreProvider, useStore } from "./lib/store";
 import { streak } from "./lib/state";
 import { dueCards } from "./lib/srs";
+import { Sheet } from "./components/Sheet";
+import { SoundCheck } from "./components/SoundCheck";
+import { getSoundCheckOpen, setSoundCheckOpen, subscribeUi } from "./lib/ui";
 import { dismissSpeechIssue, getSpeechIssue, subscribeSpeechIssue } from "./lib/speech";
 import { Icon, type IconName } from "./components/Icon";
 import { ReadTab } from "./components/ReadTab";
@@ -25,6 +28,7 @@ function Shell() {
   const days = streak(state.days, now);
   const due = dueCards(state.vocab, now).length;
   const soundIssue = useSyncExternalStore(subscribeSpeechIssue, getSpeechIssue);
+  const checkOpen = useSyncExternalStore(subscribeUi, getSoundCheckOpen);
 
   return (
     <div className="app">
@@ -43,7 +47,10 @@ function Shell() {
         <div className="notice" role="alert">
           <div>
             <strong>The sound didn’t start.</strong> On iPhone: switch off Silent mode (the switch on the side), turn up the volume, and check that a
-            Dutch voice is installed (Settings → Accessibility → Spoken Content → Voices → Dutch). Then tap a speaker again.
+            Dutch voice is installed (Settings → Accessibility → Spoken Content → Voices → Dutch). Then tap a speaker again.{" "}
+            <button className="link" onClick={() => setSoundCheckOpen(true)}>
+              Run the sound check
+            </button>
           </div>
           <button className="btn btn-text" onClick={dismissSpeechIssue}>
             Dismiss
@@ -57,6 +64,12 @@ function Shell() {
         {tab === "words" && <WordsTab goRead={() => setTab("read")} />}
         {tab === "grammar" && <GrammarTab />}
       </main>
+
+      {checkOpen && (
+        <Sheet label="Sound check" onClose={() => setSoundCheckOpen(false)}>
+          <SoundCheck />
+        </Sheet>
+      )}
 
       <nav className="tabs" aria-label="Main">
         {TABS.map((t) => (

@@ -4,6 +4,7 @@ import { dueCards, level } from "../lib/srs";
 import { displayWord } from "../data/dictionary";
 import { canSpeak, speak } from "../lib/speech";
 import { Flashcards } from "./Flashcards";
+import { setSoundCheckOpen } from "../lib/ui";
 import { Icon } from "./Icon";
 
 export function WordsTab({ goRead }: { goRead: () => void }) {
@@ -99,6 +100,10 @@ export function WordsTab({ goRead }: { goRead: () => void }) {
 
         <p className="fineprint">
           Your progress is stored on this device only.{" "}
+          <button className="link" onClick={() => setSoundCheckOpen(true)}>
+            Sound check
+          </button>{" "}
+          ·{" "}
           {confirmReset ? (
             <>
               Reset saved stories, words and streak?{" "}

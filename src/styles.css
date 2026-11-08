@@ -352,3 +352,12 @@ button.w.saved { background: var(--saved-soft); border-bottom-style: solid; bord
 }
 .notice .btn-text { color: inherit; text-decoration: underline; flex: none; }
 .story-tools .btn-text { align-self: flex-start; margin-left: -4px; }
+
+/* ── Sound check ────────────────────────── */
+.sc { display: grid; gap: 10px; padding-right: 0; }
+.sc-info { margin: 0; padding-left: 18px; font-size: 0.78rem; color: var(--muted); display: grid; gap: 2px; word-break: break-word; }
+.sc-buttons { display: grid; gap: 8px; }
+.sc-log {
+  margin: 0; padding: 10px; background: var(--surface-2); border-radius: 10px; font: 0.75rem/1.5 ui-monospace, Menlo, monospace;
+  white-space: pre-wrap; word-break: break-word; min-height: 4.5em; max-height: 30dvh; overflow-y: auto;
+}
