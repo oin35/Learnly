@@ -62,15 +62,18 @@ If a clip is missing or can't play, the app falls back to the browser's built-in
 defensively for iOS/Safari (see `src/lib/speech.ts`). If neither starts, a notice explains what to check. The **Sound
 check** panel (Words tab) tests the beep, the recorded clips and the phone voice step by step.
 
-### Recording clips for new stories
+### Daily stories and recording clips
 
-`npm test` fails when a story, word or grammar example has no recording. To add them:
+Two new stories are added every day by a scheduled run: the rules are in `docs/CURRICULUM.md` (difficulty scale,
+names, Dutch insights) and the steps in `docs/DAILY-RUN.md`. Clips are stored in **packs** (one new MP3 file per run, plus
+`src/data/audio-index.json`), because the hosting allows a limited number of files. `npm test` fails when a story, word or
+grammar example has no recording. To record by hand:
 
 ```bash
-python3 -m venv .venv-audio && .venv-audio/bin/pip install piper-tts numpy   # needs ffmpeg on the PATH
-# download nl_NL-ronnie-medium.onnx and .onnx.json from https://huggingface.co/rhasspy/piper-voices (nl/nl_NL/ronnie/medium)
+bash scripts/setup-audio.sh            # Piper + the nl_NL-ronnie-medium voice (needs ffmpeg)
 npm run audio:texts
-.venv-audio/bin/python scripts/make-audio.py --model path/to/nl_NL-ronnie-medium.onnx
+.venv-audio/bin/python scripts/make-audio.py --model .voice/nl_NL-ronnie-medium.onnx
 ```
 
-Only missing clips are rendered (`--force` redoes all).
+Only missing clips are recorded, into a new pack (`--rebuild` records everything again into one pack).
+`npm run smoke` opens every story in a real browser; `npm run build:artifact` makes the page that is published.

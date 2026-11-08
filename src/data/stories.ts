@@ -12,6 +12,7 @@ export const stories: Story[] = [
     emoji: "🐰",
     topic: "Animals",
     level: "A1",
+    difficulty: 1,
     intro: {
       words: ["wortel", "tuin", "vogel", "honger", "blij"],
       pills: ["dim", "have"],
@@ -46,6 +47,11 @@ export const stories: Story[] = [
     emoji: "🌍",
     topic: "Geography",
     level: "A1",
+    difficulty: 2,
+    insight: {
+      title: "Amsterdam is the capital, but the government sits in The Hague",
+      text: "Amsterdam is the capital of the Netherlands, but the government and the parliament are in The Hague (Den Haag), about an hour away by train. The king's working palace is in The Hague too.",
+    },
     intro: {
       words: ["hoofdstad", "land", "stad", "mens", "wonen"],
       pills: ["plural", "erzijn"],
@@ -80,6 +86,7 @@ export const stories: Story[] = [
     emoji: "☕",
     topic: "Daily life",
     level: "A1",
+    difficulty: 2,
     intro: {
       words: ["koffie", "ober", "alstublieft", "kosten", "betalen"],
       pills: ["modal", "polite"],
@@ -110,6 +117,7 @@ export const stories: Story[] = [
     emoji: "🚲",
     topic: "Daily life",
     level: "A1",
+    difficulty: 2,
     intro: {
       words: ["werk", "middag", "avond", "koken", "fietsen"],
       pills: ["sep", "time"],
@@ -144,6 +152,7 @@ export const stories: Story[] = [
     emoji: "🍎",
     topic: "Shopping",
     level: "A1",
+    difficulty: 2,
     intro: {
       words: ["markt", "kopen", "duur", "lekker", "hoeveel"],
       pills: ["q", "plural"],
@@ -174,6 +183,7 @@ export const stories: Story[] = [
     emoji: "👨‍👩‍👧‍👦",
     topic: "People",
     level: "A1",
+    difficulty: 1,
     intro: {
       words: ["familie", "vader", "moeder", "broer", "zus"],
       pills: ["be", "poss"],
@@ -208,6 +218,7 @@ export const stories: Story[] = [
     emoji: "🌧️",
     topic: "Daily life",
     level: "A1",
+    difficulty: 2,
     intro: {
       words: ["regen", "koud", "warm", "zon", "paraplu"],
       pills: ["weather", "neg"],
@@ -238,6 +249,7 @@ export const stories: Story[] = [
     emoji: "🚉",
     topic: "Daily life",
     level: "A1",
+    difficulty: 2,
     intro: {
       words: ["station", "rechtdoor", "links", "naast", "ver"],
       pills: ["imp", "q"],

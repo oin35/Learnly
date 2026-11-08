@@ -103,6 +103,40 @@ describe("story entry page (intro)", () => {
   });
 });
 
+describe("difficulty ramp (docs/CURRICULUM.md)", () => {
+  const BASELINE = 8; // the first stories, all at difficulty 1–2
+
+  it("starts with the baseline stories at difficulty 1 or 2", () => {
+    for (const s of stories.slice(0, BASELINE)) expect([1, 2], s.id).toContain(s.difficulty);
+  });
+
+  it("then rises by 0.5 with every new story, up to 10 (the top of A1)", () => {
+    for (let i = BASELINE; i < stories.length; i++) {
+      const expected = Math.min(10, stories[i - 1].difficulty + 0.5);
+      expect(stories[i].difficulty, `${stories[i].id} (story ${i + 1})`).toBe(expected);
+    }
+  });
+
+  it("every difficulty is a multiple of 0.5 between 1 and 10", () => {
+    for (const s of stories) {
+      expect(s.difficulty * 2, s.id).toBe(Math.round(s.difficulty * 2));
+      expect(s.difficulty).toBeGreaterThanOrEqual(1);
+      expect(s.difficulty).toBeLessThanOrEqual(10);
+    }
+  });
+
+  it("stays short enough for its difficulty", () => {
+    for (const s of stories) expect(countWords(s.paragraphs), s.id).toBeLessThanOrEqual(Math.min(180, 70 + 30 * s.difficulty));
+  });
+
+  it("every story after the baseline carries a Dutch insight", () => {
+    for (const s of stories.slice(BASELINE)) {
+      expect(s.insight?.title.length ?? 0, `${s.id} needs an insight`).toBeGreaterThan(5);
+      expect(s.insight?.text.length ?? 0, `${s.id} needs an insight`).toBeGreaterThan(40);
+    }
+  });
+});
+
 describe("story titles", () => {
   it("English titles are direct translations", () => {
     const t = Object.fromEntries(stories.map((s) => [s.id, s.titleEn]));

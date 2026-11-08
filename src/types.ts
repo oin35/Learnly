@@ -42,6 +42,13 @@ export interface Story {
   emoji: string;
   topic: string;
   level: "A1";
+  /**
+   * Difficulty within A1, from 1 (first words) to 10 (top of A1). The first 8 stories sit at 1–2;
+   * after that each new story is 0.5 harder than the one before, up to 10 (see docs/CURRICULUM.md).
+   */
+  difficulty: number;
+  /** A short "Dutch insight" about the culture, places or habits behind the story (English, A1 learners read it with help) */
+  insight?: { title: string; text: string };
   /** Entry page shown before the story: up to 5 key words (dictionary ids) and 1–2 key grammar pills */
   intro: { words: string[]; pills: string[] };
   paragraphs: Paragraph[];

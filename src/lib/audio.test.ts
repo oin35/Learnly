@@ -2,11 +2,16 @@ import { describe, expect, it } from "vitest";
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { stories } from "../data/stories";
 import { pills } from "../data/pills";
-import { dictionary } from "../data/dictionary";
-import { displayWord } from "../data/dictionary";
+import { dictionary, displayWord } from "../data/dictionary";
 import { audioId, normalizeClipText } from "./audioId";
 import { stripMarkup } from "./text";
-import audioIndex from "../data/audio-index.json";
+import audioIndexJson from "../data/audio-index.json";
+
+interface AudioIndex {
+  packs: string[];
+  clips: Record<string, [number, number, number]>;
+}
+const audioIndex = audioIndexJson as unknown as AudioIndex;
 
 const HOW = "Run `npm run audio:texts` and then scripts/make-audio.py (see README) to record the missing clips.";
 
@@ -29,25 +34,37 @@ describe("recorded audio", () => {
   });
 
   it("has a recorded clip for every story paragraph, word and grammar example", () => {
-    const index = new Set<string>(audioIndex);
-    const missing = [...new Set(spokenTexts())].filter((t) => !index.has(audioId(t)));
+    const missing = [...new Set(spokenTexts())].filter((t) => !(audioId(t) in audioIndex.clips));
     expect(missing, HOW).toEqual([]);
   });
 
-  it("every indexed clip exists on disk and is a real MP3", () => {
-    for (const id of audioIndex) {
-      const f = `public/audio/${id}.mp3`;
+  it("every pack file exists, and every clip lies inside its pack as a real, non-overlapping MP3", () => {
+    const packs = audioIndex.packs.map((name) => {
+      const f = `public/audio/${name}`;
       expect(existsSync(f), f).toBe(true);
-      const b = readFileSync(f);
-      expect(b.length, f).toBeGreaterThan(2000);
-      const isMp3 = b.subarray(0, 3).toString("latin1") === "ID3" || (b[0] === 0xff && (b[1] & 0xe0) === 0xe0);
-      expect(isMp3, `${f} is not an MP3`).toBe(true);
+      return readFileSync(f);
+    });
+    const byPack = new Map<number, [number, number, string][]>();
+    for (const [id, [pack, offset, length]] of Object.entries(audioIndex.clips)) {
+      expect(pack, id).toBeLessThan(packs.length);
+      expect(length, id).toBeGreaterThan(2000);
+      expect(offset + length, `${id} runs past the end of its pack`).toBeLessThanOrEqual(packs[pack].length);
+      const head = packs[pack].subarray(offset, offset + 3);
+      const isMp3 = head.toString("latin1") === "ID3" || (head[0] === 0xff && (head[1] & 0xe0) === 0xe0);
+      expect(isMp3, `${id} does not start like an MP3`).toBe(true);
+      byPack.set(pack, [...(byPack.get(pack) ?? []), [offset, length, id]]);
+    }
+    for (const [pack, list] of byPack) {
+      const sorted = [...list].sort((a, b) => a[0] - b[0]);
+      for (let i = 1; i < sorted.length; i++) {
+        expect(sorted[i][0], `clips ${sorted[i - 1][2]} and ${sorted[i][2]} overlap in pack ${pack}`).toBeGreaterThanOrEqual(sorted[i - 1][0] + sorted[i - 1][1]);
+      }
     }
   });
 
   it("has no stray audio files", () => {
-    const index = new Set<string>(audioIndex);
-    const stray = readdirSync("public/audio").filter((f) => f.endsWith(".mp3") && !index.has(f.replace(".mp3", "")));
+    const known = new Set(audioIndex.packs);
+    const stray = readdirSync("public/audio").filter((f) => !known.has(f));
     expect(stray).toEqual([]);
   });
 });

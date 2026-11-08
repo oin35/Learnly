@@ -14,6 +14,7 @@ import { WordSheet } from "./WordSheet";
 import { Quiz } from "./Quiz";
 import { IntroView } from "./IntroView";
 import { StoryPlayer } from "./StoryPlayer";
+import { formatDifficulty } from "../lib/text";
 
 type Selection = { kind: "word"; token: string; paragraph: string } | { kind: "pill"; id: string } | null;
 
@@ -62,7 +63,7 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
   const minutes = readingMinutes(story.paragraphs);
   const texts = useMemo(() => story.paragraphs.map((p) => stripMarkup(p.nl)), [story]);
   const narration = useNarration(texts);
-  useEffect(() => warmClips(storyClipTexts(story), true), [story]);
+  useEffect(() => warmClips(storyClipTexts(story)), [story]);
 
   const openPill = (id: string) => {
     dispatch({ type: "pillSeen", id });
@@ -102,7 +103,7 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
             {story.emoji}
           </div>
           <p className="eyebrow">
-            {story.level} · {story.topic} · {minutes} min read · {countWords(story.paragraphs)} words
+            {story.level} · Difficulty {formatDifficulty(story.difficulty)} · {story.topic} · {minutes} min read · {countWords(story.paragraphs)} words
           </p>
           <h1 className="story-title">{story.title}</h1>
           <p className="story-sub">{story.titleEn}</p>
@@ -163,6 +164,16 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
               </div>
             ))}
           </div>
+
+          {story.insight && (
+            <aside className="insight" aria-label="Dutch insight">
+              <p className="insight-label">
+                <span className="flag-nl" aria-hidden="true" /> Dutch insight
+              </p>
+              <h3>{story.insight.title}</h3>
+              <p>{story.insight.text}</p>
+            </aside>
+          )}
 
           <Quiz
             questions={story.quiz}

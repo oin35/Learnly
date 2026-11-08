@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { stories } from "../data/stories";
 import { useStore } from "../lib/store";
-import { readingMinutes } from "../lib/text";
+import { formatDifficulty, readingMinutes } from "../lib/text";
 import { StoryView } from "./StoryView";
 
 export function SavedTab({ goRead }: { goRead: () => void }) {
@@ -51,7 +51,7 @@ export function SavedTab({ goRead }: { goRead: () => void }) {
                       <span className="story-card-title">{s.title}</span>
                       <span className="story-card-sub">{s.titleEn}</span>
                       <span className="story-card-meta">
-                        {s.topic} · {readingMinutes(s.paragraphs)} min
+                        Difficulty {formatDifficulty(s.difficulty)} · {s.topic} · {readingMinutes(s.paragraphs)} min
                         {q ? ` · quiz ${q.score}/${q.total}` : ""}
                       </span>
                     </span>

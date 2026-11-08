@@ -3,7 +3,10 @@
  *
  * 1. Recorded clips (public/audio, made with Piper, see scripts/make-audio.py) are played through a normal
  *    <audio> element. That sounds natural and, unlike speech synthesis, keeps playing in iPhone silent mode.
- * 2. Anything without a recording falls back to the browser's built-in speech synthesis (no network needed).
+ *    Clips live in "packs" (many clips back to back in one MP3 file); a pack is downloaded once, then each clip is
+ *    sliced out of it and played from memory, so taps are instant.
+ * 2. Anything without a recording, or if a pack can't be loaded, falls back to the browser's built-in speech
+ *    synthesis (no network needed).
  *
  * The speech-synthesis path is written defensively for iOS/Safari, where it is fragile:
  *  - utterances are kept referenced until they finish (iOS/Chrome can drop garbage-collected ones),
@@ -13,14 +16,19 @@
  *  - a Dutch voice is chosen explicitly when one is installed,
  *  - if nothing starts within a couple of seconds we flag an issue the UI can show.
  */
-
 import audioIndex from "../data/audio-index.json";
 import { audioId } from "./audioId";
 
-const recorded = new Set<string>(audioIndex as string[]);
-export const clipCount = recorded.size;
-export const hasClip = (text: string): boolean => recorded.has(audioId(text));
-export const clipUrl = (text: string): string => `audio/${audioId(text)}.mp3`;
+interface AudioIndex {
+  packs: string[];
+  /** clip id → [pack number, byte offset, byte length] */
+  clips: Record<string, [number, number, number]>;
+}
+const index = audioIndex as unknown as AudioIndex;
+
+export const clipCount = Object.keys(index.clips).length;
+export const hasClip = (text: string): boolean => audioId(text) in index.clips;
+export const clipPackName = (text: string): string | undefined => index.packs[index.clips[audioId(text)]?.[0]];
 
 export const RATE_NORMAL = 0.85; // a little slower than native speed, for learners
 export const RATE_SLOW = 0.6;
@@ -110,44 +118,59 @@ export interface QueueOptions {
   onError?: () => void;
 }
 
-/* ── Warm cache: download clips ahead of time so a tap plays immediately ──── */
-const cache = new Map<string, string>(); // clip id → blob: URL
-const waiting: string[] = [];
-const queued = new Set<string>();
-let active = 0;
-const CONCURRENCY = 4;
+/* ── Audio packs: download once, slice clips out of memory ─────────────────── */
+const packData = new Map<number, ArrayBuffer>();
+const packLoading = new Map<number, Promise<boolean>>();
+const clipUrls = new Map<string, string>(); // clip id → blob: URL
 
-function pumpWarm() {
-  while (active < CONCURRENCY && waiting.length) {
-    const id = waiting.shift()!;
-    active++;
-    fetch(`audio/${id}.mp3`)
-      .then((r) => (r.ok ? r.blob() : Promise.reject(new Error(String(r.status)))))
-      .then((b) => void cache.set(id, URL.createObjectURL(b)))
-      .catch(() => undefined) // not cached: the tap just streams the file instead
-      .finally(() => {
-        queued.delete(id);
-        active--;
-        pumpWarm();
-      });
+function loadPack(n: number): Promise<boolean> {
+  if (packData.has(n)) return Promise.resolve(true);
+  let p = packLoading.get(n);
+  if (!p) {
+    p = fetch(`audio/${index.packs[n]}`)
+      .then((r) => (r.ok ? r.arrayBuffer() : Promise.reject(new Error(String(r.status)))))
+      .then((buf) => {
+        packData.set(n, buf);
+        return true;
+      })
+      .catch(() => false)
+      .finally(() => packLoading.delete(n));
+    packLoading.set(n, p);
   }
+  return p;
 }
 
-/** Start downloading clips in the background. `first` puts them at the front of the line. */
-export function warmClips(texts: string[], first = false): void {
-  if (typeof fetch === "undefined" || typeof URL.createObjectURL === "undefined") return;
-  const ids = [...new Set(texts.filter(hasClip).map(audioId))].filter((id) => !cache.has(id) && !queued.has(id));
-  ids.forEach((id) => queued.add(id));
-  if (first) waiting.unshift(...ids);
-  else waiting.push(...ids);
-  pumpWarm();
+/** The blob: URL of a clip, if its pack has been downloaded. */
+function clipBlobUrl(id: string): string | undefined {
+  const cached = clipUrls.get(id);
+  if (cached) return cached;
+  const entry = index.clips[id];
+  const buf = entry && packData.get(entry[0]);
+  if (!buf) return undefined;
+  const url = URL.createObjectURL(new Blob([buf.slice(entry[1], entry[1] + entry[2])], { type: "audio/mpeg" }));
+  clipUrls.set(id, url);
+  return url;
 }
 
-const srcFor = (text: string): string => cache.get(audioId(text)) ?? clipUrl(text);
+const packsFor = (texts: string[]): number[] => [...new Set(texts.filter(hasClip).map((t) => index.clips[audioId(t)][0]))];
+
+/** Start downloading the packs that contain these texts, so taps play instantly. */
+export function warmClips(texts: string[]): void {
+  if (typeof fetch === "undefined") return;
+  packsFor(texts).forEach((n) => void loadPack(n));
+}
+
+/** Download what a clip needs and return its blob: URL (used by the Sound check). */
+export async function ensureClip(text: string): Promise<string | undefined> {
+  const entry = index.clips[audioId(text)];
+  if (!entry || !(await loadPack(entry[0]))) return undefined;
+  return clipBlobUrl(audioId(text));
+}
 
 /* ── Recorded clips ────────────────────────────────────────────────────────── */
 let mode: "audio" | "tts" | null = null;
 let audioEl: HTMLAudioElement | null = null;
+const SILENT = "data:audio/mpeg;base64,//MgxAAAAANIAAAAAExBTUUzLjEwMFVVVVVVVVVVVVVVTEFNRTMuMTAwVVVVVVVVVVVVVf/zIsQnAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVV//MgxE8AAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVMQU1FMy4xMDBVVVVVVVVVVVVVVf/zIMR2AAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVX/8yDEnQAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//MixMQAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/8yDE2AAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV//MgxNgAAANIAAAAAFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zIMTYAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVX/8yLE1wAAA0gAAAAAVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVQ==";
 
 /** One shared element, reused for every clip: once iOS has unlocked it with a tap, later clips can chain on their own. */
 function getAudio(): HTMLAudioElement {
@@ -178,9 +201,11 @@ function playClips(texts: string[], opts: QueueOptions, gen: number): void {
   const a = getAudio();
   mode = "audio";
   onInterrupt = opts.onInterrupt;
+  const ids = texts.map(audioId);
   const playbackRate = (opts.rate ?? RATE_NORMAL) / RATE_NORMAL; // slow mode: ~0.7x
   let i = 0;
   let started = false;
+  const played = (globalThis as { __played?: string[] }).__played; // test hook: which clips were played
 
   // If a clip cannot be played (blocked, missing, undecodable), say the rest with the browser's voice.
   const fallback = () => {
@@ -198,35 +223,55 @@ function playClips(texts: string[], opts: QueueOptions, gen: number): void {
   };
 
   const load = () => {
-    warmClips(texts.slice(i + 1, i + 3), true); // the next paragraphs, so they follow without a gap
-    a.src = srcFor(texts[i]);
+    const url = clipBlobUrl(ids[i]);
+    if (!url) return fallback();
+    played?.push(ids[i]);
+    a.src = url;
     a.defaultPlaybackRate = playbackRate;
     a.playbackRate = playbackRate;
     a.play()?.catch(fallback);
   };
 
-  a.onplaying = () => {
-    if (gen !== generation) return;
-    started = true;
-    setIssue(false);
-    opts.onStart?.(i);
+  const begin = () => {
+    a.onplaying = () => {
+      if (gen !== generation) return;
+      started = true;
+      setIssue(false);
+      opts.onStart?.(i);
+    };
+    a.onended = () => {
+      if (gen !== generation) return;
+      i++;
+      if (i < ids.length) {
+        load();
+      } else {
+        onInterrupt = undefined;
+        mode = null;
+        opts.onEnd?.();
+      }
+    };
+    a.onerror = fallback;
+    window.setTimeout(() => {
+      if (gen === generation && mode === "audio" && !started) fallback();
+    }, 4000);
+    load();
   };
-  a.onended = () => {
+
+  const needed = packsFor(texts);
+  if (needed.every((n) => packData.has(n))) {
+    begin();
+    return;
+  }
+  // A pack is still downloading. Hold the audio element with a silent blip while we wait, inside the tap,
+  // so iOS keeps allowing playback when the download finishes.
+  a.src = SILENT;
+  a.play()?.catch(() => undefined);
+  const timeout = new Promise<boolean[]>((res) => window.setTimeout(() => res([false]), 8000));
+  void Promise.race([Promise.all(needed.map(loadPack)), timeout]).then((oks) => {
     if (gen !== generation) return;
-    i++;
-    if (i < texts.length) {
-      load();
-    } else {
-      onInterrupt = undefined;
-      mode = null;
-      opts.onEnd?.();
-    }
-  };
-  a.onerror = fallback;
-  window.setTimeout(() => {
-    if (gen === generation && mode === "audio" && !started) fallback();
-  }, 4000);
-  load();
+    if (oks.every(Boolean)) begin();
+    else fallback();
+  });
 }
 
 /** Speak several texts one after another. Must be called from a user gesture (click/tap) on iOS. */

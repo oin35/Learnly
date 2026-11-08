@@ -37,7 +37,7 @@ function Shell() {
 
   // Download the audio in the background so taps play instantly: words first, then every story.
   useEffect(() => {
-    const t = window.setTimeout(() => warmClips([...allClipTexts(), ...stories.flatMap(storyClipTexts)]), 1500);
+    const t = window.setTimeout(() => warmClips([...allClipTexts(), ...stories.slice(0, 3).flatMap(storyClipTexts)]), 1500);
     return () => window.clearTimeout(t);
   }, []);
 

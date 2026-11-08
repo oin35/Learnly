@@ -1,5 +1,5 @@
 import { useMemo, useRef, useState } from "react";
-import { clipCount, clipUrl, hasClip, speakQueue } from "../lib/speech";
+import { clipCount, clipPackName, ensureClip, hasClip, speakQueue } from "../lib/speech";
 
 const TEST_NL = "Hallo, dit is een test.";
 const TEST_EN = "Hello, this is a test.";
@@ -104,10 +104,12 @@ export function SoundCheck() {
     window.setTimeout(() => !started && add(`${label}: no start event after 4 s`), 4000);
   };
 
-  const clip = () => {
-    const url = clipUrl("de wortel");
-    add(`Clip: loading ${url}`);
+  const clip = async () => {
     clipEl.current?.pause(); // never play two on top of each other
+    add(`Clip: downloading ${clipPackName("de wortel") ?? "?"}`);
+    const url = await ensureClip("de wortel");
+    if (!url) return add("Clip: the audio pack could not be downloaded");
+    add("Clip: pack loaded, clip cut out");
     const a = new Audio(url);
     clipEl.current = a;
     a.onloadeddata = () => add(`Clip: loaded (${a.duration.toFixed(2)} s)`);

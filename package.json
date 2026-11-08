@@ -10,7 +10,9 @@
     "preview": "vite preview",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
-    "audio:texts": "tsx scripts/audio-texts.ts"
+    "audio:texts": "tsx scripts/audio-texts.ts",
+    "build:artifact": "npm run build:single && python3 scripts/make-artifact-page.py",
+    "smoke": "node scripts/smoke.cjs"
   },
   "dependencies": {
     "react": "^19.3.1",

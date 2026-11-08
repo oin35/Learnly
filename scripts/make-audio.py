@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
 """
-Render the app's Dutch audio clips with Piper (free, offline neural TTS) and encode them as small MP3s.
+Record the app's Dutch audio with Piper (free, offline neural TTS) and append it to the audio packs.
 
-Setup (once):
-    python3 -m venv .venv-audio && .venv-audio/bin/pip install piper-tts numpy
-    # voice: nl_NL-ronnie-medium (CC0) from https://huggingface.co/rhasspy/piper-voices (the .onnx and .onnx.json)
-    # also needs ffmpeg on the PATH
+Clips are stored in "packs": big MP3 files made of many clips back to back, with an index
+(src/data/audio-index.json) that says where each clip lives: {"packs": [...], "clips": {id: [pack, offset, length]}}.
+A pack is never changed once published, so each run only adds ONE new pack with the clips that are still missing.
+(The hosting allows a limited number of files, so one file per clip would not scale.)
 
-Usage:
-    npm run audio:texts
-    .venv-audio/bin/python scripts/make-audio.py --model path/to/nl_NL-ronnie-medium.onnx
+Setup:   bash scripts/setup-audio.sh        (creates .venv-audio and downloads the voice into .voice/)
+Usage:   npm run audio:texts
+         .venv-audio/bin/python scripts/make-audio.py --model .voice/nl_NL-ronnie-medium.onnx
 
-Only missing clips are rendered (use --force to redo all). Writes public/audio/<id>.mp3 and src/data/audio-index.json.
+--rebuild records everything again into a single fresh pack (replaces all old packs).
 """
 import argparse, json, subprocess, sys, tempfile, wave
 from pathlib import Path
@@ -53,13 +53,14 @@ def render(voice: PiperVoice, text: str, cfg: SynthesisConfig) -> tuple[np.ndarr
     return x, rate
 
 
-def write_mp3(x: np.ndarray, rate: int, out: Path) -> None:
+def encode_mp3(x: np.ndarray, rate: int) -> bytes:
     with tempfile.TemporaryDirectory() as td:
-        wav = Path(td) / "clip.wav"
+        wav, mp3 = Path(td) / "clip.wav", Path(td) / "clip.mp3"
         with wave.open(str(wav), "wb") as w:
             w.setnchannels(1); w.setsampwidth(2); w.setframerate(rate)
             w.writeframes((np.clip(x, -1, 1) * 32767).astype(np.int16).tobytes())
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-ac", "1", "-ar", "22050", "-b:a", "48k", str(out)], check=True)
+        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", str(wav), "-ac", "1", "-ar", "22050", "-b:a", "48k", str(mp3)], check=True)
+        return mp3.read_bytes()
 
 
 def main() -> int:
@@ -68,30 +69,39 @@ def main() -> int:
     ap.add_argument("--texts", default=str(ROOT / "scripts/audio/texts.json"))
     ap.add_argument("--out", default=str(ROOT / "public/audio"))
     ap.add_argument("--index", default=str(ROOT / "src/data/audio-index.json"))
-    ap.add_argument("--force", action="store_true")
+    ap.add_argument("--rebuild", action="store_true")
     args = ap.parse_args()
 
     texts: dict[str, str] = json.loads(Path(args.texts).read_text())
-    out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
+    out, index_path = Path(args.out), Path(args.index)
+    out.mkdir(parents=True, exist_ok=True)
+    index = {"packs": [], "clips": {}} if args.rebuild or not index_path.exists() else json.loads(index_path.read_text())
+    if args.rebuild:
+        for old in out.glob("pack-*.mp3"):
+            old.unlink()
+
+    todo = {cid: t for cid, t in texts.items() if cid not in index["clips"]}
+    if not todo:
+        print(f"nothing to record: all {len(texts)} clips are already in {len(index['packs'])} pack(s)")
+        return 0
+
     voice = PiperVoice.load(args.model)
     cfg = SynthesisConfig(length_scale=1.0)
-
-    done = skipped = 0
-    for i, (cid, text) in enumerate(texts.items(), 1):
-        target = out / f"{cid}.mp3"
-        if target.exists() and not args.force:
-            skipped += 1
-            continue
-        x, rate = render(voice, text, cfg)
-        write_mp3(x, rate, target)
-        done += 1
-        if done % 25 == 0:
-            print(f"  {i}/{len(texts)} …", flush=True)
-
-    ids = sorted(p.stem for p in out.glob("*.mp3") if p.stem in texts)
-    Path(args.index).write_text(json.dumps(ids) + "\n")
-    total = sum((out / f"{i}.mp3").stat().st_size for i in ids)
-    print(f"rendered {done}, kept {skipped}; index has {len(ids)} clips, {total/1e6:.1f} MB")
+    pack_no = len(index["packs"])
+    name = f"pack-{pack_no:03d}.mp3"
+    blob, entries = bytearray(), {}
+    for i, (cid, text) in enumerate(todo.items(), 1):
+        mp3 = encode_mp3(*render(voice, text, cfg))
+        entries[cid] = [pack_no, len(blob), len(mp3)]
+        blob += mp3
+        if i % 25 == 0:
+            print(f"  {i}/{len(todo)} …", flush=True)
+    (out / name).write_bytes(blob)
+    index["packs"].append(name)
+    index["clips"].update(entries)
+    # drop clips that are no longer used by any text (their bytes stay in old packs; harmless)
+    index_path.write_text(json.dumps(index, separators=(",", ":")) + "\n")
+    print(f"recorded {len(todo)} new clips into {name} ({len(blob)/1e3:.0f} KB); index now has {len(index['clips'])} clips in {len(index['packs'])} pack(s)")
     return 0
 
 

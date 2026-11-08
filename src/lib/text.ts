@@ -63,3 +63,8 @@ export function sentenceWith(raw: string, word: string): string {
   );
   return (hit ?? plain).trim();
 }
+
+/** 2 → "2", 2.5 → "2.5" */
+export function formatDifficulty(d: number): string {
+  return Number.isInteger(d) ? String(d) : d.toFixed(1);
+}
