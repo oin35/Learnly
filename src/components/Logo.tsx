@@ -5,7 +5,7 @@
  * Designed small first (it is shown at about 34 px): flat colors, few shapes, bold silhouette, no fine detail.
  * The curly hair is a cap of overlapping circles; the smile is a single short curve.
  */
-export type HairStyle = "short" | "quiff" | "crop";
+export type HairStyle = "lift" | "lift-low";
 
 type Curl = [x: number, y: number, r: number];
 
@@ -21,23 +21,17 @@ function arc(count: number, cx: number, cy: number, rx: number, ry: number, from
 }
 
 const STYLES: Record<HairStyle, { back: Curl[]; front: Curl[]; smile: string }> = {
-  // Short curly cap that stops above the ears, small curls over the forehead, a warm half-smile
-  short: {
-    back: arc(11, 32, 27, 13.8, 15.2, 196, 344, 4.5),
-    front: arc(6, 32, 21.6, 8.8, 7.6, 205, 335, 3.6),
-    smile: "M28.6 36.4 Q32 38.9 35.4 36.4",
-  },
-  // A little lift at the front (a quiff of curls), sides stay short, a slight smirk
-  quiff: {
-    back: [...arc(9, 32, 27, 13.6, 14.6, 198, 342, 4.2), [26, 9.6, 5], [32, 7.6, 5.2], [38, 9.6, 5]],
-    front: [[26.6, 16.8, 3.5], [32, 15.2, 3.5], [37.6, 16.2, 3.5], [41.4, 19.2, 2.8], [22.8, 19.6, 2.8]],
+  // Two layers: a short curly back layer with a small lift at the front, and a smaller layer of curls over the forehead
+  lift: {
+    back: [...arc(9, 32, 27, 13.6, 14.6, 198, 342, 4.2), [26.6, 10.8, 4.3], [32, 9.4, 4.5], [37.4, 10.8, 4.3]],
+    front: [[27.2, 16.9, 2.8], [32.2, 15.6, 2.8], [37.2, 16.5, 2.8], [40.8, 19.2, 2.2], [23.6, 19.4, 2.2]],
     smile: "M29 36.8 Q32.6 38.8 35.8 36",
   },
-  // Tight curls cropped close: many small circles, a soft closed smile
-  crop: {
-    back: arc(17, 32, 27, 13.4, 14.8, 192, 348, 3.3),
-    front: arc(9, 32, 22.2, 9.6, 8, 200, 340, 3),
-    smile: "M29.4 36.6 Q32 38.4 34.6 36.6",
+  // Same, with the back layer lower still
+  "lift-low": {
+    back: [...arc(9, 32, 27, 13.6, 14.6, 198, 342, 4.2), [26.8, 11.6, 4.1], [32, 10.6, 4.2], [37.2, 11.6, 4.1]],
+    front: [[27.2, 16.9, 2.8], [32.2, 15.6, 2.8], [37.2, 16.5, 2.8], [40.8, 19.2, 2.2], [23.6, 19.4, 2.2]],
+    smile: "M29 36.8 Q32.6 38.8 35.8 36",
   },
 };
 
@@ -55,7 +49,7 @@ function Curls({ curls }: { curls: Curl[] }) {
   );
 }
 
-export function Logo({ size = 36, hair = "short" }: { size?: number; hair?: HairStyle }) {
+export function Logo({ size = 36, hair = "lift" }: { size?: number; hair?: HairStyle }) {
   const { back, front, smile } = STYLES[hair];
   return (
     <svg className="logo" viewBox="0 0 64 64" width={size} height={size} role="img" aria-label="Don Pablo’s Dutch Class logo">
