@@ -48,6 +48,9 @@ All three must pass. If something fails, fix it. If you cannot fix it, **do not 
 3. `Artifact` publish: `file_path` = absolute path of `dist-artifact/page.html`, `url` = the URL above,
    `root` = absolute path of `public`, `files` = `[{"path": "audio/pack-NNN.mp3", "contentType": "audio/mpeg"}]` for **only the new pack(s)**,
    and a short `label`. Do not pass `icon` or `title`.
+   If the publish is refused because a newer version of the page exists (someone else published while you worked), pull the
+   latest code (`git pull --rebase origin claude/zen-faraday-5mk9rj`), rebuild with `npm run build:artifact`, read the saved copy the tool
+   points to, check that your build contains everything that version has, and publish again.
 4. Confirm with `Artifact` `action: "list"`, `scope: "files"` that the new pack is there.
 
 ## 7. Save and report
