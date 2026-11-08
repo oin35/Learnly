@@ -134,6 +134,12 @@ describe("progress counters and favorites", () => {
     expect(s.read).toContain("b"); // un-saving does not un-read
   });
 
+  it("never lists a story twice and keeps read stories that are no longer saved", () => {
+    const data = { v: 1, saved: ["a", "b"], skipped: [], vocab: {}, days: [], quiz: {}, pillsSeen: [], read: ["b", "c"], favPills: [] };
+    const s = loadState({ getItem: () => JSON.stringify(data), setItem: () => undefined });
+    expect([...s.read].sort()).toEqual(["a", "b", "c"]);
+  });
+
   it("toggles favorite grammar pills and keeps them through save/load", () => {
     let s = reducer(initialState, { type: "toggleFavPill", id: "neg" });
     s = reducer(s, { type: "toggleFavPill", id: "q" });
@@ -151,7 +157,7 @@ describe("progress counters and favorites", () => {
     const kv = { getItem: () => JSON.stringify(old), setItem: () => undefined };
     const s = loadState(kv);
     expect(s.saved).toEqual(["a"]);
-    expect(s.read).toEqual([]);
+    expect(s.read).toEqual(["a"]); // a saved story is also a read story, even if it was saved before `read` existed
     expect(s.favPills).toEqual([]);
   });
 });

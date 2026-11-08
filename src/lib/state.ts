@@ -164,7 +164,8 @@ export function loadState(storage: KV | null = defaultStorage()): AppState {
       days: Array.isArray(p.days) ? p.days : [],
       quiz: p.quiz && typeof p.quiz === "object" ? p.quiz : {},
       pillsSeen: Array.isArray(p.pillsSeen) ? p.pillsSeen : [],
-      read: Array.isArray(p.read) ? p.read : [],
+      // every saved story counts as read, including ones saved before `read` existed
+      read: [...new Set([...(Array.isArray(p.read) ? p.read : []), ...(Array.isArray(p.saved) ? p.saved : [])])],
       favPills: Array.isArray(p.favPills) ? p.favPills : [],
     };
   } catch {

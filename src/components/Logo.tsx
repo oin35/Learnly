@@ -5,8 +5,6 @@
  * Designed small first (it is shown at about 34 px): flat colors, few shapes, bold silhouette, no fine detail.
  * The curly hair is a cap of overlapping circles; the smile is a single short curve.
  */
-export type HairStyle = "lift" | "lift-low";
-
 type Curl = [x: number, y: number, r: number];
 
 const HAIR = "#c4953f"; // dark golden blonde
@@ -20,20 +18,11 @@ function arc(count: number, cx: number, cy: number, rx: number, ry: number, from
   });
 }
 
-const STYLES: Record<HairStyle, { back: Curl[]; front: Curl[]; smile: string }> = {
-  // Two layers: a short curly back layer with a small lift at the front, and a smaller layer of curls over the forehead
-  lift: {
-    back: [...arc(9, 32, 27, 13.6, 14.6, 198, 342, 4.2), [26.6, 10.8, 4.3], [32, 9.4, 4.5], [37.4, 10.8, 4.3]],
-    front: [[27.2, 16.9, 2.8], [32.2, 15.6, 2.8], [37.2, 16.5, 2.8], [40.8, 19.2, 2.2], [23.6, 19.4, 2.2]],
-    smile: "M29 36.8 Q32.6 38.8 35.8 36",
-  },
-  // Same, with the back layer lower still
-  "lift-low": {
-    back: [...arc(9, 32, 27, 13.6, 14.6, 198, 342, 4.2), [26.8, 11.6, 4.1], [32, 10.6, 4.2], [37.2, 11.6, 4.1]],
-    front: [[27.2, 16.9, 2.8], [32.2, 15.6, 2.8], [37.2, 16.5, 2.8], [40.8, 19.2, 2.2], [23.6, 19.4, 2.2]],
-    smile: "M29 36.8 Q32.6 38.8 35.8 36",
-  },
-};
+// Two layers: a short curly back layer with a small lift at the front, and a smaller layer of curls over the forehead
+const BACK: Curl[] = [...arc(9, 32, 27, 13.6, 14.6, 198, 342, 4.2), [26.8, 11.6, 4.1], [32, 10.6, 4.2], [37.2, 11.6, 4.1]];
+const FRONT: Curl[] = [[27.4, 17, 2.3], [32.2, 15.8, 2.3], [37, 16.6, 2.3], [40.4, 19, 1.9], [24, 19.4, 1.9]];
+// A single short, thin curve with a slight smirk: no teeth, no mustache
+const SMILE = "M29 36.8 Q32.6 38.8 35.8 36";
 
 function Curls({ curls }: { curls: Curl[] }) {
   return (
@@ -49,8 +38,7 @@ function Curls({ curls }: { curls: Curl[] }) {
   );
 }
 
-export function Logo({ size = 36, hair = "lift" }: { size?: number; hair?: HairStyle }) {
-  const { back, front, smile } = STYLES[hair];
+export function Logo({ size = 36 }: { size?: number }) {
   return (
     <svg className="logo" viewBox="0 0 64 64" width={size} height={size} role="img" aria-label="Don Pablo’s Dutch Class logo">
       <defs>
@@ -73,21 +61,21 @@ export function Logo({ size = 36, hair = "lift" }: { size?: number; hair?: HairS
         <path d="M32 50 L40 46.5 L40 55 Z" fill="#1d1f27" />
         <rect x="29.6" y="48" width="4.8" height="5.2" rx="1.4" fill="#2c2f3a" />
         {/* hair behind the face */}
-        <Curls curls={back} />
+        <Curls curls={BACK} />
         {/* ears */}
         <ellipse cx="19.2" cy="28.4" rx="2.4" ry="3.3" fill="#eebd94" />
         <ellipse cx="44.8" cy="28.4" rx="2.4" ry="3.3" fill="#eebd94" />
         {/* face */}
         <ellipse cx="32" cy="27" rx="12.8" ry="14.6" fill="#f2c9a1" />
         {/* curls over the forehead */}
-        <Curls curls={front} />
+        <Curls curls={FRONT} />
         {/* eyebrows, eyes */}
         <path d="M23.8 24.4 Q26.4 23 29 24.4" fill="none" stroke="#9a7430" strokeWidth="1.5" strokeLinecap="round" />
         <path d="M35 24.4 Q37.6 23 40.2 24.4" fill="none" stroke="#9a7430" strokeWidth="1.5" strokeLinecap="round" />
         <ellipse cx="26.4" cy="28.2" rx="1.5" ry="1.9" fill="#2a1d18" />
         <ellipse cx="37.6" cy="28.2" rx="1.5" ry="1.9" fill="#2a1d18" />
         {/* smile: one short, thin curve. No mustache. */}
-        <path d={smile} fill="none" stroke="#b0664f" strokeWidth="1.5" strokeLinecap="round" />
+        <path d={SMILE} fill="none" stroke="#b0664f" strokeWidth="1.5" strokeLinecap="round" />
       </g>
     </svg>
   );
