@@ -10,6 +10,7 @@ import { allClipTexts, storyClipTexts } from "./lib/warm";
 import { warmClips } from "./lib/speech";
 import { dismissSpeechIssue, getSpeechIssue, subscribeSpeechIssue } from "./lib/speech";
 import { Icon, type IconName } from "./components/Icon";
+import { Logo } from "./components/Logo";
 import { ReadTab } from "./components/ReadTab";
 import { SavedTab } from "./components/SavedTab";
 import { WordsTab } from "./components/WordsTab";
@@ -43,7 +44,7 @@ function Shell() {
     <div className="app">
       <header className="topbar">
         <div className="brand">
-          <span className="brand-mark" aria-hidden="true">D</span>
+          <Logo size={34} />
           <span className="brand-name">Don Pablo’s Dutch Class</span>
         </div>
         <div className="streak" title="Day streak" aria-label={`${days} day streak`}>
