@@ -101,7 +101,7 @@ button { font: inherit; color: inherit; }
 .topbar { position: relative; }
 /* Personal mark: dead centre of the top bar, almost invisible, never in the way of taps */
 .phi {
-  position: absolute; left: 50%; height: 62%; width: auto; aspect-ratio: 406 / 410;
+  position: absolute; left: 50%; height: 31%; width: auto; aspect-ratio: 406 / 410;
   top: calc(50% + (max(10px, env(safe-area-inset-top, 0px)) - 10px) / 2);
   transform: translate(-50%, -50%);
   color: var(--text); opacity: 0.075; pointer-events: none; user-select: none;
