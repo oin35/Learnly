@@ -144,6 +144,22 @@ describe("difficulty ramp (docs/CURRICULUM.md)", () => {
   });
 });
 
+describe("names in new stories (docs/CURRICULUM.md)", () => {
+  it("use no person's name other than Tom and Lisa", () => {
+    const BASELINE = 8;
+    const bad: string[] = [];
+    for (const s of stories.slice(BASELINE)) {
+      for (const p of s.paragraphs) {
+        for (const t of tokenize(stripMarkup(p.nl))) {
+          const e = t.word ? lookup(t.text) : undefined;
+          if (e?.pos === "name" && e.en.endsWith("(a name)") && !["Tom", "Lisa"].includes(e.nl)) bad.push(`${e.nl} in ${s.id}`);
+        }
+      }
+    }
+    expect([...new Set(bad)], "Only Tom (man) and Lisa (woman) may be used; use a role (de ober, de buurman, …) for anyone else").toEqual([]);
+  });
+});
+
 describe("story titles", () => {
   it("English titles are direct translations", () => {
     const t = Object.fromEntries(stories.map((s) => [s.id, s.titleEn]));

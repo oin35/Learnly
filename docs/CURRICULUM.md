@@ -57,14 +57,21 @@ Also, every time:
   points, 2–3 examples, tip). Every pill must be used in at least one story.
 - Record the audio (see `docs/DAILY-RUN.md`). Tests fail until every paragraph, word and example has a recording.
 
-## Names
+## Names (decided by the owner: always Tom and Lisa)
 
-Use friendly, **non-controversial** first names. Mix Dutch and Turkish names, for example:
-- Dutch: Emma, Sara, Tom, Daan, Lisa, Noor, Eva, Bram, Sem, Julia, Finn, Lotte, Thijs, Fleur, Lars, Anna, Jan.
-- Turkish: Volkan, Özkan, Deniz, Beyza, Buket, Elif, Mert, Selin, Can, Emre, Zeynep, Kerem, Defne.
+Use **only two first names for people in every new story: Tom for a man or boy, Lisa for a woman or girl. Always.**
+The Dutch voice cannot pronounce other names well (Turkish names in particular come out wrong), so no other first names,
+no nicknames, and no names for animals or objects.
 
-Never use the names of politicians, religious figures, celebrities or anyone in the news. Don't tie a name to a stereotype.
-(The Dutch voice reads Turkish names with Dutch pronunciation. That is acceptable.)
+- Need a second person of the same gender? Use a role instead: *de ober, de buurman, de buurvrouw, de leraar, de verkoper,
+  de vrouw, de man, de dokter, de agent*.
+- Never use names of real people, celebrities, politicians or religious figures, except where a culture insight is about a
+  place or an artwork and the name is part of its official name (for example the *Van Gogh Museum*, *Rijksmuseum*); keep those
+  out of the story text and in the English insight where possible.
+- Places (Amsterdam, Utrecht, Friesland …) are fine and are added to the dictionary as names *without* "(a name)".
+- A **person's first name** is added to `src/data/dictionary.ts` as `name("Tom", "Tom (a name)")`: the English text ends with
+  "(a name)". `npm test` checks that new stories use no person's name other than Tom and Lisa.
+- The 8 baseline stories keep the names they have.
 
 ## Dutch insights: topics (one per story, paired with a daily-life theme)
 
