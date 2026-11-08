@@ -103,6 +103,14 @@ describe("story entry page (intro)", () => {
   });
 });
 
+describe("story titles", () => {
+  it("English titles are direct translations", () => {
+    const t = Object.fromEntries(stories.map((s) => [s.id, s.titleEn]));
+    expect(t["een-dag-van-emma"]).toBe("A day of Emma");
+    expect(t["konijn-wortel"]).toBe("The rabbit and the carrot");
+  });
+});
+
 describe("dictionary", () => {
   it("has unique lemma ids", () => {
     const ids = dictionary.map(entryId);

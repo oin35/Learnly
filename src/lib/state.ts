@@ -11,6 +11,10 @@ export interface AppState {
   days: string[];
   quiz: Record<string, { score: number; total: number }>;
   pillsSeen: string[];
+  /** Stories finished: the comprehension check completed, or liked after reading */
+  read: string[];
+  /** Grammar pills starred as favorites */
+  favPills: string[];
 }
 
 export const initialState: AppState = {
@@ -21,6 +25,8 @@ export const initialState: AppState = {
   days: [],
   quiz: {},
   pillsSeen: [],
+  read: [],
+  favPills: [],
 };
 
 export type WordInput = Parameters<typeof newCard>[0];
@@ -35,6 +41,8 @@ export type Action =
   | { type: "review"; id: string; correct: boolean; now: number }
   | { type: "quiz"; id: string; score: number; total: number; now: number }
   | { type: "pillSeen"; id: string }
+  | { type: "markRead"; id: string; now: number }
+  | { type: "toggleFavPill"; id: string }
   | { type: "reset" };
 
 export function dayKey(ms: number): string {
@@ -58,6 +66,7 @@ export function reducer(state: AppState, action: Action): AppState {
         ...state,
         saved: [action.id, ...without(state.saved, action.id)],
         skipped: without(state.skipped, action.id),
+        read: state.read.includes(action.id) ? state.read : [...state.read, action.id],
         days: withDay(state.days, action.now),
       };
     case "skip":
@@ -97,6 +106,17 @@ export function reducer(state: AppState, action: Action): AppState {
       const best = !prev || action.score >= prev.score ? { score: action.score, total: action.total } : prev;
       return { ...state, quiz: { ...state.quiz, [action.id]: best }, days: withDay(state.days, action.now) };
     }
+    case "markRead":
+      return {
+        ...state,
+        read: state.read.includes(action.id) ? state.read : [...state.read, action.id],
+        days: withDay(state.days, action.now),
+      };
+    case "toggleFavPill":
+      return {
+        ...state,
+        favPills: state.favPills.includes(action.id) ? without(state.favPills, action.id) : [...state.favPills, action.id],
+      };
     case "pillSeen":
       return state.pillsSeen.includes(action.id) ? state : { ...state, pillsSeen: [...state.pillsSeen, action.id] };
     case "reset":
@@ -144,6 +164,8 @@ export function loadState(storage: KV | null = defaultStorage()): AppState {
       days: Array.isArray(p.days) ? p.days : [],
       quiz: p.quiz && typeof p.quiz === "object" ? p.quiz : {},
       pillsSeen: Array.isArray(p.pillsSeen) ? p.pillsSeen : [],
+      read: Array.isArray(p.read) ? p.read : [],
+      favPills: Array.isArray(p.favPills) ? p.favPills : [],
     };
   } catch {
     return initialState;

@@ -1,12 +1,13 @@
 import type { Pill } from "../types";
 import { speak, canSpeak } from "../lib/speech";
+import { FavStar } from "./FavStar";
 import { Icon } from "./Icon";
 
 export function PillBody({ pill }: { pill: Pill }) {
   return (
     <div className="pill-body">
       <h2 className="pill-title">
-        <span className="capsule" aria-hidden="true" /> {pill.title}
+        <span className="capsule" aria-hidden="true" /> {pill.title} <FavStar pillId={pill.id} title={pill.title} />
       </h2>
       <p className="pill-summary">{pill.summary}</p>
       <ul className="pill-points">

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { stories } from "../data/stories";
 import { useStore } from "../lib/store";
-import { dueCards } from "../lib/srs";
 import { streak } from "../lib/state";
 import { StoryView } from "./StoryView";
 
@@ -18,23 +17,26 @@ export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
   const next = stories.find((s) => !state.saved.includes(s.id) && !state.skipped.includes(s.id));
   const left = stories.filter((s) => !state.saved.includes(s.id) && !state.skipped.includes(s.id)).length;
   const now = Date.now();
-  const due = dueCards(state.vocab, now).length;
   const days = streak(state.days, now);
 
   const strip = (
-    <div className="today" aria-label="Today">
+    <div className="today" aria-label="Your progress">
       <div className="stat">
         <strong>{days}</strong>
-        <span>day streak 🔥</span>
+        <span>day streak</span>
       </div>
       <button className="stat stat-btn" onClick={() => goTo("words")}>
         <strong>{Object.keys(state.vocab).length}</strong>
         <span>words saved</span>
       </button>
-      <button className="stat stat-btn" onClick={() => goTo("words")}>
-        <strong>{due}</strong>
-        <span>cards to review</span>
+      <button className="stat stat-btn" onClick={() => goTo("saved")}>
+        <strong>{state.saved.length}</strong>
+        <span>stories saved</span>
       </button>
+      <div className="stat">
+        <strong>{state.read.length}</strong>
+        <span>stories read</span>
+      </div>
     </div>
   );
 

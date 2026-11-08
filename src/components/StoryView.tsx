@@ -166,7 +166,10 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
 
           <Quiz
             questions={story.quiz}
-            onDone={(score, total) => dispatch({ type: "quiz", id: story.id, score, total, now: Date.now() })}
+            onDone={(score, total) => {
+              dispatch({ type: "quiz", id: story.id, score, total, now: Date.now() });
+              dispatch({ type: "markRead", id: story.id, now: Date.now() });
+            }}
           />
         </article>
       </div>

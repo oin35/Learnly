@@ -1,6 +1,6 @@
-# Learnly
+# Don Pablo’s Dutch Class
 
-Learn Dutch by reading. Learnly gives English speakers short **A1 stories** (3 minutes or less) and turns every
+Learn Dutch by reading. The app gives English speakers short **A1 stories** (3 minutes or less) and turns every
 story into a small lesson: tap any word for its meaning, save it to your vocabulary, review it as a flashcard,
 and pick up **grammar pills** exactly where the grammar appears. The goal isn't grammar for its own sake. It's
 being able to handle basic daily situations: ordering a coffee, shopping, asking the way.
@@ -13,9 +13,10 @@ being able to handle basic daily situations: ordering a coffee, shopping, asking
 - **Saved stories**: recall any saved story later, with your quiz score.
 - **Tap-a-word dictionary**: inflected forms resolve to the dictionary word (`kijkt` → `kijken`), with the
   article for nouns (`de wortel`). Save words to your vocabulary; saved words are highlighted in later stories.
-- **Flashcards**: spaced repetition (Leitner boxes, 1 / 3 / 7 / 14 / 30 days), NL → EN or EN → NL, keyboard
-  shortcuts (Space to flip, 1 = not yet, 2 = got it).
-- **Grammar pills**: 18 bite-sized pills (de/het, verb in second place, niet/geen, questions, "ik wil graag…",
+- **Word quiz**: a 3-choice question for each saved word (NL → EN or EN → NL, keys 1–3). A word is **Learning** until
+  you answer it correctly 3 times in a row, then it is **Known**; a wrong answer sends it back. Review is
+  spaced (1 / 3 / 7 / 14 / 30 days) and the Words tab filters All / Learning / Known.
+- **Grammar pills**: star your favorites, filter to them with the star button, and search the pills; 18 bite-sized pills (de/het, verb in second place, niet/geen, questions, "ik wil graag…",
   u vs. je, numbers & prices, time, …), highlighted inline in the stories and collected in the Grammar tab.
 - **Listen to the whole story**: a read-aloud player (play / pause / stop, *Slow* mode) that highlights the
   paragraph being read, in a natural pre-recorded voice that also works in iPhone silent mode. Every paragraph,

@@ -43,9 +43,8 @@ function Shell() {
     <div className="app">
       <header className="topbar">
         <div className="brand">
-          <span className="brand-mark" aria-hidden="true">L</span>
-          <span className="brand-name">Learnly</span>
-          <span className="chip">Nederlands · A1</span>
+          <span className="brand-mark" aria-hidden="true">D</span>
+          <span className="brand-name">Don Pablo’s Dutch Class</span>
         </div>
         <div className="streak" title="Day streak" aria-label={`${days} day streak`}>
           🔥 {days}

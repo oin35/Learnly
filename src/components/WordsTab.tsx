@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { useStore } from "../lib/store";
-import { dueCards, level } from "../lib/srs";
+import { KNOWN_AFTER, dueCards, level } from "../lib/srs";
 import { displayWord } from "../data/dictionary";
 import { canSpeak, speak } from "../lib/speech";
-import { Flashcards } from "./Flashcards";
+import { WordQuiz } from "./WordQuiz";
 import { setSoundCheckOpen } from "../lib/ui";
 import { Icon } from "./Icon";
 
@@ -11,18 +11,19 @@ export function WordsTab({ goRead }: { goRead: () => void }) {
   const { state, dispatch } = useStore();
   const [session, setSession] = useState<string[] | null>(null);
   const [q, setQ] = useState("");
+  const [filter, setFilter] = useState<"all" | "learning" | "known">("all");
   const [confirmReset, setConfirmReset] = useState(false);
 
   const cards = useMemo(() => Object.values(state.vocab).sort((a, b) => b.addedAt - a.addedAt), [state.vocab]);
   const due = dueCards(state.vocab, Date.now());
 
-  if (session) return <Flashcards ids={session} onExit={() => setSession(null)} />;
+  if (session) return <WordQuiz ids={session} onExit={() => setSession(null)} />;
 
-  const filtered = q.trim()
-    ? cards.filter((c) => `${c.nl} ${c.en}`.toLowerCase().includes(q.trim().toLowerCase()))
-    : cards;
-  const counts = { new: 0, learning: 0, known: 0 };
+  const counts = { all: cards.length, learning: 0, known: 0 };
   for (const c of cards) counts[level(c)]++;
+  const filtered = cards
+    .filter((c) => filter === "all" || level(c) === filter)
+    .filter((c) => !q.trim() || `${c.nl} ${c.en}`.toLowerCase().includes(q.trim().toLowerCase()));
 
   return (
     <div className="scroll">
@@ -43,9 +44,9 @@ export function WordsTab({ goRead }: { goRead: () => void }) {
             <div className="review-box">
               <div>
                 <strong className="review-count">{due.length}</strong>
-                <span className="muted"> {due.length === 1 ? "card" : "cards"} due today</span>
+                <span className="muted"> {due.length === 1 ? "word" : "words"} due today</span>
                 <div className="levels muted">
-                  {counts.new} new · {counts.learning} learning · {counts.known} known
+                  {counts.learning} learning · {counts.known} known
                 </div>
               </div>
               <div className="review-actions">
@@ -54,12 +55,20 @@ export function WordsTab({ goRead }: { goRead: () => void }) {
                   disabled={due.length === 0}
                   onClick={() => setSession(due.map((c) => c.id))}
                 >
-                  <Icon name="cards" size={18} /> Review
+                  <Icon name="cards" size={18} /> Quiz me
                 </button>
                 <button className="btn btn-ghost" onClick={() => setSession(shuffle(cards.map((c) => c.id)))}>
                   Practice all
                 </button>
               </div>
+            </div>
+
+            <div className="seg" role="group" aria-label="Show words">
+              {(["all", "learning", "known"] as const).map((f) => (
+                <button key={f} className={`seg-btn${filter === f ? " on" : ""}`} aria-pressed={filter === f} onClick={() => setFilter(f)}>
+                  {f === "all" ? "All" : f === "learning" ? "Learning" : "Known"} <span className="seg-n">{counts[f]}</span>
+                </button>
+              ))}
             </div>
 
             <input
@@ -78,7 +87,15 @@ export function WordsTab({ goRead }: { goRead: () => void }) {
                     <span className="word-row-nl">{displayWord(c)}</span>
                     <span className="word-row-en">{c.en}</span>
                   </div>
-                  <span className={`chip lvl-${level(c)}`}>{level(c)}</span>
+                  {level(c) === "known" ? (
+                    <span className="chip lvl-known">Known</span>
+                  ) : (
+                    <span className="dots" role="img" aria-label={`${Math.min(c.box, KNOWN_AFTER)} of ${KNOWN_AFTER} correct in a row`}>
+                      {Array.from({ length: KNOWN_AFTER }, (_, i) => (
+                        <span key={i} className={`dot${i < c.box ? " on" : ""}`} />
+                      ))}
+                    </span>
+                  )}
                   {canSpeak() && (
                     <button className="icon-btn small" aria-label={`Listen to ${c.nl}`} onClick={() => speak(displayWord(c))}>
                       <Icon name="speaker" size={16} />
@@ -93,7 +110,9 @@ export function WordsTab({ goRead }: { goRead: () => void }) {
                   </button>
                 </li>
               ))}
-              {filtered.length === 0 && <li className="muted">No words match “{q}”.</li>}
+              {filtered.length === 0 && (
+                <li className="muted">{q.trim() ? `No words match “${q}”.` : filter === "known" ? "No known words yet. Answer a word correctly 3 times in a row." : "Nothing here."}</li>
+              )}
             </ul>
           </>
         )}

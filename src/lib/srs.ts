@@ -39,8 +39,9 @@ export function dueCards(vocab: Record<string, VocabCard>, now: number): VocabCa
     .sort((a, b) => a.due - b.due || a.addedAt - b.addedAt);
 }
 
-/** "New" (box 0, never seen), "Learning" (1–3) or "Known" (4–5) */
-export function level(card: VocabCard): "new" | "learning" | "known" {
-  if (card.seen === 0) return "new";
-  return card.box >= 4 ? "known" : "learning";
+/** A word is Known after 3 correct reviews in a row; until then it is Learning. A wrong answer sends it back. */
+export const KNOWN_AFTER = 3;
+
+export function level(card: VocabCard): "learning" | "known" {
+  return card.box >= KNOWN_AFTER ? "known" : "learning";
 }

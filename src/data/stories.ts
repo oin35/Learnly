@@ -106,7 +106,7 @@ export const stories: Story[] = [
   {
     id: "een-dag-van-emma",
     title: "Een dag van Emma",
-    titleEn: "A day in Emma's life",
+    titleEn: "A day of Emma",
     emoji: "🚲",
     topic: "Daily life",
     level: "A1",
