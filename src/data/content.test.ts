@@ -160,6 +160,30 @@ describe("names in new stories (docs/CURRICULUM.md)", () => {
   });
 });
 
+describe("web app icon and name", () => {
+  it("ships the Home Screen icon, the manifest and its icons, and links them from the page", async () => {
+    const { existsSync, readFileSync } = await import("node:fs");
+    const html = readFileSync("index.html", "utf8");
+    expect(html).toContain('rel="apple-touch-icon" href="./apple-touch-icon.png"');
+    expect(html).toContain('name="apple-mobile-web-app-title" content="Dutch Class"');
+    expect(html).toContain('rel="manifest" href="./manifest.webmanifest"');
+    const png = (f: string) => {
+      const b = readFileSync(`public/${f}`);
+      expect(b.subarray(1, 4).toString("latin1"), f).toBe("PNG");
+      return { w: b.readUInt32BE(16), h: b.readUInt32BE(20) };
+    };
+    expect(png("apple-touch-icon.png")).toEqual({ w: 180, h: 180 });
+    const m = JSON.parse(readFileSync("public/manifest.webmanifest", "utf8"));
+    expect(m.short_name).toBe("Dutch Class");
+    expect(m.display).toBe("standalone");
+    for (const icon of m.icons) {
+      expect(existsSync(`public/${icon.src}`), icon.src).toBe(true);
+      const { w, h } = png(icon.src);
+      expect(`${w}x${h}`).toBe(icon.sizes);
+    }
+  });
+});
+
 describe("story titles", () => {
   it("English titles are direct translations", () => {
     const t = Object.fromEntries(stories.map((s) => [s.id, s.titleEn]));
