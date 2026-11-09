@@ -1,0 +1,64 @@
+# Builds the app and publishes it to GitHub Pages on every push (the daily story job pushes once a day).
+# Until Pages is switched on in the repository settings (Settings → Pages → Source: GitHub Actions),
+# the workflow skips the deploy instead of failing.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [claude/zen-faraday-5mk9rj]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      enabled: ${{ steps.check.outputs.enabled }}
+    steps:
+      - name: Is GitHub Pages switched on?
+        id: check
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${{ github.repository }}/pages" >/dev/null 2>&1; then
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "enabled=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::GitHub Pages is not switched on yet, so nothing was deployed."
+          fi
+      - uses: actions/checkout@v4
+        if: steps.check.outputs.enabled == 'true'
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.enabled == 'true'
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install, test and build
+        if: steps.check.outputs.enabled == 'true'
+        run: |
+          npm ci
+          npm test
+          npm run build
+      - uses: actions/upload-pages-artifact@v3
+        if: steps.check.outputs.enabled == 'true'
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    if: needs.build.outputs.enabled == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
