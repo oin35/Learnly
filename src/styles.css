@@ -19,6 +19,7 @@
   --bad-soft: #fee2e2;
   --shadow: 0 6px 24px rgba(31, 36, 48, 0.12);
   --radius: 14px;
+  --topbar-h: calc(max(10px, env(safe-area-inset-top, 0px)) + 45px);
   color-scheme: light;
 }
 @media (prefers-color-scheme: dark) {
@@ -88,17 +89,22 @@ button { font: inherit; color: inherit; }
   height: 100dvh;
   max-width: 680px;
   margin: 0 auto;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   background: var(--bg);
+  padding-top: var(--topbar-h);
 }
+/* The header is a fixed, full-width, solid bar on purpose: iOS 26 blurs the top of home-screen web apps
+   unless the top edge is covered by exactly that (a fixed, opaque, full-width box that takes taps). */
 .topbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 30; box-sizing: border-box; height: var(--topbar-h);
   display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 16px; border-bottom: 1px solid var(--line);
-  padding-top: max(10px, env(safe-area-inset-top));
+  background: var(--bg); border-bottom: 1px solid var(--line);
+  padding: max(10px, env(safe-area-inset-top, 0px)) max(16px, calc((100vw - 680px) / 2 + 16px)) 10px;
 }
 .brand { display: flex; align-items: center; gap: 8px; }
-.topbar { position: relative; isolation: isolate; }
+.topbar { isolation: isolate; }
 /* Personal mark: dead centre of the top bar, almost invisible, never in the way of taps.
    Centred with auto margins and faded with fill-opacity (not transform/opacity): those would make the
    browser draw the title above it as a separate layer, which iPhone web apps render blurry. */
