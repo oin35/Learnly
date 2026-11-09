@@ -43,6 +43,7 @@ export type Action =
   | { type: "pillSeen"; id: string }
   | { type: "markRead"; id: string; now: number }
   | { type: "toggleFavPill"; id: string }
+  | { type: "replace"; state: AppState }
   | { type: "reset" };
 
 export function dayKey(ms: number): string {
@@ -119,6 +120,8 @@ export function reducer(state: AppState, action: Action): AppState {
       };
     case "pillSeen":
       return state.pillsSeen.includes(action.id) ? state : { ...state, pillsSeen: [...state.pillsSeen, action.id] };
+    case "replace":
+      return action.state;
     case "reset":
       return initialState;
   }
@@ -150,24 +153,31 @@ function defaultStorage(): KV | null {
   }
 }
 
+/** Turn untrusted data (browser storage, the sync server) into a valid state, or null if it is not ours. */
+export function sanitize(raw: unknown): AppState | null {
+  if (!raw || typeof raw !== "object") return null;
+  const p = raw as Partial<AppState>;
+  if (p.v !== 1) return null;
+  const list = (x: unknown): string[] => (Array.isArray(x) ? x.filter((i): i is string => typeof i === "string") : []);
+  const saved = list(p.saved);
+  return {
+    ...initialState,
+    saved,
+    skipped: list(p.skipped),
+    vocab: p.vocab && typeof p.vocab === "object" ? p.vocab : {},
+    days: list(p.days),
+    quiz: p.quiz && typeof p.quiz === "object" ? p.quiz : {},
+    pillsSeen: list(p.pillsSeen),
+    // every saved story counts as read, including ones saved before `read` existed
+    read: [...new Set([...list(p.read), ...saved])],
+    favPills: list(p.favPills),
+  };
+}
+
 export function loadState(storage: KV | null = defaultStorage()): AppState {
   try {
     const raw = storage?.getItem(KEY);
-    if (!raw) return initialState;
-    const p = JSON.parse(raw) as Partial<AppState>;
-    if (p.v !== 1) return initialState;
-    return {
-      ...initialState,
-      saved: Array.isArray(p.saved) ? p.saved : [],
-      skipped: Array.isArray(p.skipped) ? p.skipped : [],
-      vocab: p.vocab && typeof p.vocab === "object" ? p.vocab : {},
-      days: Array.isArray(p.days) ? p.days : [],
-      quiz: p.quiz && typeof p.quiz === "object" ? p.quiz : {},
-      pillsSeen: Array.isArray(p.pillsSeen) ? p.pillsSeen : [],
-      // every saved story counts as read, including ones saved before `read` existed
-      read: [...new Set([...(Array.isArray(p.read) ? p.read : []), ...(Array.isArray(p.saved) ? p.saved : [])])],
-      favPills: Array.isArray(p.favPills) ? p.favPills : [],
-    };
+    return (raw ? sanitize(JSON.parse(raw)) : null) ?? initialState;
   } catch {
     return initialState;
   }

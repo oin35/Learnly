@@ -8,7 +8,7 @@ import { setSoundCheckOpen } from "../lib/ui";
 import { Icon } from "./Icon";
 
 export function WordsTab({ goRead }: { goRead: () => void }) {
-  const { state, dispatch } = useStore();
+  const { state, dispatch, sync } = useStore();
   const [session, setSession] = useState<string[] | null>(null);
   const [q, setQ] = useState("");
   const [filter, setFilter] = useState<"all" | "learning" | "known">("all");
@@ -118,7 +118,7 @@ export function WordsTab({ goRead }: { goRead: () => void }) {
         )}
 
         <p className="fineprint">
-          Your progress is stored on this device only.{" "}
+          {sync.code ? "Your progress is saved on this device and synced with your code." : "Your progress is stored on this device only."}{" "}
           <button className="link" onClick={() => setSoundCheckOpen(true)}>
             Sound check
           </button>{" "}

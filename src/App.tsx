@@ -4,6 +4,7 @@ import { streak } from "./lib/state";
 import { dueCards } from "./lib/srs";
 import { Sheet } from "./components/Sheet";
 import { SoundCheck } from "./components/SoundCheck";
+import { SyncSheet } from "./components/SyncSheet";
 import { getSoundCheckOpen, setSoundCheckOpen, subscribeUi } from "./lib/ui";
 import { stories } from "./data/stories";
 import { allClipTexts, storyClipTexts } from "./lib/warm";
@@ -28,7 +29,8 @@ const TABS: { id: Tab; label: string; icon: IconName }[] = [
 
 function Shell() {
   const [tab, setTab] = useState<Tab>("read");
-  const { state } = useStore();
+  const { state, sync } = useStore();
+  const [syncOpen, setSyncOpen] = useState(false);
   const now = Date.now();
   const days = streak(state.days, now);
   const due = dueCards(state.vocab, now).length;
@@ -49,8 +51,19 @@ function Shell() {
           <Logo size={34} />
           <span className="brand-name">Don Pablo’s Dutch Class</span>
         </div>
-        <div className="streak" title="Day streak" aria-label={`${days} day streak`}>
-          🔥 {days}
+        <div className="top-actions">
+          {sync.available && (
+            <button
+              className={`sync-btn sync-${sync.status}`}
+              aria-label={sync.code ? (sync.status === "error" ? "Sync: not connected. Open sync settings." : "Sync is on. Open sync settings.") : "Sync is off. Turn on sync."}
+              onClick={() => setSyncOpen(true)}
+            >
+              <Icon name="cloud" size={18} fill={Boolean(sync.code) && sync.status !== "error"} />
+            </button>
+          )}
+          <div className="streak" title="Day streak" aria-label={`${days} day streak`}>
+            🔥 {days}
+          </div>
         </div>
       </header>
 
@@ -76,6 +89,7 @@ function Shell() {
         {tab === "grammar" && <GrammarTab />}
       </main>
 
+      {syncOpen && <SyncSheet onClose={() => setSyncOpen(false)} />}
       {checkOpen && (
         <Sheet label="Sound check" onClose={() => setSoundCheckOpen(false)}>
           <SoundCheck />

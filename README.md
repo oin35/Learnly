@@ -24,6 +24,19 @@ being able to handle basic daily situations: ordering a coffee, shopping, asking
 - **Extras**: show/hide English translation per story, a 2-question comprehension check, a daily streak, dark mode.
 - Everything is stored in the browser (`localStorage`). No account, no backend.
 
+## Where it runs
+
+- **Website:** https://oin35.github.io/Learnly/ (GitHub Pages). `.github/workflows/pages.yml` tests, builds and deploys on every push.
+- **claude.ai page:** the same app published as an artifact (no sync there: that page cannot reach outside services).
+
+## Progress and sync
+
+Progress is saved in the browser. On the website, people can also turn on **sync** (cloud button in the header): they get a
+personal 12-character code, progress is saved online under it, and entering the code on another device continues there.
+No accounts. Storage is a free Supabase project: `docs/supabase-setup.sql` creates one closed table and two functions
+(load / save by code; only a hash of the code is stored). The project URL and publishable key live in `src/lib/syncConfig.ts`;
+sync stays hidden while the URL is empty. Logic and merge rules: `src/lib/sync.ts` (tests in `src/lib/sync.test.ts`).
+
 ## Develop
 
 ```bash

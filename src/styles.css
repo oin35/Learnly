@@ -106,7 +106,8 @@ button { font: inherit; color: inherit; }
   transform: translate(-50%, -50%);
   color: var(--text); opacity: 0.075; pointer-events: none; user-select: none;
 }
-.brand, .streak { position: relative; z-index: 1; }
+.brand, .top-actions { position: relative; z-index: 1; }
+.top-actions { display: flex; align-items: center; gap: 8px; flex: none; }
 .brand { min-width: 0; }
 .logo { flex: none; display: block; }
 .brand-name { font-weight: 800; letter-spacing: -0.01em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -432,3 +433,19 @@ button.w.saved { background: var(--saved-soft); border-bottom-style: solid; bord
 .tick { display: block; width: 0.16em; min-width: 1.5px; border-radius: 1px; background: var(--line); height: 45%; }
 .tick.t-full { background: var(--lvl); opacity: 0.45; height: 100%; }
 .tick.t-half { background: var(--lvl); opacity: 0.45; height: 60%; }
+
+/* ── Sync ───────────────────────────────── */
+.sync-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--muted); display: grid; place-items: center; cursor: pointer; }
+.sync-btn.sync-ok, .sync-btn.sync-syncing { color: var(--pill); }
+.sync-btn.sync-error { color: var(--bad); border-color: var(--bad); }
+.sync { display: grid; gap: 12px; }
+.sync-code { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--surface-2); border-radius: 12px; padding: 12px 14px; }
+.sync-code code { font: 700 1.25rem/1.2 ui-monospace, Menlo, monospace; letter-spacing: 0.06em; user-select: all; -webkit-user-select: all; }
+.sync-status { font-size: 0.9rem; min-height: 1.4em; }
+.sync-warn { margin-top: 0; }
+.sync-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.sync-join { display: grid; gap: 6px; margin-top: 4px; }
+.sync-join label { font-weight: 600; }
+.sync-join-row { display: flex; gap: 8px; }
+.sync-join-row .search { margin-bottom: 0; flex: 1; min-width: 0; text-transform: uppercase; font-family: ui-monospace, Menlo, monospace; letter-spacing: 0.04em; }
+.sync .fineprint { margin-top: 0; }
