@@ -4,16 +4,12 @@ import { KEY_MIN, normalizeKey } from "../lib/sync";
 import { Icon } from "./Icon";
 import { Sheet } from "./Sheet";
 
-const MESSAGES: Partial<Record<SyncResult, string>> = {
-  taken: "That key is already in use. If it is yours, tap “I already use this key”. Otherwise choose a different one.",
-  missing: "No progress is saved under that key. Check the spelling, or tap “Create this key” to start with it.",
-  invalid: `A sync key needs at least ${KEY_MIN} characters.`,
-  error: "Couldn’t reach the sync service. Check your connection and try again.",
-};
+type Mode = "start" | "join";
 
-/** Turn progress sync on or off: choose your own sync key, or enter the key you already use on another device. */
+/** Turn progress sync on or off: create your own sync key, or enter the key you already use on another device. */
 export function SyncSheet({ onClose }: { onClose: () => void }) {
   const { sync } = useStore();
+  const [mode, setMode] = useState<Mode | null>(null);
   const [entered, setEntered] = useState("");
   const [busy, setBusy] = useState(false);
   const [problem, setProblem] = useState<SyncResult | null>(null);
@@ -21,13 +17,21 @@ export function SyncSheet({ onClose }: { onClose: () => void }) {
   const [confirmStop, setConfirmStop] = useState(false);
   const valid = normalizeKey(entered) !== null;
 
-  const go = async (mode: "start" | "join") => {
+  const go = async (m: Mode) => {
+    setMode(m);
     setBusy(true);
     setProblem(null);
-    const result = await (mode === "start" ? sync.start(entered) : sync.join(entered));
+    const result = await (m === "start" ? sync.start(entered) : sync.join(entered));
     setBusy(false);
-    if (result === "ok") setEntered("");
-    else setProblem(result);
+    if (result === "ok") {
+      setEntered("");
+      setMode(null);
+    } else setProblem(result);
+  };
+
+  const pick = (m: Mode | null) => {
+    setMode(m);
+    setProblem(null);
   };
 
   const copy = async () => {
@@ -87,46 +91,92 @@ export function SyncSheet({ onClose }: { onClose: () => void }) {
               )}
             </div>
           </>
+        ) : mode === null ? (
+          <>
+            <p className="muted">Keep your saved stories, words and streak safe online and use them on all your devices. No account needed.</p>
+            <div className="sync-choices">
+              <button className="sync-choice" onClick={() => pick("start")}>
+                <span className="sync-choice-icon" aria-hidden="true">
+                  <Icon name="plus" size={22} />
+                </span>
+                <span>
+                  <strong>Create a new key</strong>
+                  <span>First time syncing? Choose your own key.</span>
+                </span>
+              </button>
+              <button className="sync-choice" onClick={() => pick("join")}>
+                <span className="sync-choice-icon" aria-hidden="true">
+                  <Icon name="key" size={22} />
+                </span>
+                <span>
+                  <strong>I already have a key</strong>
+                  <span>Enter it to get your progress on this device.</span>
+                </span>
+              </button>
+            </div>
+          </>
         ) : (
           <form
             className="sync-join"
             onSubmit={(e) => {
               e.preventDefault();
-              if (valid && !busy) void go("start");
+              if (valid && !busy) void go(mode);
             }}
           >
-            <p className="muted">Keep your saved stories, words and streak safe online and use them on all your devices. No account needed: you choose a sync key.</p>
-            <label htmlFor="sync-key-input">Your sync key</label>
+            <button className="btn btn-text" type="button" onClick={() => pick(null)}>
+              <Icon name="back" size={18} /> Back
+            </button>
+            <label htmlFor="sync-key-input">{mode === "start" ? "Choose your new sync key" : "Enter your sync key"}</label>
             <input
               id="sync-key-input"
               className="search"
-              placeholder={`At least ${KEY_MIN} characters`}
+              placeholder={mode === "start" ? `At least ${KEY_MIN} characters` : "The key you created before"}
               autoCapitalize="none"
               autoComplete="off"
               autoCorrect="off"
               spellCheck={false}
               maxLength={60}
+              autoFocus
               value={entered}
               onChange={(e) => {
                 setEntered(e.target.value);
                 setProblem(null);
               }}
             />
-            <p className="fineprint">Choose something only you would think of, not “123456” or your first name: anyone who enters the same key sees and can change your progress. Capital letters and spaces don’t matter.</p>
-            {problem && (
+            <p className="fineprint">
+              {mode === "start"
+                ? "Choose something only you would think of, not “123456” or your first name: anyone who enters the same key sees and can change your progress. Capital letters and spaces don’t matter."
+                : "Capital letters and spaces don’t matter. The progress already on this device is kept and combined with your key’s progress."}
+            </p>
+            {problem === "taken" && (
+              <div className="sync-problem" role="alert">
+                <p>That key is already in use. Choose a different one.</p>
+                <button className="link" type="button" onClick={() => void go("join")}>
+                  It’s my key: use it on this device
+                </button>
+              </div>
+            )}
+            {problem === "missing" && (
+              <div className="sync-problem" role="alert">
+                <p>No progress is saved under that key. Check the spelling.</p>
+                <button className="link" type="button" onClick={() => void go("start")}>
+                  Create it as a new key instead
+                </button>
+              </div>
+            )}
+            {problem === "invalid" && (
               <p className="sync-problem" role="alert">
-                {MESSAGES[problem]}
+                A sync key needs at least {KEY_MIN} characters.
               </p>
             )}
-            <div className="sync-actions">
-              <button className="btn btn-primary" type="submit" disabled={!valid || busy}>
-                Create this key
-              </button>
-              <button className="btn btn-ghost" type="button" disabled={!valid || busy} onClick={() => void go("join")}>
-                I already use this key
-              </button>
-            </div>
-            <p className="fineprint">The progress already on this device is kept and combined with the key’s progress.</p>
+            {problem === "error" && (
+              <p className="sync-problem" role="alert">
+                Couldn’t reach the sync service. Check your connection and try again.
+              </p>
+            )}
+            <button className="btn btn-primary btn-block" type="submit" disabled={!valid || busy}>
+              {busy ? "One moment…" : mode === "start" ? "Create key" : "Use my key"}
+            </button>
           </form>
         )}
       </div>

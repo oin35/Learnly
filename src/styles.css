@@ -98,15 +98,15 @@ button { font: inherit; color: inherit; }
   padding-top: max(10px, env(safe-area-inset-top));
 }
 .brand { display: flex; align-items: center; gap: 8px; }
-.topbar { position: relative; }
-/* Personal mark: dead centre of the top bar, almost invisible, never in the way of taps */
+.topbar { position: relative; isolation: isolate; }
+/* Personal mark: dead centre of the top bar, almost invisible, never in the way of taps.
+   Centred with auto margins and faded with fill-opacity (not transform/opacity): those would make the
+   browser draw the title above it as a separate layer, which iPhone web apps render blurry. */
 .phi {
-  position: absolute; left: 50%; height: 31%; width: auto; aspect-ratio: 406 / 410;
-  top: calc(50% + (max(10px, env(safe-area-inset-top, 0px)) - 10px) / 2);
-  transform: translate(-50%, -50%);
-  color: var(--text); opacity: 0.075; pointer-events: none; user-select: none;
+  position: absolute; z-index: -1; left: 0; right: 0; top: max(10px, env(safe-area-inset-top, 0px)); bottom: 10px; margin: auto;
+  height: 17px; width: auto; aspect-ratio: 406 / 410;
+  color: var(--text); pointer-events: none; user-select: none;
 }
-.brand, .top-actions { position: relative; z-index: 1; }
 .top-actions { display: flex; align-items: center; gap: 8px; flex: none; }
 .brand { min-width: 0; }
 .logo { flex: none; display: block; }
@@ -447,5 +447,13 @@ button.w.saved { background: var(--saved-soft); border-bottom-style: solid; bord
 .sync-join { display: grid; gap: 6px; margin-top: 4px; }
 .sync-join label { font-weight: 600; }
 .sync-join .search { margin-bottom: 0; }
+.sync-choices { display: grid; gap: 10px; }
+.sync-choice { display: flex; align-items: center; gap: 14px; text-align: left; width: 100%; min-height: 76px; padding: 14px 16px; cursor: pointer;
+  background: var(--surface); color: var(--text); border: 1.5px solid var(--line); border-radius: var(--radius); }
+.sync-choice:hover { border-color: var(--accent); }
+.sync-choice-icon { flex: none; width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); }
+.sync-choice strong { display: block; font-size: 1.05rem; }
+.sync-choice span span { color: var(--muted); font-size: 0.9rem; }
 .sync-problem { color: var(--bad); font-weight: 600; font-size: 0.9rem; }
 .sync .fineprint { margin-top: 0; }
+.sync-join > .btn-text { justify-self: start; margin-left: -4px; }

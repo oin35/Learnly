@@ -8,7 +8,7 @@ const PATH =
 export function PhiMark() {
   return (
     <svg className="phi" viewBox="0 0 406 410" aria-hidden="true" focusable="false">
-      <path d={PATH} fill="currentColor" fillRule="evenodd" />
+      <path d={PATH} fill="currentColor" fillOpacity={0.075} fillRule="evenodd" />
     </svg>
   );
 }
