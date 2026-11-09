@@ -284,6 +284,22 @@ export const pills: Pill[] = [
     ],
     tip: "The -e is the default (de grote zaal, mijn kleine zus). Only a het-word with een or no article drops it (een groot museum).",
   },
+  {
+    id: "conj",
+    title: "And, but, because",
+    summary: "en · maar · want",
+    points: [
+      "en = and, maar = but, want = because. They join two full sentences.",
+      "After en, maar and want the word order does not change: the verb stays in second place.",
+      "Use want to give a reason: Hij neemt de trein, want Lisa woont daar.",
+      "Use maar for a contrast: Ik wil Fries leren, maar het is moeilijk.",
+    ],
+    examples: [
+      { nl: "Het regent, maar ik ga naar buiten.", en: "It is raining, but I am going outside." },
+      { nl: "Ik ben moe, want het is laat.", en: "I am tired, because it is late." },
+    ],
+    tip: "Want is for a reason, maar for a contrast, en for adding. Start simple: two short sentences with one of these words in between.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

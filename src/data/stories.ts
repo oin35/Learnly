@@ -351,4 +351,82 @@ export const stories: Story[] = [
       { q: "Where does she go this weekend?", options: ["A shop", "A museum in Amsterdam", "A café"], answer: 1 },
     ],
   },
+  {
+    id: "naar-friesland",
+    title: "Naar Friesland",
+    titleEn: "To Friesland",
+    emoji: "🚆",
+    topic: "Provinces",
+    level: "A1",
+    difficulty: 3.5,
+    insight: {
+      title: "Friesland has its own official language",
+      text: "Besides Dutch, Frisian (Fries) is an official language in the province of Friesland. Its capital Leeuwarden is called Ljouwert in Frisian, and signs in Friesland often show both names.",
+    },
+    intro: {
+      words: ["taal", "naam", "bord", "eigen", "auto"],
+      pills: ["conj", "modal"],
+    },
+    paragraphs: [
+      {
+        nl: "{{Tom wil Friesland zien.|modal}} Hij neemt de trein naar Leeuwarden, {{want Lisa woont daar.|conj}} Zij staat op het station.",
+        en: "Tom wants to see Friesland. He takes the train to Leeuwarden, because Lisa lives there. She is at the station.",
+      },
+      {
+        nl: "Ze gaan met de auto naar de stad. Bij de stad staat een groot bord met twee namen: Leeuwarden en Ljouwert. \"Wat is Ljouwert?\" vraagt Tom.",
+        en: "They go to the city by car. At the city stands a big sign with two names: Leeuwarden and Ljouwert. \"What is Ljouwert?\" asks Tom.",
+      },
+      {
+        nl: "\"Dat is Fries,\" zegt Lisa. \"Fries is een eigen taal, en veel mensen praten ook Nederlands.\"",
+        en: "\"That is Frisian,\" says Lisa. \"Frisian is a language of its own, and many people also speak Dutch.\"",
+      },
+      {
+        nl: "{{Tom wil een beetje Fries leren, maar het is moeilijk.|conj}} Lisa lacht. \"Eerst een kopje thee,\" zegt ze.",
+        en: "Tom wants to learn a little Frisian, but it is difficult. Lisa laughs. \"First a cup of tea,\" she says.",
+      },
+    ],
+    quiz: [
+      { q: "Why does Tom take the train to Leeuwarden?", options: ["Lisa lives there", "He works there", "He wants to buy a car"], answer: 0 },
+      { q: "What is Ljouwert?", options: ["A train station", "The Frisian name of Leeuwarden", "A cup of tea"], answer: 1 },
+    ],
+  },
+  {
+    id: "de-hunebedden",
+    title: "De hunebedden",
+    titleEn: "The hunebeds",
+    emoji: "🪨",
+    topic: "Provinces",
+    level: "A1",
+    difficulty: 4,
+    insight: {
+      title: "Drenthe, land of the hunebeds",
+      text: "Of the 54 hunebeds (stone tombs) in the northern Netherlands, 52 are in the province of Drenthe. They are more than 5,000 years old and were built with big boulders that ice-age glaciers brought from Scandinavia. The capital of Drenthe is Assen.",
+    },
+    intro: {
+      words: ["hunebed", "steen", "graf", "provincie", "zwaar"],
+      pills: ["sep", "erzijn"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn in Drenthe. Dat is een provincie in het noorden. De hoofdstad is Assen. Vandaag {{staan ze vroeg op,|sep}} want ze willen de hunebedden zien.",
+        en: "Tom and Lisa are in Drenthe. That is a province in the north. The capital is Assen. Today they get up early, because they want to see the hunebeds.",
+      },
+      {
+        nl: "Ze nemen water en brood mee. Het is mooi weer en ze fietsen door het bos. {{Er zijn veel bomen,|erzijn}} maar er zijn weinig mensen.",
+        en: "They take water and bread with them. The weather is nice and they cycle through the forest. There are many trees, but there are few people.",
+      },
+      {
+        nl: "Dan zien ze grote stenen op de grond. Dat is een hunebed. Een hunebed is een graf, en het is meer dan vijfduizend jaar oud. De stenen zijn heel zwaar.",
+        en: "Then they see big stones on the ground. That is a hunebed. A hunebed is a tomb, and it is more than five thousand years old. The stones are very heavy.",
+      },
+      {
+        nl: "In Drenthe liggen meer dan vijftig hunebedden. Lisa maakt een foto van een hunebed. Tom is moe, maar hij is blij.",
+        en: "In Drenthe lie more than fifty hunebeds. Lisa takes a photo of a hunebed. Tom is tired, but he is happy.",
+      },
+    ],
+    quiz: [
+      { q: "What is a hunebed?", options: ["A forest path", "A tomb made of big stones", "A kind of bike"], answer: 1 },
+      { q: "What do Tom and Lisa take with them?", options: ["Water and bread", "Tea and cheese", "An umbrella"], answer: 0 },
+    ],
+  },
 ];
