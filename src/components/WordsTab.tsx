@@ -118,7 +118,7 @@ export function WordsTab({ goRead }: { goRead: () => void }) {
         )}
 
         <p className="fineprint">
-          {sync.code ? "Your progress is saved on this device and synced with your code." : "Your progress is stored on this device only."}{" "}
+          {sync.key ? "Your progress is saved on this device and synced with your sync key." : "Your progress is stored on this device only."}{" "}
           <button className="link" onClick={() => setSoundCheckOpen(true)}>
             Sound check
           </button>{" "}

@@ -55,10 +55,10 @@ function Shell() {
           {sync.available && (
             <button
               className={`sync-btn sync-${sync.status}`}
-              aria-label={sync.code ? (sync.status === "error" ? "Sync: not connected. Open sync settings." : "Sync is on. Open sync settings.") : "Sync is off. Turn on sync."}
+              aria-label={sync.key ? (sync.status === "error" ? "Sync: not connected. Open sync settings." : "Sync is on. Open sync settings.") : "Sync is off. Turn on sync."}
               onClick={() => setSyncOpen(true)}
             >
-              <Icon name="cloud" size={18} fill={Boolean(sync.code) && sync.status !== "error"} />
+              <Icon name="cloud" size={18} fill={Boolean(sync.key) && sync.status !== "error"} />
             </button>
           )}
           <div className="streak" title="Day streak" aria-label={`${days} day streak`}>

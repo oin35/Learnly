@@ -3,27 +3,36 @@ import { sanitize, type AppState } from "./state";
 import { SYNC } from "./syncConfig";
 
 /**
- * Progress sync with a personal code (no accounts).
- * The code is the only key: whoever has it can read and change that progress, so it is long and random.
+ * Progress sync with a personal sync key (no accounts). People choose their own key (6 characters or more).
+ * The key is the only thing protecting the progress: whoever types the same key sees and can change it.
+ *
+ * The server never sees the key itself: the app sends a code derived from it (and the server stores a hash of that).
  */
-export const syncAvailable = Boolean(SYNC.url && SYNC.key);
-
-const ALPHABET = "23456789ABCDEFGHJKLMNPQRSTUVWXYZ"; // no 0/O, 1/I: easy to read and type
-export const CODE_LENGTH = 12;
-
-export function newCode(random: (n: number) => Uint8Array = (n) => crypto.getRandomValues(new Uint8Array(n))): string {
-  return [...random(CODE_LENGTH)].map((b) => ALPHABET[b % ALPHABET.length]).join("");
+function framed(): boolean {
+  try {
+    return typeof window !== "undefined" && window.self !== window.top;
+  } catch {
+    return true;
+  }
 }
 
-/** What the person typed → the canonical code, or null if it cannot be one. Forgiving about case, spaces and dashes. */
-export function normalizeCode(input: string): string | null {
-  const raw = input.toUpperCase().replace(/[^0-9A-Z]/g, "");
-  return raw.length === CODE_LENGTH && [...raw].every((ch) => ALPHABET.includes(ch)) ? raw : null;
+/** Off inside an embedded page (the claude.ai artifact cannot reach outside services) and when no server is configured. */
+export const syncAvailable = Boolean(SYNC.url && SYNC.key) && !framed();
+
+export const KEY_MIN = 6;
+export const KEY_MAX = 40;
+
+/** What the person typed → their key: case and spaces don't matter. Null if it is too short or too long. */
+export function normalizeKey(input: string): string | null {
+  const k = input.normalize("NFKC").toLowerCase().replace(/\s+/g, "");
+  const n = [...k].length;
+  return n >= KEY_MIN && n <= KEY_MAX ? k : null;
 }
 
-/** K7QM9TXP4HDW → K7QM-9TXP-4HDW */
-export function formatCode(code: string): string {
-  return code.replace(/(.{4})(?=.)/g, "$1-");
+/** The code sent to the server for a key: 32 hex characters from a SHA-256 of the key. */
+export async function codeFor(key: string): Promise<string> {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode("don-pablo-dutch-class:" + key));
+  return [...new Uint8Array(digest)].slice(0, 16).map((b) => b.toString(16).padStart(2, "0")).join("").toUpperCase();
 }
 
 /* ── Merging two devices' progress ─────────────────────────────────────────── */
@@ -55,6 +64,9 @@ export function mergeStates(a: AppState, b: AppState): AppState {
 }
 
 export interface SyncMeta {
+  /** The sync key the person chose (normalised), shown back to them */
+  key: string;
+  /** The code derived from the key; this is what the server sees */
   code: string;
   /** Server timestamp of the version this device last synced with (null: never synced) */
   stamp: string | null;
@@ -108,7 +120,9 @@ const META_KEY = "learnly:sync";
 export function loadMeta(): SyncMeta | null {
   try {
     const m = JSON.parse(localStorage.getItem(META_KEY) ?? "null") as Partial<SyncMeta> | null;
-    return m && typeof m.code === "string" && normalizeCode(m.code) ? { code: m.code, stamp: typeof m.stamp === "string" ? m.stamp : null, dirty: Boolean(m.dirty) } : null;
+    return m && typeof m.key === "string" && typeof m.code === "string" && /^[0-9A-F]{32}$/.test(m.code)
+      ? { key: m.key, code: m.code, stamp: typeof m.stamp === "string" ? m.stamp : null, dirty: Boolean(m.dirty) }
+      : null;
   } catch {
     return null;
   }

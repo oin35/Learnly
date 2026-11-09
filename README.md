@@ -31,11 +31,12 @@ being able to handle basic daily situations: ordering a coffee, shopping, asking
 
 ## Progress and sync
 
-Progress is saved in the browser. On the website, people can also turn on **sync** (cloud button in the header): they get a
-personal 12-character code, progress is saved online under it, and entering the code on another device continues there.
-No accounts. Storage is a free Supabase project: `docs/supabase-setup.sql` creates one closed table and two functions
-(load / save by code; only a hash of the code is stored). The project URL and publishable key live in `src/lib/syncConfig.ts`;
-sync stays hidden while the URL is empty. Logic and merge rules: `src/lib/sync.ts` (tests in `src/lib/sync.test.ts`).
+Progress is saved in the browser. On the website, people can also turn on **sync** (cloud button in the header): they choose
+their own **sync key** (at least 6 characters), progress is saved online under it, and entering the same key on another device
+continues there. No accounts. Creating a key that is already in use is refused. The key never leaves the device: the app sends
+a code derived from it. Storage is a free Supabase project: `docs/supabase-setup.sql` creates one closed table and two functions
+(load / save; only a hash is stored). The project URL and publishable key live in `src/lib/syncConfig.ts`. Sync is hidden on
+the claude.ai page. Logic and merge rules: `src/lib/sync.ts` (tests in `src/lib/sync.test.ts`).
 
 ## Develop
 

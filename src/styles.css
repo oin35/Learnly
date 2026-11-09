@@ -440,12 +440,12 @@ button.w.saved { background: var(--saved-soft); border-bottom-style: solid; bord
 .sync-btn.sync-error { color: var(--bad); border-color: var(--bad); }
 .sync { display: grid; gap: 12px; }
 .sync-code { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--surface-2); border-radius: 12px; padding: 12px 14px; }
-.sync-code code { font: 700 1.25rem/1.2 ui-monospace, Menlo, monospace; letter-spacing: 0.06em; user-select: all; -webkit-user-select: all; }
+.sync-code code { font: 700 1.15rem/1.2 ui-monospace, Menlo, monospace; letter-spacing: 0.02em; word-break: break-all; min-width: 0; user-select: all; -webkit-user-select: all; }
 .sync-status { font-size: 0.9rem; min-height: 1.4em; }
 .sync-warn { margin-top: 0; }
 .sync-actions { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .sync-join { display: grid; gap: 6px; margin-top: 4px; }
 .sync-join label { font-weight: 600; }
-.sync-join-row { display: flex; gap: 8px; }
-.sync-join-row .search { margin-bottom: 0; flex: 1; min-width: 0; text-transform: uppercase; font-family: ui-monospace, Menlo, monospace; letter-spacing: 0.04em; }
+.sync-join .search { margin-bottom: 0; }
+.sync-problem { color: var(--bad); font-weight: 600; font-size: 0.9rem; }
 .sync .fineprint { margin-top: 0; }

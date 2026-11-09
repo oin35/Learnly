@@ -1,30 +1,28 @@
 import { describe, expect, it } from "vitest";
 import { initialState, reducer, sanitize, type AppState } from "./state";
-import { CODE_LENGTH, formatCode, mergeStates, newCode, normalizeCode, reconcile } from "./sync";
+import { codeFor, mergeStates, normalizeKey, reconcile } from "./sync";
 
 const t0 = new Date(2026, 5, 10, 9, 30).getTime();
 const word = (id: string) => ({ id, nl: id, en: id + "-en", pos: "noun" as const });
 const withWord = (s: AppState, id: string, now = t0) => reducer(s, { type: "addWord", word: word(id), now });
 
-describe("sync codes", () => {
-  it("are 12 unambiguous characters and survive formatting and sloppy typing", () => {
-    for (let i = 0; i < 50; i++) {
-      const c = newCode();
-      expect(c).toMatch(/^[2-9A-HJ-NP-Z]{12}$/);
-      expect(c).toHaveLength(CODE_LENGTH);
-      expect(normalizeCode(formatCode(c))).toBe(c);
-      expect(normalizeCode(" " + formatCode(c).toLowerCase().replace(/-/g, " ") + " ")).toBe(c);
-    }
-    expect(formatCode("K7QM9TXP4HDW")).toBe("K7QM-9TXP-4HDW");
+describe("sync keys", () => {
+  it("need at least 6 characters; capitals and spaces don't matter", () => {
+    expect(normalizeKey("12345")).toBeNull();
+    expect(normalizeKey("  a b c d e ")).toBeNull(); // only 5 real characters
+    expect(normalizeKey("123456")).toBe("123456");
+    expect(normalizeKey(" Tulip Bike 77 ")).toBe("tulipbike77");
+    expect(normalizeKey("TULIPBIKE77")).toBe(normalizeKey("tulip bike 77"));
+    expect(normalizeKey("çiçek-2026")).toBe("çiçek-2026"); // any letters and signs are fine
+    expect(normalizeKey("x".repeat(41))).toBeNull();
   });
-  it("rejects things that cannot be a code", () => {
-    expect(normalizeCode("")).toBeNull();
-    expect(normalizeCode("K7QM-9TXP")).toBeNull();
-    expect(normalizeCode("K7QM-9TXP-4HDW-AAAA")).toBeNull();
-    expect(normalizeCode("K7QM-9TXP-4HD0")).toBeNull(); // 0 is never used
-  });
-  it("uses the random source it is given", () => {
-    expect(newCode(() => new Uint8Array(12))).toBe("222222222222");
+
+  it("turn into a code the server accepts, the same on every device and different per key", async () => {
+    const a = await codeFor("tulipbike77");
+    expect(a).toMatch(/^[0-9A-F]{32}$/); // fits the server rule ^[0-9A-Z]{12,40}$
+    expect(await codeFor("tulipbike77")).toBe(a);
+    expect(await codeFor("tulipbike78")).not.toBe(a);
+    expect(a).not.toContain("TULIP"); // the key itself is not sent
   });
 });
 
@@ -68,7 +66,7 @@ describe("merging two devices", () => {
 describe("deciding what to do after fetching the server copy", () => {
   const local = withWord(initialState, "wortel");
   const server = withWord(initialState, "fiets");
-  const meta = (stamp: string | null, dirty: boolean) => ({ code: "K7QM9TXP4HDW", stamp, dirty });
+  const meta = (stamp: string | null, dirty: boolean) => ({ key: "tulipbike77", code: "0".repeat(32), stamp, dirty });
 
   it("uploads when the server has nothing yet", () => {
     expect(reconcile(local, meta(null, true), null)).toEqual({ state: local, push: true, replaced: false });

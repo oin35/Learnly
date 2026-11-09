@@ -1,19 +1,23 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useReducer, useRef, useState, type Dispatch, type ReactNode } from "react";
 import { reducer, loadState, saveState, type Action, type AppState } from "./state";
-import { loadMeta, newCode, pull, push, reconcile, saveMeta, syncAvailable, type SyncMeta } from "./sync";
+import { codeFor, loadMeta, normalizeKey, pull, push, reconcile, saveMeta, syncAvailable, type SyncMeta } from "./sync";
 
 export type SyncStatus = "off" | "syncing" | "ok" | "error";
 
+/** ok: sync is on · taken: someone already uses that key · missing: no progress under that key · invalid: too short/long · error: service unreachable */
+export type SyncResult = "ok" | "taken" | "missing" | "invalid" | "error";
+
 export interface SyncApi {
   available: boolean;
-  code: string | null;
+  /** This device's sync key, when sync is on */
+  key: string | null;
   status: SyncStatus;
   /** When this device last synced successfully (ms), if it has */
   lastSynced: number | null;
-  /** Start syncing this device under a brand-new code */
-  start: () => void;
-  /** Start syncing this device with an existing code (from another device) */
-  join: (code: string) => void;
+  /** Start syncing under a new key the person chose; refused if the key is already in use */
+  start: (key: string) => Promise<SyncResult>;
+  /** Start syncing with a key that is already in use (their own, from another device) */
+  join: (key: string) => Promise<SyncResult>;
   /** Stop syncing on this device (progress stays on the device and on the server) */
   stop: () => void;
   syncNow: () => void;
@@ -64,7 +68,7 @@ function useSyncEngine(state: AppState, dispatch: Dispatch<Action>): SyncApi {
         }
         const stamp = r.push ? await push(m.code, r.state, closing) : (remote?.stamp ?? null);
         if (metaRef.current?.code === m.code) {
-          setMeta({ code: m.code, stamp, dirty: changes.current !== seen });
+          setMeta({ key: m.key, code: m.code, stamp, dirty: changes.current !== seen });
           setStatus("ok");
           setLastSynced(Date.now());
         }
@@ -119,11 +123,22 @@ function useSyncEngine(state: AppState, dispatch: Dispatch<Action>): SyncApi {
     };
   }, [run]);
 
-  const begin = useCallback(
-    (code: string) => {
-      setMeta({ code, stamp: null, dirty: true });
-      setStatus("syncing");
-      void run();
+  const connect = useCallback(
+    async (input: string, mode: "start" | "join"): Promise<SyncResult> => {
+      const key = normalizeKey(input);
+      if (!key) return "invalid";
+      try {
+        const code = await codeFor(key);
+        const existing = await pull(code);
+        if (mode === "start" && existing) return "taken";
+        if (mode === "join" && !existing) return "missing";
+        setMeta({ key, code, stamp: null, dirty: true });
+        setStatus("syncing");
+        void run();
+        return "ok";
+      } catch {
+        return "error";
+      }
     },
     [run, setMeta],
   );
@@ -131,11 +146,11 @@ function useSyncEngine(state: AppState, dispatch: Dispatch<Action>): SyncApi {
   return useMemo(
     () => ({
       available: syncAvailable,
-      code: meta?.code ?? null,
+      key: meta?.key ?? null,
       status: meta ? status : "off",
       lastSynced,
-      start: () => begin(newCode()),
-      join: (code: string) => begin(code),
+      start: (key: string) => connect(key, "start"),
+      join: (key: string) => connect(key, "join"),
       stop: () => {
         window.clearTimeout(timer.current);
         setMeta(null);
@@ -144,7 +159,7 @@ function useSyncEngine(state: AppState, dispatch: Dispatch<Action>): SyncApi {
       },
       syncNow: () => void run(),
     }),
-    [meta, status, lastSynced, begin, run, setMeta],
+    [meta, status, lastSynced, connect, run, setMeta],
   );
 }
 
