@@ -429,4 +429,82 @@ export const stories: Story[] = [
       { q: "What do Tom and Lisa take with them?", options: ["Water and bread", "Tea and cheese", "An umbrella"], answer: 0 },
     ],
   },
+  {
+    id: "het-nieuwe-land",
+    title: "Het nieuwe land",
+    titleEn: "The new land",
+    emoji: "🌱",
+    topic: "Provinces",
+    level: "A1",
+    difficulty: 4.5,
+    insight: {
+      title: "Flevoland: land from the sea",
+      text: "Flevoland is the youngest province of the Netherlands: it became a province on 1 January 1986. Almost all of its land was reclaimed from the former Zuiderzee, which was closed off by a dike in 1932. The capital is Lelystad, and the biggest city is Almere.",
+    },
+    intro: {
+      words: ["provincie", "water", "dijk", "pompen", "nieuw"],
+      pills: ["sep", "q"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn in Flevoland. Het is de jongste provincie van Nederland. Het land is heel nieuw: het komt uit het water.",
+        en: "Tom and Lisa are in Flevoland. It is the youngest province of the Netherlands. The land is very new: it comes out of the water.",
+      },
+      {
+        nl: "\"{{Hoe komt het land uit het water?|q}}\" vraagt Tom. \"Mensen bouwen een dijk,\" zegt Lisa. \"{{Dan pompen ze het water weg.|sep}} Daarna is er droog land.\"",
+        en: "\"How does the land come out of the water?\" asks Tom. \"People build a dike,\" says Lisa. \"Then they pump the water away. After that there is dry land.\"",
+      },
+      {
+        nl: "{{Er zijn nu huizen, bossen en wegen.|erzijn}} De hoofdstad is Lelystad. Almere is een grote stad met veel jonge mensen.",
+        en: "There are now houses, forests and roads. The capital is Lelystad. Almere is a big city with many young people.",
+      },
+      {
+        nl: "Tom en Lisa fietsen over een lange dijk. Het is mooi weer en er is veel wind. Aan het eind van de dag eten ze een broodje in Lelystad.",
+        en: "Tom and Lisa cycle over a long dike. The weather is nice and there is a lot of wind. At the end of the day they eat a sandwich in Lelystad.",
+      },
+    ],
+    quiz: [
+      { q: "How do people get dry land from the water?", options: ["They build a dike and pump the water away", "They wait for the sun", "They move the sea"], answer: 0 },
+      { q: "What is the capital of Flevoland in the story?", options: ["Almere", "Lelystad", "Amsterdam"], answer: 1 },
+    ],
+  },
+  {
+    id: "student-in-groningen",
+    title: "Student in Groningen",
+    titleEn: "Student in Groningen",
+    emoji: "🎓",
+    topic: "Provinces",
+    level: "A1",
+    difficulty: 5,
+    insight: {
+      title: "Groningen: a city full of students",
+      text: "Groningen is the biggest city in the north of the Netherlands. The University of Groningen was founded in 1614, and with its two higher-education institutions the city has around 60,000 students, nearly a quarter of its population.",
+    },
+    intro: {
+      words: ["student", "universiteit", "kleiner", "bezoek", "kwart"],
+      pills: ["comp", "sep"],
+    },
+    paragraphs: [
+      {
+        nl: "Lisa is student in Groningen. Dat is een stad in het noorden. {{De stad is kleiner dan Amsterdam,|comp}} maar er wonen veel jonge mensen.",
+        en: "Lisa is a student in Groningen. That is a city in the north. The city is smaller than Amsterdam, but many young people live there.",
+      },
+      {
+        nl: "Tom komt op bezoek. {{Hij komt om vier uur aan.|sep}} Lisa heeft twee fietsen. \"Jij kunt de oude fiets pakken,\" zegt ze.",
+        en: "Tom comes to visit. He arrives at four o'clock. Lisa has two bicycles. \"You can take the old bike,\" she says.",
+      },
+      {
+        nl: "Ze fietsen door de stad. Overal zie je studenten. \"Is de universiteit oud?\" vraagt Tom. \"Ja, ze is meer dan vierhonderd jaar oud,\" zegt Lisa. \"Bijna een kwart van de mensen in de stad is student.\"",
+        en: "They cycle through the city. You see students everywhere. \"Is the university old?\" asks Tom. \"Yes, it is more than four hundred years old,\" says Lisa. \"Almost a quarter of the people in the city are students.\"",
+      },
+      {
+        nl: "Die avond eten ze soep in de kleine kamer van Lisa. Tom is moe, maar blij. \"{{Groningen is kleiner dan Amsterdam, maar de stad is erg gezellig,|comp}}\" zegt hij.",
+        en: "That evening they eat soup in Lisa's small room. Tom is tired, but happy. \"Groningen is smaller than Amsterdam, but the city is very cosy,\" he says.",
+      },
+    ],
+    quiz: [
+      { q: "How does Tom get to Lisa?", options: ["He cycles", "He arrives at four o'clock", "He stays at home"], answer: 1 },
+      { q: "How old is the university according to Lisa?", options: ["More than 400 years", "About 40 years", "Exactly 100 years"], answer: 0 },
+    ],
+  },
 ];

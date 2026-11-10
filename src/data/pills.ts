@@ -300,6 +300,22 @@ export const pills: Pill[] = [
     ],
     tip: "Want is for a reason, maar for a contrast, en for adding. Start simple: two short sentences with one of these words in between.",
   },
+  {
+    id: "comp",
+    title: "Bigger than: groter dan",
+    summary: "groot → groter · dan = than",
+    points: [
+      "Add -er to an adjective to compare: groot → groter, klein → kleiner, oud → ouder, jong → jonger.",
+      "dan = than: Groningen is kleiner dan Amsterdam.",
+      "Some are irregular: goed → beter, veel → meer, graag → liever.",
+      "Words ending in -r add -der: ver → verder, duur → duurder.",
+    ],
+    examples: [
+      { nl: "De stad is groter dan het dorp.", en: "The city is bigger than the village." },
+      { nl: "Mijn fiets is ouder dan jouw fiets.", en: "My bike is older than your bike." },
+    ],
+    tip: "To say 'as big as' use even … als: even groot als.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));
