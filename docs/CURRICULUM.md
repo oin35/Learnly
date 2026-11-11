@@ -46,7 +46,7 @@ Follow the existing stories in `src/data/stories.ts` exactly (same fields). Appe
    "A day of Emma", not an idiomatic rewrite), `emoji`, `topic`, `level` (`"A1"` or `"A2"`), `difficulty`.
 2. `intro`: up to **5 key words** (dictionary ids, all of which occur in the story) and **1–2 key grammar pills** (used in the story).
 3. 3–4 `paragraphs`: `nl` with grammar pills marked inline as `{{phrase|pill-id}}`, and `en` (a faithful translation).
-4. `quiz`: 2 multiple-choice questions in English (3 options).
+4. `quiz`: 2 or 3 multiple-choice questions (3 options each) that **test the language, not the plot**: see "Questions" below.
 5. `insight`: a **Dutch insight** (title and 1–3 sentences in English) about the culture, a place or a habit behind the story.
    Verify every fact with a reliable source before writing it. Never guess.
 
@@ -56,6 +56,34 @@ Also, every time:
 - Add a **new grammar pill** to `src/data/pills.ts` whenever a new feature appears (same style as the others: title, summary,
   points, 2–3 examples, tip). Every pill must be used in at least one story.
 - Record the audio (see `docs/DAILY-RUN.md`). Tests fail until every paragraph, word and example has a recording.
+
+## Questions: test the language, not the memory (owner's rule)
+
+The goal of the app is to **learn Dutch**. A question like "When is the museum open?" only checks whether the reader remembers
+a detail, and can be answered without understanding any Dutch. Do not write questions like that.
+
+Every question must **make the learner work with Dutch**: it quotes a Dutch word or sentence from the story (in “ ” quotes),
+or its answer options are Dutch. Write the question itself in simple English.
+
+Use these kinds, and mix them (at least one about a key word, at least one about the grammar pill of the story):
+
+| Kind | Example |
+|---|---|
+| Meaning of a word in context | What does “de rij” mean in “Er is al een rij”? → the queue / the row of seats / the ticket |
+| Meaning of a sentence | What does “Je kunt de mensen goed zien” mean? → You can see the people well / You must see the people / The people can see you |
+| Grammar in use (fill the gap) | Which word fits? “Tom ___ twee kaartjes.” → koopt / kopen / koop |
+| Word order | Which sentence is correct? → Om negen uur is het museum open. / Om negen uur het museum is open. / Om negen uur open is het museum. |
+| Say it in Dutch (daily use) | You want to thank someone politely. What do you say? → Dank u wel. / Alstublieft. / Tot ziens. |
+| De or het | Which is right? → het museum / de museum / een het museum |
+
+Rules:
+- Test the story's **key words** and **grammar pills**, so the question practises what the story just taught.
+- Wrong options must be **plausible mistakes a learner really makes** (wrong verb form, wrong article, wrong word order,
+  a word that looks similar), never silly ones. Exactly one option is correct; check it twice.
+- The answer must **not** be findable by memory of the plot alone, and must not need knowledge from outside the story and its pills.
+- Every Dutch word used in a question or option must be in the dictionary (add it if needed), with correct spelling.
+- `npm test` checks that each question of a new story quotes Dutch or has Dutch options. The stories written before this rule
+  (the first 16) keep their old questions.
 
 ## Names (decided by the owner)
 

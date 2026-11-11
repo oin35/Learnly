@@ -144,6 +144,44 @@ describe("difficulty ramp (docs/CURRICULUM.md)", () => {
   });
 });
 
+describe("questions test the language, not the memory (docs/CURRICULUM.md)", () => {
+  const OLD = 16; // stories written before this rule keep their questions
+  const isDutch = (text: string) => {
+    const words = tokenize(text.replace(/_+/g, " ")).filter((t) => t.word);
+    return words.length > 0 && words.every((t) => lookup(t.text));
+  };
+  /** Quoted parts of a question: “…”, "…" or ‘…’ */
+  const quoted = (q: string) => [...q.matchAll(/[“"‘]([^”"’]+)[”"’]/g)].map((m) => m[1]);
+
+  it("every question of a new story quotes Dutch or has Dutch answer options", () => {
+    const bad: string[] = [];
+    for (const s of stories.slice(OLD)) {
+      for (const q of s.quiz) {
+        const quotesDutch = quoted(q.q).some(isDutch);
+        const dutchOptions = q.options.every(isDutch);
+        if (!quotesDutch && !dutchOptions) bad.push(`${s.id}: ${q.q}`);
+      }
+    }
+    expect(bad, "Rewrite these so the learner has to work with Dutch (see Questions in docs/CURRICULUM.md)").toEqual([]);
+  });
+
+  it("new stories have 2 or 3 questions with 3 distinct options each", () => {
+    for (const s of stories.slice(OLD)) {
+      expect(s.quiz.length, s.id).toBeGreaterThanOrEqual(2);
+      expect(s.quiz.length, s.id).toBeLessThanOrEqual(3);
+      for (const q of s.quiz) expect(new Set(q.options).size, `${s.id}: ${q.q}`).toBe(3);
+    }
+  });
+
+  it("the check itself tells a language question from a memory question", () => {
+    expect(quoted("What does “de rij” mean in “Er is al een rij”?").every(isDutch)).toBe(true);
+    expect(quoted("When is the museum open?")).toEqual([]);
+    expect(["At nine o'clock", "At twelve o'clock"].every(isDutch)).toBe(false);
+    expect(["koopt", "kopen"].every(isDutch)).toBe(true);
+    expect(isDutch("Tom ___ twee kaartjes.")).toBe(true);
+  });
+});
+
 describe("names in new stories (docs/CURRICULUM.md)", () => {
   it("use no person's name other than Tom and Lisa", () => {
     const BASELINE = 8;
