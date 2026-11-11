@@ -316,6 +316,38 @@ export const pills: Pill[] = [
     ],
     tip: "To say 'as big as' use even … als: even groot als.",
   },
+  {
+    id: "plan",
+    title: "Plans: ik ga + infinitive",
+    summary: "Ik ga eten = I am going to eat",
+    points: [
+      "Use gaan + infinitive for plans and the near future: Ik ga een ijsje eten.",
+      "The first verb is gaan (ga, gaat, gaan); the second verb goes to the end in the infinitive.",
+      "It is the same word order as with willen and kunnen: Ze gaan met een boot varen.",
+      "Add a time word to make the plan clear: morgen, vandaag, straks.",
+    ],
+    examples: [
+      { nl: "Morgen ga ik fietsen.", en: "Tomorrow I am going to cycle." },
+      { nl: "We gaan koffie drinken.", en: "We are going to drink coffee." },
+    ],
+    tip: "Do not confuse it with movement: Ik ga naar huis (I go home) has no second verb.",
+  },
+  {
+    id: "clock",
+    title: "Half, quarter past, quarter to",
+    summary: "kwart over · half · kwart voor",
+    points: [
+      "kwart over negen = 9:15 (a quarter past nine). kwart voor negen = 8:45 (a quarter to nine).",
+      "half negen = 8:30. Careful: Dutch counts towards the NEXT hour, so half negen is half an hour before nine.",
+      "Use om for the time: De trein vertrekt om half tien.",
+      "Ask with: Hoe laat is het? (What time is it?)",
+    ],
+    examples: [
+      { nl: "Het is half negen.", en: "It is half past eight." },
+      { nl: "Om kwart over twee.", en: "At a quarter past two." },
+    ],
+    tip: "Half negen is NOT 9:30. Think: 'half the way to nine'.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

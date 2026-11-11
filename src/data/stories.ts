@@ -507,4 +507,82 @@ export const stories: Story[] = [
       { q: "How old is the university according to Lisa?", options: ["More than 400 years", "About 40 years", "Exactly 100 years"], answer: 0 },
     ],
   },
+  {
+    id: "met-de-boot",
+    title: "Met de boot",
+    titleEn: "With the boat",
+    emoji: "🛶",
+    topic: "Provinces",
+    level: "A1",
+    difficulty: 5.5,
+    insight: {
+      title: "Giethoorn: a village of canals",
+      text: "Giethoorn, in the province of Overijssel (capital: Zwolle), is famous for its canals, footbridges and quiet boats. In the old centre many people get around by boat, on foot or by bike. The canals come from peat that people dug up long ago.",
+    },
+    intro: {
+      words: ["boot", "dorp", "brug", "varen", "ijsje"],
+      pills: ["plan", "q"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn in Overijssel. De hoofdstad is Zwolle, maar vandaag gaan ze naar een klein dorp: Giethoorn.",
+        en: "Tom and Lisa are in Overijssel. The capital is Zwolle, but today they are going to a small village: Giethoorn.",
+      },
+      {
+        nl: "Het dorp heeft veel water en veel bruggen. {{Ze gaan met een boot varen.|plan}} De boot is klein en stil.",
+        en: "The village has a lot of water and many bridges. They are going to sail in a boat. The boat is small and quiet.",
+      },
+      {
+        nl: "Veel mensen gaan hier met de boot. Er zijn ook fietspaden, maar er zijn weinig auto's. Tom ziet huizen met mooie tuinen aan het water.",
+        en: "Many people go by boat here. There are also bike paths, but there are few cars. Tom sees houses with beautiful gardens by the water.",
+      },
+      {
+        nl: "\"{{Hoe laat moeten we terug zijn?|q}}\" vraagt Tom. \"Om vijf uur,\" zegt de man van de boot. \"{{Dan ga ik nog een ijsje eten,|plan}}\" zegt Lisa.",
+        en: "\"What time do we have to be back?\" asks Tom. \"At five o'clock,\" says the man from the boat. \"Then I am going to eat an ice cream first,\" says Lisa.",
+      },
+    ],
+    quiz: [
+      { q: "How do Tom and Lisa travel in Giethoorn?", options: ["By boat", "By train", "By taxi"], answer: 0 },
+      { q: "What time must they be back?", options: ["At three o'clock", "At five o'clock", "At nine o'clock"], answer: 1 },
+    ],
+  },
+  {
+    id: "de-fietsenstalling",
+    title: "De fietsenstalling",
+    titleEn: "The bicycle parking",
+    emoji: "🚲",
+    topic: "Cycling",
+    level: "A1",
+    difficulty: 6,
+    insight: {
+      title: "The biggest bike parking in the world",
+      text: "At Utrecht Centraal station there is a bicycle parking with room for about 12,500 bikes. Reports call it the largest in the world; the last part opened in August 2019. Many Dutch people cycle to the station and take the train from there.",
+    },
+    intro: {
+      words: ["fietsenstalling", "perron", "plaats", "wereld", "kwart"],
+      pills: ["clock", "sep"],
+    },
+    paragraphs: [
+      {
+        nl: "Lisa woont in Utrecht. Ze gaat elke dag met de trein naar haar werk. Eerst fietst ze naar het station.",
+        en: "Lisa lives in Utrecht. Every day she goes to her work by train. First she cycles to the station.",
+      },
+      {
+        nl: "{{Het is kwart voor negen.|clock}} Bij het station is een grote fietsenstalling. Lisa {{zet haar fiets daar neer|sep}} en loopt naar binnen.",
+        en: "It is a quarter to nine. At the station there is a big bicycle parking. Lisa puts her bike down there and walks inside.",
+      },
+      {
+        nl: "De stalling is heel groot: er is plaats voor meer dan twaalfduizend fietsen. Het is de grootste fietsenstalling van de wereld. Lisa koopt een koffie en een broodje.",
+        en: "The parking is very big: there is room for more than twelve thousand bikes. It is the biggest bicycle parking in the world. Lisa buys a coffee and a sandwich.",
+      },
+      {
+        nl: "Ze loopt naar het perron. {{De trein vertrekt om kwart over negen.|clock}} Lisa stapt in en pakt haar boek. Ze is op tijd.",
+        en: "She walks to the platform. The train leaves at a quarter past nine. Lisa gets on and takes her book. She is on time.",
+      },
+    ],
+    quiz: [
+      { q: "Where does Lisa leave her bike?", options: ["At home", "In the bicycle parking at the station", "On the train"], answer: 1 },
+      { q: "When does the train leave?", options: ["At a quarter past nine", "At a quarter to nine", "At half past nine"], answer: 0 },
+    ],
+  },
 ];
