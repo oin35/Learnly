@@ -60,6 +60,7 @@ export function mergeStates(a: AppState, b: AppState): AppState {
     pillsSeen: union(a.pillsSeen, b.pillsSeen),
     read: union(union(a.read, b.read), saved),
     favPills: union(a.favPills, b.favPills),
+    startRank: a.startRank, // a preference, not progress: this device's choice wins when both changed
   };
 }
 

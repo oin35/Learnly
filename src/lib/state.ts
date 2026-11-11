@@ -15,6 +15,8 @@ export interface AppState {
   read: string[];
   /** Grammar pills starred as favorites */
   favPills: string[];
+  /** The level the reader chose to start from (see lib/deck.ts rankOf); 0 = from the very first story */
+  startRank: number;
 }
 
 export const initialState: AppState = {
@@ -27,6 +29,7 @@ export const initialState: AppState = {
   pillsSeen: [],
   read: [],
   favPills: [],
+  startRank: 0,
 };
 
 export type WordInput = Parameters<typeof newCard>[0];
@@ -43,6 +46,7 @@ export type Action =
   | { type: "pillSeen"; id: string }
   | { type: "markRead"; id: string; now: number }
   | { type: "toggleFavPill"; id: string }
+  | { type: "setStartRank"; rank: number }
   | { type: "replace"; state: AppState }
   | { type: "reset" };
 
@@ -120,6 +124,8 @@ export function reducer(state: AppState, action: Action): AppState {
       };
     case "pillSeen":
       return state.pillsSeen.includes(action.id) ? state : { ...state, pillsSeen: [...state.pillsSeen, action.id] };
+    case "setStartRank":
+      return state.startRank === action.rank ? state : { ...state, startRank: action.rank };
     case "replace":
       return action.state;
     case "reset":
@@ -171,6 +177,7 @@ export function sanitize(raw: unknown): AppState | null {
     // every saved story counts as read, including ones saved before `read` existed
     read: [...new Set([...list(p.read), ...saved])],
     favPills: list(p.favPills),
+    startRank: typeof p.startRank === "number" && Number.isFinite(p.startRank) && p.startRank >= 0 && p.startRank <= 20 ? p.startRank : 0,
   };
 }
 

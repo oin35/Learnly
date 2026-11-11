@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { stories } from "../data/stories";
 import { useStore } from "../lib/store";
 import { streak } from "../lib/state";
+import { nextStory, unreadStories } from "../lib/deck";
+import { Icon } from "./Icon";
+import { LevelSheet } from "./LevelSheet";
 import { StoryView } from "./StoryView";
 
 export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
@@ -14,8 +17,9 @@ export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
     return () => clearTimeout(t);
   }, [toast]);
 
-  const next = stories.find((s) => !state.saved.includes(s.id) && !state.skipped.includes(s.id));
-  const left = stories.filter((s) => !state.saved.includes(s.id) && !state.skipped.includes(s.id)).length;
+  const [levelOpen, setLevelOpen] = useState(false);
+  const next = nextStory(stories, state);
+  const left = unreadStories(stories, state).length;
   const now = Date.now();
   const days = streak(state.days, now);
 
@@ -72,9 +76,16 @@ export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
         header={
           <>
             {strip}
-            <p className="left">
-              {left} new {left === 1 ? "story" : "stories"} to read
-            </p>
+            <button
+              className={`left lvl-${next.level.toLowerCase()}`}
+              aria-label={`${left} new ${left === 1 ? "story" : "stories"} to read. Choose your level.`}
+              onClick={() => setLevelOpen(true)}
+            >
+              <span>
+                {left} new {left === 1 ? "story" : "stories"} to read
+              </span>
+              <Icon name="sliders" size={16} />
+            </button>
           </>
         }
         onLike={() => {
@@ -86,6 +97,7 @@ export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
           setToast("Skipped. Next story!");
         }}
       />
+      {levelOpen && <LevelSheet onClose={() => setLevelOpen(false)} />}
       {toast && (
         <div className="toast" role="status">
           {toast}

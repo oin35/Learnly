@@ -180,7 +180,13 @@ kbd { font: 0.7rem monospace; opacity: 0.7; border: 1px solid currentColor; bord
 .stat strong { font-size: 1.3rem; color: var(--text); line-height: 1.2; }
 .stat span { line-height: 1.25; }
 .stat-btn { cursor: pointer; }
-.left { padding: 10px 16px 0; font-size: 0.8rem; color: var(--muted); }
+.left {
+  all: unset; box-sizing: border-box; display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  padding: 10px 16px 0; font-size: 0.8rem; color: var(--muted); --lvl: var(--accent);
+}
+.left.lvl-a2 { --lvl: var(--pill); }
+.left svg { color: var(--lvl); opacity: 0.85; flex: none; } /* same colour and strength as the level mark on the title */
+.left:focus-visible { outline: 2px solid var(--lvl); outline-offset: 2px; border-radius: 6px; }
 
 /* ── Story ──────────────────────────────── */
 .story { padding: 12px 16px 28px; }
@@ -463,3 +469,14 @@ button.w.saved { background: var(--saved-soft); border-bottom-style: solid; bord
 .sync-problem { color: var(--bad); font-weight: 600; font-size: 0.9rem; }
 .sync .fineprint { margin-top: 0; }
 .sync-join > .btn-text { justify-self: start; margin-left: -4px; }
+
+/* ── Level chooser ──────────────────────── */
+.lv { display: grid; gap: 14px; }
+.lv-now { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.lv-now strong { font-size: 2.2rem; letter-spacing: -0.02em; white-space: nowrap; }
+.lv-now span { color: var(--muted); }
+.lv input[type="range"] { width: 100%; height: 32px; margin: 0; accent-color: var(--accent); }
+.lv-scale { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 0.78rem; margin-top: -8px; }
+.lv-next { display: flex; align-items: center; gap: 12px; background: var(--surface-2); border-radius: 12px; padding: 10px 14px; min-height: 64px; }
+.lv-next small { display: block; color: var(--muted); }
+.lv-emoji { font-size: 1.8rem; }
