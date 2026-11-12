@@ -348,6 +348,38 @@ export const pills: Pill[] = [
     ],
     tip: "Half negen is NOT 9:30. Think: 'half the way to nine'.",
   },
+  {
+    id: "why",
+    title: "Why? Waarom, want, daarom",
+    summary: "Waarom …? · want … · Daarom …",
+    points: [
+      "Waarom = why. It is a question word, so the verb comes second: Waarom zijn er deuren?",
+      "Answer with want (because): Het water is hoog, want het stormt.",
+      "Daarom = that is why. When it starts a sentence the verb still comes second: Daarom gaan de deuren dicht.",
+      "Do not say “Daarom de deuren gaan dicht”: after daarom comes the verb, then the subject.",
+    ],
+    examples: [
+      { nl: "Waarom ben je moe?", en: "Why are you tired?" },
+      { nl: "Het regent, daarom neem ik een paraplu.", en: "It is raining, that is why I take an umbrella." },
+    ],
+    tip: "Daarom swaps the order: Daarom + verb + subject.",
+  },
+  {
+    id: "perf",
+    title: "Yesterday: hebben + gegeten",
+    summary: "Ik heb gegeten · Ik ben gegaan",
+    points: [
+      "To talk about the past use hebben (or zijn) + a past participle at the END of the sentence: Ze hebben koffie gedronken.",
+      "Most verbs use hebben: heb gezien, heb gekocht, heb gefietst, heb gegeten.",
+      "Verbs of movement and change use zijn: ben gegaan, ben gekomen, ben geweest.",
+      "Regular participles: ge- + stem + t: fietsen → gefietst, maken → gemaakt, kopen → gekocht (irregular).",
+    ],
+    examples: [
+      { nl: "Ik heb gisteren een film gezien.", en: "I saw a film yesterday." },
+      { nl: "Ze zijn naar Utrecht gegaan.", en: "They went to Utrecht." },
+    ],
+    tip: "Learn the participle together with the verb: zien – gezien, drinken – gedronken, eten – gegeten, gaan – gegaan.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

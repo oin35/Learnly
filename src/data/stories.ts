@@ -585,4 +585,84 @@ export const stories: Story[] = [
       { q: "When does the train leave?", options: ["At a quarter past nine", "At a quarter to nine", "At half past nine"], answer: 0 },
     ],
   },
+  {
+    id: "de-grote-dam",
+    title: "De grote dam",
+    titleEn: "The big dam",
+    emoji: "🌊",
+    topic: "Water",
+    level: "A1",
+    difficulty: 6.5,
+    insight: {
+      title: "The Delta Works protect Zeeland",
+      text: "After the North Sea flood of 1953 the Netherlands built the Delta Works. The Eastern Scheldt barrier (Oosterscheldekering) in Zeeland is about 9 km long and opened in 1986. Its gates normally stay open and close only when high water threatens.",
+    },
+    intro: {
+      words: ["dam", "deur", "storm", "dicht", "zee"],
+      pills: ["why"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn in Zeeland. Ze staan op een heel lange dam in de zee. In de dam zijn grote deuren.",
+        en: "Tom and Lisa are in Zeeland. They are standing on a very long dam in the sea. In the dam there are big doors.",
+      },
+      {
+        nl: "\"{{Waarom zijn er deuren in de dam?|why}}\" vraagt Tom. \"Bij storm komt het water hoog,\" zegt Lisa. \"{{Daarom gaan de deuren dicht.|why}} Zo blijft het land droog.\"",
+        en: "\"Why are there doors in the dam?\" asks Tom. \"In a storm the water comes up high,\" says Lisa. \"That is why the doors close. That way the land stays dry.\"",
+      },
+      {
+        nl: "Meestal staan de deuren open. Dan kan het water van de zee naar binnen en weer naar buiten. Dat is goed voor de vissen.",
+        en: "Most of the time the doors are open. Then the water can go from the sea to the inside and back outside. That is good for the fish.",
+      },
+      {
+        nl: "Tom en Lisa lopen over de dam. De wind is sterk en het water is blauw. \"Dat is echt groot!\" zegt Tom.",
+        en: "Tom and Lisa walk over the dam. The wind is strong and the water is blue. \"That is really big!\" says Tom.",
+      },
+    ],
+    quiz: [
+      { q: "What does “dicht” mean in “De deuren gaan dicht”?", options: ["closed", "open", "high"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Daarom gaan de deuren dicht.", "Daarom de deuren gaan dicht.", "Daarom dicht gaan de deuren."], answer: 0 },
+      { q: "What does “storm” mean in “Bij storm komt het water hoog”?", options: ["a storm", "rain", "a wave"], answer: 0 },
+    ],
+  },
+  {
+    id: "gisteren-bij-de-molens",
+    title: "Gisteren bij de molens",
+    titleEn: "Yesterday at the mills",
+    emoji: "🌬️",
+    topic: "Water",
+    level: "A1",
+    difficulty: 7,
+    insight: {
+      title: "The windmills of Kinderdijk",
+      text: "Kinderdijk, in the province of South Holland, has 19 windmills from around 1740. They helped to keep the polder dry by moving water away. Since 1997 they have been a UNESCO World Heritage Site.",
+    },
+    intro: {
+      words: ["molen", "gisteren", "langs", "plek", "negentien"],
+      pills: ["perf"],
+    },
+    paragraphs: [
+      {
+        nl: "{{Tom en Lisa zijn gisteren naar Kinderdijk gegaan.|perf}} Dat is een plek in Zuid-Holland met negentien molens.",
+        en: "Tom and Lisa went to Kinderdijk yesterday. That is a place in South Holland with nineteen windmills.",
+      },
+      {
+        nl: "{{Ze hebben veel molens gezien.|perf}} De molens zijn heel oud en heel mooi. Veel mensen komen hier kijken.",
+        en: "They saw many windmills. The windmills are very old and very beautiful. Many people come here to look.",
+      },
+      {
+        nl: "Ze hebben langs het water gefietst. Daarna hebben ze koffie gedronken en een stuk appeltaart gegeten.",
+        en: "They cycled along the water. Afterwards they drank coffee and ate a piece of apple pie.",
+      },
+      {
+        nl: "Tom heeft veel foto's gemaakt. Lisa heeft een kaart gekocht voor haar moeder. Het was een lange dag, maar ze zijn blij.",
+        en: "Tom took many photos. Lisa bought a card for her mother. It was a long day, but they are happy.",
+      },
+    ],
+    quiz: [
+      { q: "What does “gisteren” mean in “Gisteren zijn Tom en Lisa naar Kinderdijk gegaan”?", options: ["yesterday", "tomorrow", "today"], answer: 0 },
+      { q: "Which word fits? “Gisteren ___ Tom koffie gedronken.”", options: ["heeft", "is", "hebben"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Ze hebben veel molens gezien.", "Ze hebben gezien veel molens.", "Ze gezien hebben veel molens."], answer: 0 },
+    ],
+  },
 ];
