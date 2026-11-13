@@ -380,6 +380,37 @@ export const pills: Pill[] = [
     ],
     tip: "Learn the participle together with the verb: zien – gezien, drinken – gedronken, eten – gegeten, gaan – gegaan.",
   },
+  {
+    id: "omdat",
+    title: "Because: omdat",
+    summary: "omdat + verb at the end",
+    points: [
+      "omdat = because. It starts a part of the sentence in which the verb goes to the END.",
+      "Tom koopt een stroopwafel, omdat hij honger heeft. (not: omdat hij heeft honger)",
+      "Compare want: Tom heeft honger, want het is laat (verb stays second). With omdat the verb goes last.",
+      "If the omdat part comes first, the main verb follows straight after the comma: Omdat hij honger heeft, koopt Tom een stroopwafel.",
+    ],
+    examples: [
+      { nl: "Ik blijf thuis, omdat het regent.", en: "I stay at home, because it is raining." },
+      { nl: "Lisa lacht, omdat het leuk is.", en: "Lisa laughs, because it is fun." },
+    ],
+    tip: "After omdat, look for the verb at the very end: omdat hij honger heeft.",
+  },
+  {
+    id: "dus",
+    title: "So: dus",
+    summary: "dus = so, therefore",
+    points: [
+      "dus = so. It connects two sentences and the word order stays normal: Ik heb honger, dus ik eet.",
+      "Use dus for the result: first the reason, then dus + the result.",
+      "Do not mix it up with omdat: omdat gives the reason, dus gives the result.",
+    ],
+    examples: [
+      { nl: "Het regent, dus ik neem een paraplu.", en: "It is raining, so I take an umbrella." },
+      { nl: "De doos is leeg, dus we kopen nieuwe.", en: "The box is empty, so we buy a new one." },
+    ],
+    tip: "reason → omdat, result → dus.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

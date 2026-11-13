@@ -665,4 +665,84 @@ export const stories: Story[] = [
       { q: "Which sentence is correct?", options: ["Ze hebben veel molens gezien.", "Ze hebben gezien veel molens.", "Ze gezien hebben veel molens."], answer: 0 },
     ],
   },
+  {
+    id: "de-stroopwafel",
+    title: "De stroopwafel",
+    titleEn: "The stroopwafel",
+    emoji: "🧇",
+    topic: "Food",
+    level: "A1",
+    difficulty: 7.5,
+    insight: {
+      title: "The stroopwafel comes from Gouda",
+      text: "The stroopwafel, two thin waffles with syrup in between, comes from the city of Gouda. Folklore says bakers first made them from leftover scraps and syrup; sources disagree on the exact date, somewhere between the late 18th and early 19th century. Many people put one on a hot cup of tea or coffee to make the syrup soft.",
+    },
+    intro: {
+      words: ["stroopwafel", "stroop", "kraam", "zacht", "cadeau"],
+      pills: ["omdat"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn op de markt in Gouda. Dat is een stad in Zuid-Holland. Daar staat een kraam met stroopwafels.",
+        en: "Tom and Lisa are at the market in Gouda. That is a city in South Holland. There is a stall with stroopwafels.",
+      },
+      {
+        nl: "De verkoper bakt de wafels. Tom koopt een warme stroopwafel, {{omdat hij honger heeft.|omdat}} Lisa koopt een zak stroopwafels, {{omdat ze een cadeau voor haar moeder zoekt.|omdat}}",
+        en: "The seller bakes the waffles. Tom buys a warm stroopwafel, because he is hungry. Lisa buys a bag of stroopwafels, because she is looking for a gift for her mother.",
+      },
+      {
+        nl: "\"Een stroopwafel heeft twee dunne wafels met stroop,\" zegt de verkoper. \"Leg de wafel op een warme kop thee. Dan wordt de stroop zacht.\"",
+        en: "\"A stroopwafel has two thin waffles with syrup,\" says the seller. \"Put the waffle on a warm cup of tea. Then the syrup becomes soft.\"",
+      },
+      {
+        nl: "Tom zegt: \"Heerlijk!\" Lisa lacht, omdat Tom stroop op zijn neus heeft.",
+        en: "Tom says: \"Delicious!\" Lisa laughs, because Tom has syrup on his nose.",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits? “Tom koopt een stroopwafel, omdat hij honger ___.”", options: ["heeft", "hebben", "heb"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Lisa lacht, omdat Tom stroop op zijn neus heeft.", "Lisa lacht, omdat Tom heeft stroop op zijn neus.", "Lisa lacht, omdat heeft Tom stroop op zijn neus."], answer: 0 },
+      { q: "What does “stroop” mean in “Dan wordt de stroop zacht”?", options: ["syrup", "sugar", "cheese"], answer: 0 },
+    ],
+  },
+  {
+    id: "hagelslag",
+    title: "Hagelslag",
+    titleEn: "Hagelslag",
+    emoji: "🍫",
+    topic: "Food",
+    level: "A1",
+    difficulty: 8,
+    insight: {
+      title: "Chocolate sprinkles on bread",
+      text: "Hagelslag are chocolate sprinkles that Dutch people put on buttered bread, often at breakfast or lunch. Estimates say the Dutch eat around 14 million kilos of them a year. The chocolate version is usually credited to the 1930s.",
+    },
+    intro: {
+      words: ["hagelslag", "boterham", "boter", "chocolade", "doos"],
+      pills: ["dus", "perf"],
+    },
+    paragraphs: [
+      {
+        nl: "{{Vorige week heeft Lisa bij Tom gegeten.|perf}} Tom heeft brood, boter en hagelslag gekocht.",
+        en: "Last week Lisa ate at Tom's place. Tom bought bread, butter and hagelslag.",
+      },
+      {
+        nl: "\"Wat is dat?\" vraagt Lisa. \"Dat is hagelslag,\" zegt Tom. \"Het zijn kleine stukjes chocolade, en je doet ze op brood met boter.\"",
+        en: "\"What is that?\" asks Lisa. \"That is hagelslag,\" says Tom. \"They are small pieces of chocolate, and you put them on bread with butter.\"",
+      },
+      {
+        nl: "{{Lisa heeft honger, dus ze eet twee boterhammen met hagelslag.|dus}} Ze vindt het heel lekker.",
+        en: "Lisa is hungry, so she eats two slices of bread with hagelslag. She thinks it is very tasty.",
+      },
+      {
+        nl: "Tom heeft gisteren ook hagelslag gegeten, {{dus de doos is bijna leeg.|dus}} Volgende week gaan ze nieuwe hagelslag kopen.",
+        en: "Tom also ate hagelslag yesterday, so the box is almost empty. Next week they are going to buy new hagelslag.",
+      },
+    ],
+    quiz: [
+      { q: "What does “dus” mean in “Lisa heeft honger, dus ze eet twee boterhammen”?", options: ["so", "because", "but"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Tom heeft gisteren hagelslag gegeten.", "Tom heeft gisteren gegeten hagelslag.", "Tom gisteren heeft hagelslag gegeten."], answer: 0 },
+      { q: "What does “hagelslag” mean in “Dat is hagelslag”?", options: ["chocolate sprinkles", "a hailstorm", "a kind of cheese"], answer: 0 },
+    ],
+  },
 ];
