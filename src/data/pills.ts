@@ -411,6 +411,38 @@ export const pills: Pill[] = [
     ],
     tip: "reason → omdat, result → dus.",
   },
+  {
+    id: "noge",
+    title: "No ge- on some participles",
+    summary: "verkocht · betaald · vertrokken",
+    points: [
+      "Most participles start with ge-: gekocht, gezien, gefietst.",
+      "Verbs that start with be-, ge-, ont- or ver- get NO extra ge-: verkopen → verkocht, betalen → betaald, vertrekken → vertrokken.",
+      "Regular participles end in -t or -d: betaald (betalen), gebakken is irregular (bakken).",
+      "The participle still goes to the end: Lisa heeft al drie boeken verkocht.",
+    ],
+    examples: [
+      { nl: "Ik heb mijn fiets verkocht.", en: "I have sold my bike." },
+      { nl: "Hij heeft de koffie betaald.", en: "He has paid for the coffee." },
+    ],
+    tip: "If the verb starts with be-, ge-, ont- or ver-, do not add ge-.",
+  },
+  {
+    id: "gezellig",
+    title: "Gezellig: a very Dutch word",
+    summary: "cosy, friendly, together",
+    points: [
+      "gezellig describes a warm, friendly, relaxed feeling, with nice people, in a nice place.",
+      "It is hard to translate: cosy, pleasant and social all at once.",
+      "You can use it for a café, an evening, a room or a person: Het is hier gezellig!",
+      "Gezellig is also the standard compliment after a nice visit: Het was gezellig!",
+    ],
+    examples: [
+      { nl: "Het is gezellig in het café.", en: "It is cosy in the café." },
+      { nl: "Wat gezellig!", en: "How nice and cosy!" },
+    ],
+    tip: "If you do not know what to say after a nice evening, say: Het was gezellig!",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

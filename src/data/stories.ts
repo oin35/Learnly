@@ -745,4 +745,84 @@ export const stories: Story[] = [
       { q: "What does “hagelslag” mean in “Dat is hagelslag”?", options: ["chocolate sprinkles", "a hailstorm", "a kind of cheese"], answer: 0 },
     ],
   },
+  {
+    id: "koningsdag",
+    title: "Koningsdag",
+    titleEn: "King's Day",
+    emoji: "🧡",
+    topic: "Calendar",
+    level: "A1",
+    difficulty: 8.5,
+    insight: {
+      title: "King's Day: orange and the free market",
+      text: "Koningsdag is the king's birthday. It is on 27 April (on 26 April if the 27th is a Sunday). People wear orange, the colour of the royal house, and on the vrijmarkt (free market) people sell their old things in the street. The exact rules for the free market differ per municipality.",
+    },
+    intro: {
+      words: ["koning", "vrijmarkt", "verkopen", "spullen", "oranje"],
+      pills: ["noge", "omdat"],
+    },
+    paragraphs: [
+      {
+        nl: "Vandaag is het Koningsdag. Het is de verjaardag van de koning. Tom en Lisa dragen oranje kleren, {{omdat oranje de kleur van het koningshuis is.|omdat}}",
+        en: "Today it is King's Day. It is the birthday of the king. Tom and Lisa wear orange clothes, because orange is the colour of the royal house.",
+      },
+      {
+        nl: "Op straat is een vrijmarkt. Mensen verkopen oude spullen, zoals boeken, speelgoed en kleren. {{Lisa heeft al drie boeken verkocht.|noge}}",
+        en: "In the street there is a free market. People sell old things, such as books, toys and clothes. Lisa has already sold three books.",
+      },
+      {
+        nl: "Tom koopt een oude lamp. {{Hij heeft vijf euro betaald,|noge}} dus de lamp is nu van hem.",
+        en: "Tom buys an old lamp. He has paid five euros, so the lamp is his now.",
+      },
+      {
+        nl: "Aan het eind van de dag zijn ze moe, maar blij. \"Volgend jaar gaan we weer naar de vrijmarkt,\" zegt Lisa.",
+        en: "At the end of the day they are tired, but happy. \"Next year we are going to the free market again,\" says Lisa.",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits? “Lisa heeft al drie boeken ___.”", options: ["verkocht", "geverkocht", "verkopen"], answer: 0 },
+      { q: "What does “spullen” mean in “Mensen verkopen oude spullen”?", options: ["things", "clothes", "tickets"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Tom en Lisa dragen oranje kleren, omdat oranje de kleur van het koningshuis is.", "Tom en Lisa dragen oranje kleren, omdat oranje is de kleur van het koningshuis.", "Tom en Lisa dragen oranje kleren, omdat is oranje de kleur van het koningshuis."], answer: 0 },
+    ],
+  },
+  {
+    id: "de-verjaardag",
+    title: "De verjaardag",
+    titleEn: "The birthday",
+    emoji: "🎂",
+    topic: "Calendar",
+    level: "A1",
+    difficulty: 9,
+    insight: {
+      title: "The circle birthday",
+      text: "At a Dutch birthday party the guests often sit in a circle (a kringverjaardag). You say “gefeliciteerd” not only to the birthday person but also to close family, such as the parents, partner or children. The mood is often described as gezellig: a cosy, friendly feeling of being together that is hard to translate.",
+    },
+    intro: {
+      words: ["verjaardag", "kring", "taart", "gezellig", "gefeliciteerd"],
+      pills: ["gezellig", "perf"],
+    },
+    paragraphs: [
+      {
+        nl: "Vandaag is het de verjaardag van de oma van Lisa. Tom en Lisa gaan naar haar huis. {{Tom heeft een bos bloemen gekocht.|perf}}",
+        en: "Today it is the birthday of Lisa's grandmother. Tom and Lisa go to her house. Tom has bought a bunch of flowers.",
+      },
+      {
+        nl: "In de kamer zitten veel mensen in een kring. Tom zegt \"gefeliciteerd\" tegen oma, maar ook tegen de andere mensen. Dat doet iedereen hier.",
+        en: "In the room many people are sitting in a circle. Tom says \"congratulations\" to grandma, but also to the other people. Everybody does that here.",
+      },
+      {
+        nl: "Er is koffie en er is taart. Iedereen praat en lacht. {{Het is erg gezellig.|gezellig}}",
+        en: "There is coffee and there is cake. Everybody talks and laughs. It is very cosy and friendly.",
+      },
+      {
+        nl: "Oma heeft zelf een taart gebakken. Straks gaan ze zingen en daarna gaan ze de taart eten. Tom kent het lied niet, dus hij luistert goed.",
+        en: "Grandma has baked a cake herself. Soon they are going to sing and after that they are going to eat the cake. Tom does not know the song, so he listens carefully.",
+      },
+    ],
+    quiz: [
+      { q: "What does “gezellig” mean in “Het is erg gezellig”?", options: ["cosy and friendly", "expensive", "very quiet"], answer: 0 },
+      { q: "Which word fits? “Oma heeft zelf een taart ___.”", options: ["gebakken", "gebakt", "bakken"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Straks gaan ze zingen.", "Straks ze gaan zingen.", "Straks gaan zingen ze."], answer: 0 },
+    ],
+  },
 ];
