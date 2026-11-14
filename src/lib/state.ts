@@ -17,6 +17,8 @@ export interface AppState {
   favPills: string[];
   /** The level the reader chose to start from (see lib/deck.ts rankOf); 0 = from the very first story */
   startRank: number;
+  /** Saved stories that are back in the reading deck, because the reader rolled back to their level */
+  again: string[];
 }
 
 export const initialState: AppState = {
@@ -30,6 +32,7 @@ export const initialState: AppState = {
   read: [],
   favPills: [],
   startRank: 0,
+  again: [],
 };
 
 export type WordInput = Parameters<typeof newCard>[0];
@@ -46,8 +49,8 @@ export type Action =
   | { type: "pillSeen"; id: string }
   | { type: "markRead"; id: string; now: number }
   | { type: "toggleFavPill"; id: string }
-  /** Choose the level to read at; `unskip` = skipped stories that come back into the deck with it */
-  | { type: "setStartRank"; rank: number; unskip?: string[] }
+  /** Choose the level to read at. `unskip`: skipped stories that come back into the deck; `again`: saved stories that do */
+  | { type: "setStartRank"; rank: number; unskip?: string[]; again?: string[] }
   | { type: "replace"; state: AppState }
   | { type: "reset" };
 
@@ -70,8 +73,10 @@ export function reducer(state: AppState, action: Action): AppState {
     case "like":
       return {
         ...state,
-        saved: [action.id, ...without(state.saved, action.id)],
+        // a story that is read again keeps its place in Saved
+        saved: state.saved.includes(action.id) ? state.saved : [action.id, ...state.saved],
         skipped: without(state.skipped, action.id),
+        again: without(state.again, action.id),
         read: state.read.includes(action.id) ? state.read : [...state.read, action.id],
         days: withDay(state.days, action.now),
       };
@@ -79,10 +84,11 @@ export function reducer(state: AppState, action: Action): AppState {
       return {
         ...state,
         skipped: state.saved.includes(action.id) ? state.skipped : [...without(state.skipped, action.id), action.id],
+        again: without(state.again, action.id), // passing over a saved story leaves it saved
         days: withDay(state.days, action.now),
       };
     case "unsave":
-      return { ...state, saved: without(state.saved, action.id) };
+      return { ...state, saved: without(state.saved, action.id), again: without(state.again, action.id) };
     case "resetSkipped":
       return { ...state, skipped: [] };
     case "addWord": {
@@ -127,9 +133,10 @@ export function reducer(state: AppState, action: Action): AppState {
       return state.pillsSeen.includes(action.id) ? state : { ...state, pillsSeen: [...state.pillsSeen, action.id] };
     case "setStartRank": {
       const back = action.unskip ?? [];
+      const again = (action.again ?? []).filter((id) => state.saved.includes(id));
       const skipped = state.skipped.filter((id) => !back.includes(id));
-      if (state.startRank === action.rank && skipped.length === state.skipped.length) return state;
-      return { ...state, startRank: action.rank, skipped };
+      const same = state.startRank === action.rank && skipped.length === state.skipped.length && again.join() === state.again.join();
+      return same ? state : { ...state, startRank: action.rank, skipped, again };
     }
     case "replace":
       return action.state;
@@ -182,6 +189,7 @@ export function sanitize(raw: unknown): AppState | null {
     // every saved story counts as read, including ones saved before `read` existed
     read: [...new Set([...list(p.read), ...saved])],
     favPills: list(p.favPills),
+    again: list(p.again).filter((id) => saved.includes(id)),
     startRank: typeof p.startRank === "number" && Number.isFinite(p.startRank) && p.startRank >= 0 && p.startRank <= 20 ? p.startRank : 0,
   };
 }

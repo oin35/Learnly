@@ -21,6 +21,8 @@ type Selection = { kind: "word"; token: string; paragraph: string } | { kind: "p
 interface Props {
   story: Story;
   mode: "deck" | "saved";
+  /** In the deck: this story was saved before and is being read again */
+  saved?: boolean;
   /** Shown above the entry page (e.g. today's stats) */
   header?: ReactNode;
   onSkip?: () => void;
@@ -55,7 +57,7 @@ function Words({
   );
 }
 
-export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsave }: Props) {
+export function StoryView({ story, mode, saved, header, onSkip, onLike, onBack, onUnsave }: Props) {
   const { dispatch } = useStore();
   const [phase, setPhase] = useState<"intro" | "story">("intro");
   const [showEn, setShowEn] = useState(false);
@@ -194,7 +196,15 @@ export function StoryView({ story, mode, header, onSkip, onLike, onBack, onUnsav
               <Icon name="skip" size={18} /> Skip
             </button>
             <button className="btn btn-primary" onClick={onLike}>
-              <Icon name="heart" size={18} /> Like &amp; save
+              {saved ? (
+                <>
+                  <Icon name="heart" size={18} fill /> Saved · Next
+                </>
+              ) : (
+                <>
+                  <Icon name="heart" size={18} /> Like &amp; save
+                </>
+              )}
             </button>
           </>
         ) : (

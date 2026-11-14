@@ -20,6 +20,7 @@ export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
   const [levelOpen, setLevelOpen] = useState(false);
   const next = nextStory(stories, state);
   const left = unreadStories(stories, state).length;
+  const again = next ? state.saved.includes(next.id) : false; // rolled back to a story that was saved before
   const now = Date.now();
   const days = streak(state.days, now);
 
@@ -73,6 +74,7 @@ export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
         key={next.id}
         story={next}
         mode="deck"
+        saved={again}
         header={
           <>
             {strip}
@@ -90,11 +92,11 @@ export function ReadTab({ goTo }: { goTo: (tab: "saved" | "words") => void }) {
         }
         onLike={() => {
           dispatch({ type: "like", id: next.id, now: Date.now() });
-          setToast(`Saved “${next.title}” ♥`);
+          setToast(again ? "Next story!" : `Saved “${next.title}” ♥`);
         }}
         onSkip={() => {
           dispatch({ type: "skip", id: next.id, now: Date.now() });
-          setToast("Skipped. Next story!");
+          setToast(again ? "Next story!" : "Skipped. Next story!");
         }}
       />
       {levelOpen && <LevelSheet onClose={() => setLevelOpen(false)} />}

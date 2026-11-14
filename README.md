@@ -10,7 +10,7 @@ being able to handle basic daily situations: ordering a coffee, shopping, asking
 - **Entry page**: before every story, a short "Before you read" page with up to 5 key words (each with a
   pronunciation button, plus *Play all*) and 1–2 key grammar pills. The story opens only after **To the story**.
 - **Story deck**: read one story at a time, then **Like & save** it or **Skip** it.
-- **Choose your level**: the small sliders icon next to “N new stories to read” opens a slider to jump ahead to harder stories or roll back to easier ones. Stories you jump over stay unread, and sliding down brings back the stories you skipped from that level up (`src/lib/deck.ts`).
+- **Choose your level**: the small sliders icon next to “N new stories to read” opens a slider that starts at the level of the story on screen. Slide up to jump ahead (stories you jump over stay unread) or down to roll back: the deck starts again at that level, including stories that were read and saved or skipped before. Saved stories stay saved (`src/lib/deck.ts`).
 - **Updates itself**: when the app opens or comes back to the front it checks `version.json` and reloads if a newer build is out, so a Home Screen app on iPhone does not stay on an old version (`src/lib/update.ts`).
 - **Saved stories**: recall any saved story later, with your quiz score.
 - **Tap-a-word dictionary**: inflected forms resolve to the dictionary word (`kijkt` → `kijken`), with the

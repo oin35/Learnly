@@ -69,36 +69,81 @@ describe("choosing a level", () => {
     expect(reducer(s, { type: "setStartRank", rank: 4.5 })).toBe(s); // no change, no needless save
   });
 
-  it("rolling back also brings back the stories that were skipped on the way up", () => {
-    // read and saved a and b, then skipped c and d: the deck is at e
+  const start = (s: typeof initialState, rank: number) => {
+    const plan = levelPlan(deck, s, rank);
+    return reducer(s, { type: "setStartRank", rank, unskip: plan.unskip, again: plan.again });
+  };
+
+  it("rolling back restarts the deck at that level, with the stories that were read or skipped before", () => {
+    // read and saved a, b and d, skipped c: the deck is at e
     let s = initialState;
     for (const id of ["a", "b"]) s = reducer(s, { type: "like", id, now: 1 });
-    for (const id of ["c", "d"]) s = reducer(s, { type: "skip", id, now: 2 });
+    s = reducer(s, { type: "skip", id: "c", now: 2 });
+    s = reducer(s, { type: "like", id: "d", now: 3 });
     expect(nextStory(deck, s)?.id).toBe("e");
+    const savedBefore = s.saved;
 
-    // slide down to A1 · 2.5: d comes back, c (easier) stays skipped
+    // slide down to A1 · 2.5: the saved story d is read again; a, b, c are left alone
     let plan = levelPlan(deck, s, 2.5);
-    expect(plan.returning.map((x) => x.id)).toEqual(["d"]);
     expect(plan.next?.id).toBe("d");
-    expect(plan.easier).toBe(0);
+    expect(plan.back).toBe(1);
+    s = start(s, 2.5);
+    expect(nextStory(deck, s)?.id).toBe("d");
+    expect(s.saved).toEqual(savedBefore); // still saved, same order
+    expect(s.skipped).toEqual(["c"]);
+    expect(unreadStories(deck, s).map((x) => x.id)).toEqual(["e", "f"]); // "new stories" does not count the old ones
 
-    // all the way down: both come back; the saved stories stay in Saved
+    // reading it again and moving on keeps it saved; so does passing over it
+    const liked = reducer(s, { type: "like", id: "d", now: 4 });
+    expect(liked.saved).toEqual(savedBefore);
+    expect(nextStory(deck, liked)?.id).toBe("e");
+    const passed = reducer(s, { type: "skip", id: "d", now: 4 });
+    expect(passed.saved).toEqual(savedBefore);
+    expect(passed.skipped).toEqual(["c"]);
+    expect(nextStory(deck, passed)?.id).toBe("e");
+
+    // all the way down: everything comes back, in order
     plan = levelPlan(deck, s, 1);
-    expect(plan.returning.map((x) => x.id)).toEqual(["c", "d"]);
-    expect(plan.next?.id).toBe("c");
-    s = reducer(s, { type: "setStartRank", rank: 0, unskip: plan.returning.map((x) => x.id) });
+    expect(plan.next?.id).toBe("a");
+    expect(plan.back).toBe(3); // a, b, c (d is already back)
+    s = start(s, 1);
     expect(s.skipped).toEqual([]);
-    expect(s.saved).toHaveLength(2);
-    expect(nextStory(deck, s)?.id).toBe("c");
-    expect(unreadStories(deck, s)).toHaveLength(4);
+    const order: string[] = [];
+    for (let n = nextStory(deck, s); n; n = nextStory(deck, s)) {
+      order.push(n.id);
+      s = reducer(s, { type: "like", id: n.id, now: 5 });
+    }
+    expect(order).toEqual(["a", "b", "c", "d", "e", "f"]);
   });
 
-  it("jumping ahead leaves stories skipped below the level alone", () => {
+  it("sliding forward again returns to the new stories", () => {
+    let s = initialState;
+    for (const id of ["a", "b", "c", "d"]) s = reducer(s, { type: "like", id, now: 1 });
+    s = start(s, 1);
+    expect(nextStory(deck, s)?.id).toBe("a");
+    s = start(s, 10);
+    expect(nextStory(deck, s)?.id).toBe("e");
+    expect(s.again).toEqual([]); // the easier saved stories are out of the deck again
+    expect(s.saved).toHaveLength(4);
+  });
+
+  it("jumping ahead leaves easier stories alone", () => {
     const s = reducer(initialState, { type: "skip", id: "b", now: 1 });
     const plan = levelPlan(deck, s, 10);
-    expect(plan.returning).toEqual([]);
+    expect(plan.unskip).toEqual([]);
+    expect(plan.back).toBe(0);
     expect(plan.easier).toBe(3); // a, c, d — b is skipped, not unread
     expect(plan.next?.id).toBe("e");
-    expect(levelPlan(deck, reducer(s, { type: "like", id: "f", now: 2 }), 11).next).toBeUndefined();
+    expect(start(s, 10).skipped).toEqual(["b"]);
+  });
+
+  it("removing a story from Saved, a reload and a sync keep the deck consistent", () => {
+    let s = reducer(initialState, { type: "like", id: "a", now: 1 });
+    s = start(s, 1);
+    expect(s.again).toEqual(["a"]);
+    expect(sanitize(JSON.parse(JSON.stringify(s)))?.again).toEqual(["a"]);
+    expect(sanitize({ v: 1, saved: [], again: ["a"] })?.again).toEqual([]); // only saved stories can be "again"
+    expect(mergeStates(s, initialState).again).toEqual(["a"]);
+    expect(reducer(s, { type: "unsave", id: "a" }).again).toEqual([]);
   });
 });

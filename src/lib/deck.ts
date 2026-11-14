@@ -2,6 +2,8 @@ import type { Level, Story } from "../types";
 import type { AppState } from "./state";
 import { formatDifficulty } from "./text";
 
+type Progress = Pick<AppState, "saved" | "skipped" | "again">;
+
 /**
  * One number for "how hard": A1 1…10 → 1…10, A2 1…10 → 11…20.
  * (The levels overlap in real difficulty, but the stories are written in this order.)
@@ -20,33 +22,40 @@ export function levelSteps(stories: Story[]): number[] {
   return [...new Set(stories.map(rankOf))].sort((a, b) => a - b);
 }
 
-/** Stories not yet saved or skipped, in reading order. */
+/** New stories: not yet saved or skipped, in reading order. */
 export function unreadStories(stories: Story[], state: Pick<AppState, "saved" | "skipped">): Story[] {
   return stories.filter((s) => !state.saved.includes(s.id) && !state.skipped.includes(s.id));
 }
 
+/** A story is in the reading deck when it is new, or when the reader rolled back to it. */
+const inDeck = (s: Story, state: Progress) => !state.skipped.includes(s.id) && (!state.saved.includes(s.id) || state.again.includes(s.id));
+
 /**
- * The story to show next: the first unread one at or above the chosen level.
+ * The story to show next: the first one in the deck at or above the chosen level.
  * When everything from that level up is done, the easier unread stories come back, so nothing is ever lost.
  */
-export function nextStory(stories: Story[], state: Pick<AppState, "saved" | "skipped" | "startRank">): Story | undefined {
-  const unread = unreadStories(stories, state);
-  return unread.find((s) => rankOf(s) >= state.startRank) ?? unread[0];
+export function nextStory(stories: Story[], state: Progress & Pick<AppState, "startRank">): Story | undefined {
+  const deck = stories.filter((s) => inDeck(s, state));
+  return deck.find((s) => rankOf(s) >= state.startRank) ?? deck[0];
 }
 
 /**
- * What “Start here” at a level does. Starting at a level also brings back the stories from that level up
- * that were skipped before (that is the roll back); saved stories stay in Saved and are not shown again.
+ * What “Start here” at a level does: the deck starts again at that level, with every story from there up,
+ * also the ones that were read and saved or skipped before (that is the roll back). Saved stories stay saved.
+ * Easier stories are left as they are.
  */
-export function levelPlan(stories: Story[], state: Pick<AppState, "saved" | "skipped">, rank: number) {
-  const open = stories.filter((s) => !state.saved.includes(s.id));
-  const returning = open.filter((s) => state.skipped.includes(s.id) && rankOf(s) >= rank);
+export function levelPlan(stories: Story[], state: Progress, rank: number) {
+  const up = stories.filter((s) => rankOf(s) >= rank);
   return {
-    /** skipped stories that come back into the deck */
-    returning,
-    /** unread stories below the level: they stay unread */
-    easier: open.filter((s) => !state.skipped.includes(s.id) && rankOf(s) < rank).length,
     /** the story the deck will show */
-    next: open.find((s) => rankOf(s) >= rank),
+    next: up[0] as Story | undefined,
+    /** stories that are not in the deck now and come back into it */
+    back: up.filter((s) => !inDeck(s, state)).length,
+    /** skipped stories that become unread again */
+    unskip: up.filter((s) => state.skipped.includes(s.id)).map((s) => s.id),
+    /** saved stories that are shown again */
+    again: up.filter((s) => state.saved.includes(s.id)).map((s) => s.id),
+    /** new stories below the level: they stay unread */
+    easier: unreadStories(stories, state).filter((s) => rankOf(s) < rank).length,
   };
 }
