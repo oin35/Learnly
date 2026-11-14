@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { stories } from "../data/stories";
-import { levelSteps, rankLabel, rankOf, unreadStories } from "../lib/deck";
+import { levelPlan, levelSteps, rankLabel } from "../lib/deck";
 import { useStore } from "../lib/store";
 import { Sheet } from "./Sheet";
 
@@ -12,20 +12,23 @@ export function LevelSheet({ onClose }: { onClose: () => void }) {
   const [index, setIndex] = useState(() => Math.max(0, steps.findLastIndex((r) => r <= state.startRank)));
   const rank = steps[index];
 
-  const unread = unreadStories(stories, state);
-  const easier = unread.filter((s) => rankOf(s) < rank).length;
-  const next = unread.find((s) => rankOf(s) >= rank);
+  const { returning, easier, next } = levelPlan(stories, state, rank);
+  const plural = (n: number, one: string, many: string) => `${n} ${n === 1 ? one : many}`;
+  const notes = [
+    returning.length > 0 && `${plural(returning.length, "skipped story comes", "skipped stories come")} back`,
+    easier > 0 && `${plural(easier, "easier story stays", "easier stories stay")} unread`,
+  ].filter(Boolean);
 
   return (
     <Sheet label="Choose your level" onClose={onClose}>
       <div className="lv">
         <h2 className="pill-title">Choose your level</h2>
         <p className="muted">
-          Start reading where it feels right. Slide up to jump ahead, or back down for easier stories. Nothing is lost: stories you jump over stay unread.
+          Start reading where it feels right. Slide up to jump ahead, or back down for easier stories. Nothing is lost: stories you jump over stay unread, and skipped ones come back when you slide down.
         </p>
         <div className="lv-now">
           <strong>{rankLabel(rank)}</strong>
-          <span>{easier === 0 ? "No stories are jumped over" : `${easier} easier ${easier === 1 ? "story stays" : "stories stay"} unread`}</span>
+          <span>{notes.length ? notes.join(" · ") : "No stories are jumped over"}</span>
         </div>
         <input
           id="level-slider"
@@ -63,7 +66,7 @@ export function LevelSheet({ onClose }: { onClose: () => void }) {
         <button
           className="btn btn-primary btn-block"
           onClick={() => {
-            dispatch({ type: "setStartRank", rank: index === 0 ? 0 : rank });
+            dispatch({ type: "setStartRank", rank: index === 0 ? 0 : rank, unskip: returning.map((s) => s.id) });
             onClose();
           }}
         >

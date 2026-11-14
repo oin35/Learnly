@@ -46,7 +46,8 @@ export type Action =
   | { type: "pillSeen"; id: string }
   | { type: "markRead"; id: string; now: number }
   | { type: "toggleFavPill"; id: string }
-  | { type: "setStartRank"; rank: number }
+  /** Choose the level to read at; `unskip` = skipped stories that come back into the deck with it */
+  | { type: "setStartRank"; rank: number; unskip?: string[] }
   | { type: "replace"; state: AppState }
   | { type: "reset" };
 
@@ -124,8 +125,12 @@ export function reducer(state: AppState, action: Action): AppState {
       };
     case "pillSeen":
       return state.pillsSeen.includes(action.id) ? state : { ...state, pillsSeen: [...state.pillsSeen, action.id] };
-    case "setStartRank":
-      return state.startRank === action.rank ? state : { ...state, startRank: action.rank };
+    case "setStartRank": {
+      const back = action.unskip ?? [];
+      const skipped = state.skipped.filter((id) => !back.includes(id));
+      if (state.startRank === action.rank && skipped.length === state.skipped.length) return state;
+      return { ...state, startRank: action.rank, skipped };
+    }
     case "replace":
       return action.state;
     case "reset":
