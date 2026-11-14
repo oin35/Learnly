@@ -199,3 +199,17 @@ describe("difficulty ruler", () => {
     expect(tickStates(2.5).slice(0, 4)).toEqual(["full", "full", "half", "off"]);
   });
 });
+
+describe("updating to a newer build", () => {
+  it("reloads for a newer build, once", async () => {
+    const { shouldReload, freshUrl, BUILD } = await import("./update");
+    expect(BUILD).not.toBe("");
+    expect(shouldReload("a", "b", null)).toBe(true);
+    expect(shouldReload("a", "a", null)).toBe(false); // already up to date
+    expect(shouldReload("a", "b", "b")).toBe(false); // already tried: never loop
+    expect(shouldReload("a", undefined, null)).toBe(false); // no version file (e.g. inside claude.ai)
+    expect(shouldReload("a", "", null)).toBe(false);
+    expect(freshUrl("https://x.test/Learnly/", "2026-11-14T12:30:00.000Z")).toBe("https://x.test/Learnly/?v=20261114123000000");
+    expect(freshUrl("https://x.test/Learnly/?v=1#top", "2")).toBe("https://x.test/Learnly/?v=2#top");
+  });
+});
