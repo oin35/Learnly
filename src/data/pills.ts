@@ -443,6 +443,38 @@ export const pills: Pill[] = [
     ],
     tip: "If you do not know what to say after a nice evening, say: Het was gezellig!",
   },
+  {
+    id: "sepperf",
+    title: "Separable verbs in the past",
+    summary: "uitchecken → uitgecheckt",
+    points: [
+      "A separable verb puts ge- between the prefix and the verb in the participle: uitchecken → uitgecheckt, opstaan → opgestaan, aankomen → aangekomen.",
+      "The participle still goes to the end: Gisteren heeft Tom niet uitgecheckt.",
+      "Compare the present tense, where the prefix goes to the end: Tom checkt uit.",
+      "Which helper? uitchecken uses hebben; verbs of movement (aankomen) use zijn.",
+    ],
+    examples: [
+      { nl: "Hij heeft ingecheckt.", en: "He has checked in." },
+      { nl: "Ik ben vroeg opgestaan.", en: "I got up early." },
+    ],
+    tip: "prefix + ge + stem: in-ge-checkt, uit-ge-checkt, op-ge-staan.",
+  },
+  {
+    id: "idiom",
+    title: "Sayings (idioms)",
+    summary: "Doe maar gewoon, dan doe je al gek genoeg",
+    points: [
+      "An idiom does not mean what the words say. You learn the whole phrase as one piece.",
+      "“Doe maar gewoon, dan doe je al gek genoeg” literally: do just normal, then you already do crazy enough. It means: act normal, do not show off.",
+      "Dutch people use it to say that modest and normal is already good.",
+      "Learn idioms like words: together with an example and a situation.",
+    ],
+    examples: [
+      { nl: "Doe maar gewoon.", en: "Just act normal." },
+      { nl: "Dat is gewoon lekker.", en: "That is simply nice." },
+    ],
+    tip: "Do not translate an idiom word for word; learn its meaning.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

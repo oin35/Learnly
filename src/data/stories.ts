@@ -825,4 +825,84 @@ export const stories: Story[] = [
       { q: "Which sentence is correct?", options: ["Straks gaan ze zingen.", "Straks ze gaan zingen.", "Straks gaan zingen ze."], answer: 0 },
     ],
   },
+  {
+    id: "met-de-trein",
+    title: "Met de trein",
+    titleEn: "By train",
+    emoji: "🚆",
+    topic: "Everyday life",
+    level: "A1",
+    difficulty: 9.5,
+    insight: {
+      title: "Check in, check out",
+      text: "On Dutch trains you check in at a gate or a card reader before you travel and check out when you arrive. This works with a public transport card (OV-chipkaart) and, nowadays, also with a contactless bank card or phone (OVpay). Use the same card or device both times: if you forget to check out, you pay extra.",
+    },
+    intro: {
+      words: ["poort", "pas", "reis", "checken", "vergeten"],
+      pills: ["sep", "sepperf"],
+    },
+    paragraphs: [
+      {
+        nl: "Vandaag gaat Tom met de trein naar Rotterdam. Hij heeft geen papieren kaartje, maar een pas. Eerst loopt hij naar de poort.",
+        en: "Today Tom is going to Rotterdam by train. He has no paper ticket, but a card. First he walks to the gate.",
+      },
+      {
+        nl: "{{Tom checkt in bij de poort.|sep}} Dat moet je altijd doen: je checkt in voor de reis en je checkt uit na de reis.",
+        en: "Tom checks in at the gate. You always have to do that: you check in before the journey and you check out after the journey.",
+      },
+      {
+        nl: "{{Gisteren heeft Tom niet uitgecheckt,|sepperf}} dus hij heeft te veel betaald. Dat is niet goed. Vandaag gaat hij dat niet vergeten.",
+        en: "Yesterday Tom did not check out, so he paid too much. That is not good. Today he is not going to forget it.",
+      },
+      {
+        nl: "Daarna komt de trein in Rotterdam aan. Tom checkt uit en loopt naar buiten. Hij is blij, want nu heeft hij alles goed gedaan.",
+        en: "Then the train arrives in Rotterdam. Tom checks out and walks outside. He is happy, because now he has done everything right.",
+      },
+    ],
+    quiz: [
+      { q: "What does “uitchecken” mean in “Tom checkt uit”?", options: ["to check out", "to check in", "to pay"], answer: 0 },
+      { q: "Which word fits? “Gisteren heeft Tom niet ___.”", options: ["uitgecheckt", "gecheckt uit", "uitchecken"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Vandaag gaat hij dat niet vergeten.", "Vandaag hij gaat dat niet vergeten.", "Vandaag gaat hij niet dat vergeten."], answer: 0 },
+    ],
+  },
+  {
+    id: "doe-maar-gewoon",
+    title: "Doe maar gewoon",
+    titleEn: "Just act normal",
+    emoji: "👔",
+    topic: "Everyday life",
+    level: "A1",
+    difficulty: 10,
+    insight: {
+      title: "“Doe maar gewoon”: don't show off",
+      text: "A famous Dutch saying is “Doe maar gewoon, dan doe je al gek genoeg”: just act normal, that is crazy enough. It reflects a value that many Dutch people share: be modest and do not try to stand out too much.",
+    },
+    intro: {
+      words: ["baan", "collega", "pak", "gewoon", "gek"],
+      pills: ["idiom", "perf"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom heeft een nieuwe baan. Vandaag is zijn eerste dag. {{Hij heeft een pak en een stropdas gekocht.|perf}}",
+        en: "Tom has a new job. Today is his first day. He has bought a suit and a tie.",
+      },
+      {
+        nl: "Tom trekt zijn pak en zijn stropdas aan. Op kantoor ziet hij zijn collega's. Zij dragen een spijkerbroek en een trui.",
+        en: "Tom puts on his suit and his tie. At the office he sees his colleagues. They wear jeans and a sweater.",
+      },
+      {
+        nl: "Een collega zegt: \"Welkom! {{Doe maar gewoon, dan doe je al gek genoeg.|idiom}}\" Tom lacht, maar hij is een beetje rood.",
+        en: "A colleague says: \"Welcome! Just act normal, that is crazy enough.\" Tom laughs, but he is a little red in the face.",
+      },
+      {
+        nl: "Tom doet zijn stropdas af. Daarna drinken ze samen koffie. Morgen komt hij in een spijkerbroek.",
+        en: "Tom takes off his tie. After that they drink coffee together. Tomorrow he will come in jeans.",
+      },
+    ],
+    quiz: [
+      { q: "What does “gewoon” mean in “Doe maar gewoon”?", options: ["normal", "special", "crazy"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Tom heeft een pak en een stropdas gekocht.", "Tom heeft gekocht een pak en een stropdas.", "Tom gekocht heeft een pak en een stropdas."], answer: 0 },
+      { q: "What does “Doe maar gewoon, dan doe je al gek genoeg” tell Tom?", options: ["Act normal, do not show off", "Dress as fancy as you can", "Work harder"], answer: 0 },
+    ],
+  },
 ];
