@@ -475,6 +475,38 @@ export const pills: Pill[] = [
     ],
     tip: "Do not translate an idiom word for word; learn its meaning.",
   },
+  {
+    id: "partirr",
+    title: "Irregular participles",
+    summary: "gelopen · gezien · gehad · gedragen",
+    points: [
+      "Many common verbs have an irregular participle. You must learn them: zien → gezien, lopen → gelopen, hebben → gehad, dragen → gedragen, drinken → gedronken, gaan → gegaan.",
+      "They usually end in -en, not in -t or -d: gelopen, gezien, gegeten, gekomen, genomen.",
+      "The participle goes to the end: Ze hebben rode tulpen gezien.",
+      "Regular participles end in -t or -d: gemaakt, gewerkt, betaald.",
+    ],
+    examples: [
+      { nl: "Ik heb een film gezien.", en: "I have seen a film." },
+      { nl: "Hij heeft veel gelopen.", en: "He has walked a lot." },
+    ],
+    tip: "Learn irregular verbs in three parts: zien – zag – gezien. For now the last part (the participle) is the one you need.",
+  },
+  {
+    id: "hebzijn",
+    title: "Hebben or zijn?",
+    summary: "ik heb gelopen · ik ben gegaan",
+    points: [
+      "Most verbs use hebben in the perfect: Tom heeft een zeehond gezien. Ze hebben een gids gehad.",
+      "Verbs of going somewhere or changing use zijn: gaan, komen, vertrekken, aankomen: Ze zijn naar de Waddenzee gegaan.",
+      "The verb zijn itself uses zijn: Ik ben op school geweest.",
+      "If you are unsure: ask yourself whether someone moves from one place to another. If yes, use zijn.",
+    ],
+    examples: [
+      { nl: "Ik ben naar huis gegaan.", en: "I went home." },
+      { nl: "Ik heb koffie gedronken.", en: "I drank coffee." },
+    ],
+    tip: "Going somewhere = zijn. Doing something = hebben.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

@@ -905,4 +905,84 @@ export const stories: Story[] = [
       { q: "What does “Doe maar gewoon, dan doe je al gek genoeg” tell Tom?", options: ["Act normal, do not show off", "Dress as fancy as you can", "Work harder"], answer: 0 },
     ],
   },
+  {
+    id: "tulpen-in-de-keukenhof",
+    title: "Tulpen in de Keukenhof",
+    titleEn: "Tulips in the Keukenhof",
+    emoji: "🌷",
+    topic: "Nature",
+    level: "A2",
+    difficulty: 1,
+    insight: {
+      title: "The Keukenhof: a spring garden",
+      text: "The Keukenhof, near Lisse, is a garden that is open for only about eight weeks each spring (in 2026 from 19 March to 10 May). Millions of flower bulbs are planted for it, so April is a good time to see tulips.",
+    },
+    intro: {
+      words: ["tulp", "miljoen", "geel", "tulpenbol", "lopen"],
+      pills: ["partirr", "perf"],
+    },
+    paragraphs: [
+      {
+        nl: "Vorige week zijn Tom en Lisa naar de Keukenhof gegaan. Dat is een tuin met miljoenen tulpen.",
+        en: "Last week Tom and Lisa went to the Keukenhof. That is a garden with millions of tulips.",
+      },
+      {
+        nl: "{{Ze hebben rode, gele en roze tulpen gezien.|partirr}} Ze hebben twee uur gelopen.",
+        en: "They saw red, yellow and pink tulips. They walked for two hours.",
+      },
+      {
+        nl: "{{Lisa heeft veel foto's gemaakt.|perf}} Tom heeft een zak tulpenbollen gekocht.",
+        en: "Lisa took many photos. Tom bought a bag of tulip bulbs.",
+      },
+      {
+        nl: "Daarna hebben ze koffie gedronken. Om vijf uur zijn ze naar huis gegaan.",
+        en: "After that they drank coffee. At five o'clock they went home.",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits? “Ze hebben twee uur ___.”", options: ["gelopen", "gelopt", "gelopend"], answer: 0 },
+      { q: "What does “tulpenbollen” mean in “een zak tulpenbollen”?", options: ["tulip bulbs", "tulip petals", "tulip trees"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Om vijf uur zijn ze naar huis gegaan.", "Om vijf uur hebben ze naar huis gegaan.", "Om vijf uur zijn ze gegaan naar huis."], answer: 0 },
+    ],
+  },
+  {
+    id: "wadlopen",
+    title: "Wadlopen",
+    titleEn: "Mudflat walking",
+    emoji: "🥾",
+    topic: "Nature",
+    level: "A2",
+    difficulty: 1.5,
+    insight: {
+      title: "The Wadden Sea: walking on the seabed",
+      text: "The Wadden Sea in the north is a UNESCO World Heritage Site (the Dutch and German parts since 2009). At low tide the sea floor falls dry and people go mudflat walking (wadlopen). Go with a guide: the tide comes back quickly.",
+    },
+    intro: {
+      words: ["eb", "bodem", "gids", "gevaarlijk", "zeehond"],
+      pills: ["hebzijn", "partirr"],
+    },
+    paragraphs: [
+      {
+        nl: "{{Gisteren zijn Tom en Lisa naar de Waddenzee gegaan.|hebzijn}} Bij eb is het water weg. Dan kun je op de bodem lopen.",
+        en: "Yesterday Tom and Lisa went to the Wadden Sea. At low tide the water is gone. Then you can walk on the sea floor.",
+      },
+      {
+        nl: "Ze hebben een gids gehad, want het is gevaarlijk zonder gids. Het water komt snel terug.",
+        en: "They had a guide, because it is dangerous without a guide. The water comes back quickly.",
+      },
+      {
+        nl: "{{Ze hebben oude schoenen gedragen,|partirr}} want de bodem is nat. Ze hebben ver gelopen.",
+        en: "They wore old shoes, because the sea floor is wet. They walked far.",
+      },
+      {
+        nl: "Tom heeft een zeehond gezien. Lisa heeft een foto gemaakt. Ze zijn moe, maar blij.",
+        en: "Tom saw a seal. Lisa took a photo. They are tired, but happy.",
+      },
+    ],
+    quiz: [
+      { q: "What does “eb” mean in “Bij eb is het water weg”?", options: ["low tide", "high tide", "a storm"], answer: 0 },
+      { q: "Which word fits? “Tom heeft een zeehond ___.”", options: ["gezien", "gezeen", "gezet"], answer: 0 },
+      { q: "Which word fits? “Gisteren ___ ze naar de Waddenzee gegaan.”", options: ["zijn", "hebben", "heeft"], answer: 0 },
+    ],
+  },
 ];

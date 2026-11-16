@@ -29,8 +29,8 @@ What a story at each step may contain (guide: adjust with research and common se
 | A1 5–6 | 160–180 | 5–11 words | question words (waarom, wanneer, hoe laat), simple comparisons (groter dan), ik ga + infinitive for plans, more dialogue, larger vocabulary |
 | A1 7–8 | 180 | 6–12 words | first perfect-tense chunks (ik heb gegeten, ik ben geweest), omdat/dus in short sentences, time words (gisteren, vorige week) |
 | A1 9–10 | 180 | up to ~14 words | short connected paragraphs mixing present, perfect and gaan-future, idioms glossed (gezellig), two cultural details |
-| A2 1–2 | 180 | 6–12 words | the perfect tense with hebben (ik heb gewerkt), common irregular participles, gisteren / vorige week / vroeger |
-| A2 3–4 | 180 | 7–13 words | the perfect with zijn (ik ben gegaan), past of zijn and hebben (was, had), the future with gaan and zullen, comparatives and superlatives |
+| A2 1–2 | 100–130 | 6–12 words | consolidate the perfect (already met at A1 7–10): hebben or zijn as helper, common irregular participles (gelopen, gezien, gehad, gedragen), gisteren / vorige week / vroeger |
+| A2 3–4 | 130–160 | 7–13 words | simple past of zijn and hebben (was, waren, had, hadden), the future with gaan and zullen, superlatives (de grootste), er + preposition |
 | A2 5–6 | 180 | 7–14 words | past of the modals (kon, wilde, moest), **zou / zouden** for wishes, polite requests and advice (should/would: *Ik zou graag…*, *Je zou moeten…*), reflexive verbs, te + infinitive |
 | A2 7–8 | 180 | 8–15 words | **als … dan** (if … then: *Als het regent, blijf ik thuis*), omdat / dat / toen / terwijl clauses (verb at the end), die / dat as relative words |
 | A2 9–10 | 180 | up to ~16 words | short connected stories mixing past, present and future, opinions, plans and wishes, indirect questions, idioms |
