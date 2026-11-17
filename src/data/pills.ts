@@ -507,6 +507,38 @@ export const pills: Pill[] = [
     ],
     tip: "Going somewhere = zijn. Doing something = hebben.",
   },
+  {
+    id: "vroeger",
+    title: "Talking about the past: vroeger, geleden",
+    summary: "vroeger · vorige week · een jaar geleden",
+    points: [
+      "vroeger = in the past, in the old days (not “early”: that is vroeg).",
+      "Other time words for the past: gisteren, vorige week, vorig jaar, drie jaar geleden.",
+      "If the sentence starts with a time word, the verb comes second: Vroeger heeft hij veel geschaatst.",
+      "With a perfect tense the participle goes to the end: Vorige week hebben we gewerkt.",
+    ],
+    examples: [
+      { nl: "Vroeger heb ik in een klein dorp gewoond.", en: "In the past I lived in a small village." },
+      { nl: "Drie jaar geleden heb ik Nederlands geleerd.", en: "Three years ago I learned Dutch." },
+    ],
+    tip: "geleden always comes after the time: twee jaar geleden (two years ago).",
+  },
+  {
+    id: "talen",
+    title: "Languages",
+    summary: "Ik spreek Nederlands · in het Engels",
+    points: [
+      "Languages are written with a capital letter: Nederlands, Engels, Frans, Duits.",
+      "You can speak a language without an article: Ik spreek Engels. Tom praat Nederlands.",
+      "After in, use het: in het Nederlands, in het Engels.",
+      "A person is different from the language: de Nederlander (a Dutch person), het Nederlands (the language).",
+    ],
+    examples: [
+      { nl: "Ik leer Nederlands.", en: "I am learning Dutch." },
+      { nl: "Spreekt u Engels?", en: "Do you speak English?" },
+    ],
+    tip: "Ask politely: Kunnen we in het Nederlands praten, alstublieft?",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

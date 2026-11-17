@@ -985,4 +985,84 @@ export const stories: Story[] = [
       { q: "Which word fits? “Gisteren ___ ze naar de Waddenzee gegaan.”", options: ["zijn", "hebben", "heeft"], answer: 0 },
     ],
   },
+  {
+    id: "de-elfstedentocht",
+    title: "De Elfstedentocht",
+    titleEn: "The Eleven Cities Tour",
+    emoji: "⛸️",
+    topic: "Nature",
+    level: "A2",
+    difficulty: 2,
+    insight: {
+      title: "The Elfstedentocht: skating through Friesland",
+      text: "The Elfstedentocht is a skating tour of about 200 km along eleven cities in Friesland. It is held only when the natural ice is thick enough, so it has taken place just 15 times since 1909. The most recent one was in 1997.",
+    },
+    intro: {
+      words: ["schaatsen", "ijs", "tocht", "dik", "winter"],
+      pills: ["vroeger", "hebzijn"],
+    },
+    paragraphs: [
+      {
+        nl: "Lisa vertelt Tom over de Elfstedentocht. Mensen schaatsen dan tweehonderd kilometer door Friesland.",
+        en: "Lisa tells Tom about the Eleven Cities Tour. People then skate two hundred kilometres through Friesland.",
+      },
+      {
+        nl: "{{Vroeger heeft de opa van Lisa veel geschaatst.|vroeger}} Hij heeft de tocht gedaan.",
+        en: "In the past Lisa's grandfather skated a lot. He did the tour.",
+      },
+      {
+        nl: "Het ijs moet dik zijn. {{Daarom is er niet elke winter een Elfstedentocht geweest.|hebzijn}}",
+        en: "The ice must be thick. That is why there has not been an Eleven Cities Tour every winter.",
+      },
+      {
+        nl: "Tom en Lisa hopen op een koude winter, want ze willen graag een tocht zien.",
+        en: "Tom and Lisa hope for a cold winter, because they would love to see a tour.",
+      },
+    ],
+    quiz: [
+      { q: "What does “vroeger” mean in “Vroeger heeft hij veel geschaatst”?", options: ["in the past", "early", "soon"], answer: 0 },
+      { q: "Which word fits? “De opa van Lisa heeft veel ___.”", options: ["geschaatst", "geschaat", "schaatsen"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Daarom is er niet elke winter een tocht geweest.", "Daarom heeft er niet elke winter een tocht geweest.", "Daarom is er niet elke winter geweest een tocht."], answer: 0 },
+    ],
+  },
+  {
+    id: "nederlands-oefenen",
+    title: "Nederlands oefenen",
+    titleEn: "Practising Dutch",
+    emoji: "💬",
+    topic: "Language",
+    level: "A2",
+    difficulty: 2.5,
+    insight: {
+      title: "Why the Dutch often answer in English",
+      text: "The Netherlands came first of 123 countries in the EF English Proficiency Index 2025, a test taken by adults who chose to take it. English is taught from primary school, so many Dutch people switch to English when they hear an accent. For learners it is worth saying politely that you want to practise Dutch.",
+    },
+    intro: {
+      words: ["oefenen", "antwoorden", "engels", "ober", "plan"],
+      pills: ["talen", "perf"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom wil Nederlands oefenen. Gisteren is hij naar een café gegaan.",
+        en: "Tom wants to practise Dutch. Yesterday he went to a café.",
+      },
+      {
+        nl: "{{Hij heeft in het Nederlands gevraagd,|perf}} maar de ober heeft in het Engels geantwoord.",
+        en: "He asked in Dutch, but the waiter answered in English.",
+      },
+      {
+        nl: "{{Veel Nederlanders spreken Engels en leren het op school.|talen}} Tom is niet boos, maar hij wil liever Nederlands praten.",
+        en: "Many Dutch people speak English and learn it at school. Tom is not angry, but he would rather speak Dutch.",
+      },
+      {
+        nl: "Nu heeft Tom een plan: hij blijft in het Nederlands praten.",
+        en: "Now Tom has a plan: he keeps speaking Dutch.",
+      },
+    ],
+    quiz: [
+      { q: "What does “oefenen” mean in “Tom wil Nederlands oefenen”?", options: ["to practise", "to forget", "to translate"], answer: 0 },
+      { q: "Which word fits? “De ober heeft in het Engels ___.”", options: ["geantwoord", "geantwoordt", "antwoorden"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Tom heeft in het Nederlands gevraagd.", "Tom heeft in het Nederlands vragen.", "Tom heeft in Nederlands het gevraagd."], answer: 0 },
+    ],
+  },
 ];
