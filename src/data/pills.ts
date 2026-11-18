@@ -539,6 +539,38 @@ export const pills: Pill[] = [
     ],
     tip: "Ask politely: Kunnen we in het Nederlands praten, alstublieft?",
   },
+  {
+    id: "waswas",
+    title: "Was and had: the past of zijn and hebben",
+    summary: "ik was · wij waren · ik had · wij hadden",
+    points: [
+      "zijn in the past: ik was, jij was, hij was, wij waren, zij waren.",
+      "hebben in the past: ik had, jij had, hij had, wij hadden, zij hadden.",
+      "One person = was / had. More than one = waren / hadden.",
+      "Use was and had for descriptions in the past: Het museum was druk. Ze had een kaartje.",
+    ],
+    examples: [
+      { nl: "Het schilderij was klein.", en: "The painting was small." },
+      { nl: "We hadden een mooie dag.", en: "We had a nice day." },
+    ],
+    tip: "For most other verbs people use the perfect (ik heb gewerkt), but was/had are used all the time.",
+  },
+  {
+    id: "sup",
+    title: "The most: de duurste, het lekkerst",
+    summary: "groot → groter → het grootst",
+    points: [
+      "Superlative: adjective + -st(e): duur → de duurste, groot → de grootste, oud → de oudste.",
+      "Before a noun use -ste: de duurste kaas. After vinden or zijn use het + -st: Ik vind kaas het lekkerst.",
+      "Comparative (-er) compares two things, superlative (-st) picks the top one.",
+      "Irregular: goed → beter → het best(e), veel → meer → het meest.",
+    ],
+    examples: [
+      { nl: "Dat is de grootste kaas.", en: "That is the biggest cheese." },
+      { nl: "Ik vind de oude kaas het lekkerst.", en: "I think the old cheese is the tastiest." },
+    ],
+    tip: "Short rule: -er for more, -st for most.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

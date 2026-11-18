@@ -1065,4 +1065,84 @@ export const stories: Story[] = [
       { q: "Which sentence is correct?", options: ["Tom heeft in het Nederlands gevraagd.", "Tom heeft in het Nederlands vragen.", "Tom heeft in Nederlands het gevraagd."], answer: 0 },
     ],
   },
+  {
+    id: "het-meisje-met-de-parel",
+    title: "Het meisje met de parel",
+    titleEn: "The girl with the pearl",
+    emoji: "🖼️",
+    topic: "Museums",
+    level: "A2",
+    difficulty: 3,
+    insight: {
+      title: "Girl with a Pearl Earring in The Hague",
+      text: "The famous painting “Girl with a Pearl Earring” was made by Johannes Vermeer around 1665. It hangs in the Mauritshuis in The Hague and is quite small: about 45 by 40 centimetres.",
+    },
+    intro: {
+      words: ["druk", "toerist", "schilderij", "parel", "oor"],
+      pills: ["waswas"],
+    },
+    paragraphs: [
+      {
+        nl: "Vorige maand was Lisa in Den Haag. Ze is naar het Mauritshuis gegaan. Daar hangt een beroemd schilderij.",
+        en: "Last month Lisa was in The Hague. She went to the Mauritshuis. A famous painting hangs there.",
+      },
+      {
+        nl: "{{Het museum was niet groot, maar het was druk.|waswas}} Er waren veel toeristen. Lisa had een kaartje voor twaalf uur.",
+        en: "The museum was not big, but it was busy. There were many tourists. Lisa had a ticket for twelve o'clock.",
+      },
+      {
+        nl: "Het schilderij was klein, maar mooi. {{Het meisje had een parel in haar oor.|waswas}}",
+        en: "The painting was small, but beautiful. The girl had a pearl in her ear.",
+      },
+      {
+        nl: "Lisa heeft lang gekeken. Daarna heeft ze een foto gemaakt.",
+        en: "Lisa looked for a long time. Afterwards she took a photo.",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits (past tense)? “Het museum ___ druk.”", options: ["was", "waren", "hadden"], answer: 0 },
+      { q: "What does “druk” mean in “Het museum was druk”?", options: ["busy", "quiet", "big"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Lisa had een kaartje voor twaalf uur.", "Lisa was een kaartje voor twaalf uur.", "Lisa hadden een kaartje voor twaalf uur."], answer: 0 },
+    ],
+  },
+  {
+    id: "de-kaasmarkt",
+    title: "De kaasmarkt",
+    titleEn: "The cheese market",
+    emoji: "🧀",
+    topic: "Food",
+    level: "A2",
+    difficulty: 3.5,
+    insight: {
+      title: "The Alkmaar cheese market",
+      text: "The cheese market in Alkmaar takes place on Friday mornings, from about 10 to 1 o'clock, from spring until the end of September. The cheese carriers, in white clothes, carry the cheeses; their guild dates back to 1593.",
+    },
+    intro: {
+      words: ["kaasmarkt", "plein", "proeven", "jong", "dragen"],
+      pills: ["sup"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn op vrijdag in Alkmaar. Het is tien uur. Op het plein begint de kaasmarkt.",
+        en: "Tom and Lisa are in Alkmaar on Friday. It is ten o'clock. On the square the cheese market begins.",
+      },
+      {
+        nl: "Mannen in witte kleren dragen grote kazen. Er zijn jonge kazen en oude kazen.",
+        en: "Men in white clothes carry big cheeses. There are young cheeses and old cheeses.",
+      },
+      {
+        nl: "Lisa proeft de jonge kaas. Tom proeft de oude kaas. {{Tom vindt de oude kaas het lekkerst,|sup}} maar Lisa vindt de jonge kaas het lekkerst.",
+        en: "Lisa tastes the young cheese. Tom tastes the old cheese. Tom thinks the old cheese is the tastiest, but Lisa thinks the young cheese is the tastiest.",
+      },
+      {
+        nl: "Tom koopt een groot stuk. {{Dat is de duurste kaas van de markt!|sup}} Lisa lacht.",
+        en: "Tom buys a big piece. That is the most expensive cheese of the market! Lisa laughs.",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits? “Lisa vindt de jonge kaas het ___.”", options: ["lekkerst", "lekker", "lekkere"], answer: 0 },
+      { q: "What does “proeven” mean in “Lisa proeft de jonge kaas”?", options: ["to taste", "to buy", "to carry"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Dat is de duurste kaas van de markt.", "Dat is duurste de kaas van de markt.", "Dat is het duurste kaas van de markt."], answer: 0 },
+    ],
+  },
 ];
