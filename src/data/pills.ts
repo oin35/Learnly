@@ -571,6 +571,38 @@ export const pills: Pill[] = [
     ],
     tip: "Short rule: -er for more, -st for most.",
   },
+  {
+    id: "zullen",
+    title: "Zullen: will and shall",
+    summary: "ik zal · wij zullen · Zal ik …?",
+    points: [
+      "zullen + infinitive at the end talks about the future or a promise: Ik zal meedoen.",
+      "Forms: ik zal, jij zult (or zal), hij zal, wij zullen, zij zullen.",
+      "Zal ik …? is a polite offer: Zal ik twee mutsen kopen? (Shall I buy two hats?)",
+      "In everyday speech Dutch people often use gaan for plans (Ik ga meedoen) or just the present (Morgen doe ik mee).",
+    ],
+    examples: [
+      { nl: "Ik zal je helpen.", en: "I will help you." },
+      { nl: "Zal ik koffie maken?", en: "Shall I make coffee?" },
+    ],
+    tip: "Use Zal ik …? to offer help. It sounds friendly and polite.",
+  },
+  {
+    id: "erprep",
+    title: "Er + preposition: ermee, ernaar",
+    summary: "blij mee → er blij mee",
+    points: [
+      "Dutch does not say “with it” or “at it” for things. It uses er + the preposition: ermee (with it), ernaar (at it, to it), erover (about it), erin (in it).",
+      "met becomes mee: Ik ben er blij mee (I am happy with it).",
+      "In a sentence er and the preposition are often split: Tom kijkt er goed naar.",
+      "For people you keep the pronoun: Ik kijk naar haar. Ik ben blij met hem.",
+    ],
+    examples: [
+      { nl: "Ik ben er blij mee.", en: "I am happy with it." },
+      { nl: "We praten erover.", en: "We talk about it." },
+    ],
+    tip: "Thing → er + preposition. Person → preposition + pronoun.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

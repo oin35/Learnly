@@ -1145,4 +1145,84 @@ export const stories: Story[] = [
       { q: "Which sentence is correct?", options: ["Dat is de duurste kaas van de markt.", "Dat is duurste de kaas van de markt.", "Dat is het duurste kaas van de markt."], answer: 0 },
     ],
   },
+  {
+    id: "de-nieuwjaarsduik",
+    title: "De Nieuwjaarsduik",
+    titleEn: "The New Year's dive",
+    emoji: "🌊",
+    topic: "Calendar",
+    level: "A2",
+    difficulty: 4,
+    insight: {
+      title: "A dive into the North Sea on 1 January",
+      text: "On New Year's Day thousands of people run into the cold North Sea at Scheveningen, wearing orange hats; organisers count roughly 7,000 to 10,000 swimmers. The water is usually about 5 °C. The tradition began in the 1960s (sources say 1960 or 1965), and strong wind can cancel it.",
+    },
+    intro: {
+      words: ["traditie", "graad", "muts", "januari", "duizend"],
+      pills: ["zullen"],
+    },
+    paragraphs: [
+      {
+        nl: "Het is december. Tom en Lisa praten over het nieuwe jaar. Lisa heeft een plan. \"{{Op één januari zullen we in de zee springen!|zullen}}\"",
+        en: "It is December. Tom and Lisa talk about the new year. Lisa has a plan. \"On the first of January we will jump into the sea!\"",
+      },
+      {
+        nl: "Tom lacht. \"In januari? Het water is dan heel koud!\" \"Ja, ongeveer vijf graden,\" zegt Lisa. \"Maar het is een traditie in Scheveningen.\"",
+        en: "Tom laughs. \"In January? The water is very cold then!\" \"Yes, about five degrees,\" says Lisa. \"But it is a tradition in Scheveningen.\"",
+      },
+      {
+        nl: "Duizenden mensen doen mee. Ze dragen allemaal een oranje muts.",
+        en: "Thousands of people take part. They all wear an orange hat.",
+      },
+      {
+        nl: "\"Goed,\" zegt Tom. \"{{Ik zal meedoen,|zullen}} maar daarna wil ik warme chocolademelk.\" Lisa is blij. \"Zal ik twee mutsen kopen?\"",
+        en: "\"OK,\" says Tom. \"I will take part, but afterwards I want hot chocolate.\" Lisa is happy. \"Shall I buy two hats?\"",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits? “Op één januari ___ we in de zee springen.”", options: ["zullen", "zal", "zult"], answer: 0 },
+      { q: "What does “Zal ik twee mutsen kopen?” mean?", options: ["Shall I buy two hats?", "Did I buy two hats?", "Must I buy two hats?"], answer: 0 },
+      { q: "What does “muts” mean in “Ze dragen allemaal een oranje muts”?", options: ["a woolly hat", "a scarf", "a coat"], answer: 0 },
+    ],
+  },
+  {
+    id: "drie-zoenen",
+    title: "Drie zoenen",
+    titleEn: "Three kisses",
+    emoji: "😘",
+    topic: "Everyday life",
+    level: "A2",
+    difficulty: 4.5,
+    insight: {
+      title: "Three kisses or a handshake?",
+      text: "Many Dutch people greet close friends and family with three kisses on the cheek, often right, left, right. People you meet for the first time usually get a handshake. The habit is changing: many younger people do it less than before.",
+    },
+    intro: {
+      words: ["zoen", "ouders", "nerveus", "rechts", "afscheid"],
+      pills: ["erprep"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom gaat voor het eerst naar de ouders van Lisa. Hij is een beetje nerveus.",
+        en: "Tom goes to Lisa's parents for the first time. He is a bit nervous.",
+      },
+      {
+        nl: "De moeder van Lisa geeft Tom een hand. Maar Lisa geeft haar moeder drie zoenen: rechts, links, rechts. {{Tom kijkt er goed naar.|erprep}}",
+        en: "Lisa's mother shakes Tom's hand. But Lisa gives her mother three kisses: right, left, right. Tom watches it closely.",
+      },
+      {
+        nl: "\"Moet ik ook drie zoenen geven?\" vraagt Tom later. \"Nee,\" zegt Lisa. \"Dat doe je met familie en goede vrienden.\"",
+        en: "\"Do I have to give three kisses too?\" Tom asks later. \"No,\" says Lisa. \"You do that with family and good friends.\"",
+      },
+      {
+        nl: "Ze eten taart en drinken koffie. Het is gezellig. Bij het afscheid geeft de moeder van Lisa hem toch drie zoenen! {{Tom is er heel blij mee.|erprep}}",
+        en: "They eat cake and drink coffee. It is cosy. When they say goodbye, Lisa's mother gives him three kisses after all! Tom is very happy with it.",
+      },
+    ],
+    quiz: [
+      { q: "What does “Tom is er heel blij mee” mean?", options: ["Tom is very happy with it", "Tom is very happy with her", "Tom is very happy there"], answer: 0 },
+      { q: "What does “een hand geven” mean in “De moeder van Lisa geeft Tom een hand”?", options: ["to shake hands", "to help", "to wave"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Tom kijkt er goed naar.", "Tom kijkt naar er goed.", "Tom er kijkt goed naar."], answer: 0 },
+    ],
+  },
 ];
