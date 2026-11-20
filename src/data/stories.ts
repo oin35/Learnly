@@ -1225,4 +1225,84 @@ export const stories: Story[] = [
       { q: "Which sentence is correct?", options: ["Tom kijkt er goed naar.", "Tom kijkt naar er goed.", "Tom er kijkt goed naar."], answer: 0 },
     ],
   },
+  {
+    id: "bij-de-huisarts",
+    title: "Bij de huisarts",
+    titleEn: "At the family doctor",
+    emoji: "🩺",
+    topic: "Health",
+    level: "A2",
+    difficulty: 5,
+    insight: {
+      title: "First the huisarts",
+      text: "In the Netherlands you usually go to your family doctor (huisarts) first. To see a specialist or go to hospital you generally need a referral (verwijzing) from the huisarts, except in an emergency; without one, your health insurer may not pay.",
+    },
+    intro: {
+      words: ["huisarts", "afspraak", "hoofdpijn", "verwijzing", "ziekenhuis"],
+      pills: ["zou"],
+    },
+    paragraphs: [
+      {
+        nl: "Lisa heeft al een week hoofdpijn. Ze belt de huisarts. \"{{Ik zou graag een afspraak willen maken,|zou}}\" zegt ze.",
+        en: "Lisa has had a headache for a week. She calls the family doctor. \"I would like to make an appointment,\" she says.",
+      },
+      {
+        nl: "De assistente vraagt naar haar klachten. Lisa vertelt over de hoofdpijn. Ze kan morgen om tien uur komen.",
+        en: "The assistant asks about her complaints. Lisa tells her about the headache. She can come tomorrow at ten o'clock.",
+      },
+      {
+        nl: "De dokter luistert goed. \"{{U zou meer water moeten drinken,|zou}}\" zegt de dokter. \"En u moet minder naar uw telefoon kijken.\"",
+        en: "The doctor listens carefully. \"You should drink more water,\" says the doctor. \"And you must look at your phone less.\"",
+      },
+      {
+        nl: "\"Moet ik naar het ziekenhuis?\" vraagt Lisa. \"Nee,\" zegt de dokter. \"Voor het ziekenhuis heeft u eerst een verwijzing van mij nodig.\"",
+        en: "\"Do I have to go to the hospital?\" asks Lisa. \"No,\" says the doctor. \"For the hospital you first need a referral from me.\"",
+      },
+    ],
+    quiz: [
+      { q: "Which is the polite way to ask?", options: ["Ik zou graag een afspraak willen maken.", "Ik wil nu een afspraak!", "Ik zou een afspraak gemaakt."], answer: 0 },
+      { q: "What does “U zou meer water moeten drinken” mean?", options: ["You should drink more water", "You drank more water", "You can drink more water"], answer: 0 },
+      { q: "What does “verwijzing” mean in “Voor het ziekenhuis heeft u eerst een verwijzing nodig”?", options: ["a referral", "a prescription", "an appointment"], answer: 0 },
+    ],
+  },
+  {
+    id: "stamppot",
+    title: "Stamppot",
+    titleEn: "Stamppot",
+    emoji: "🥔",
+    topic: "Food",
+    level: "A2",
+    difficulty: 5.5,
+    insight: {
+      title: "Stamppot: a Dutch winter dish",
+      text: "Stamppot is potatoes mashed together with vegetables, such as kale (boerenkool), sauerkraut (zuurkool) or carrots and onions (hutspot). It is mostly eaten in winter, often with a smoked sausage (rookworst). Many people make a little well (kuiltje) in it for the gravy.",
+    },
+    intro: {
+      words: ["aardappel", "boerenkool", "rookworst", "kuiltje", "jus"],
+      pills: ["modpast"],
+    },
+    paragraphs: [
+      {
+        nl: "{{Vroeger moest Tom in de winter vaak stamppot eten.|modpast}} {{Hij wilde liever patat.|modpast}}",
+        en: "In the past Tom often had to eat stamppot in winter. He would rather have had chips.",
+      },
+      {
+        nl: "Gisteren mocht Tom bij Lisa eten. Lisa heeft boerenkool met aardappels gekookt, en er was ook een rookworst.",
+        en: "Yesterday Tom was allowed to eat at Lisa's place. Lisa cooked kale with potatoes, and there was also a smoked sausage.",
+      },
+      {
+        nl: "Tom moest lachen. \"Stamppot! Dat moest ik vroeger altijd eten.\" Maar hij heeft het geproefd, en het was heerlijk.",
+        en: "Tom had to laugh. \"Stamppot! I always had to eat that in the past.\" But he tasted it, and it was delicious.",
+      },
+      {
+        nl: "Lisa heeft een kuiltje voor de jus in de stamppot gemaakt. Tom wilde nog een bord.",
+        en: "Lisa made a little well for the gravy in the stamppot. Tom wanted another plate.",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits? “Vroeger ___ Tom vaak stamppot eten.”", options: ["moest", "moet", "moesten"], answer: 0 },
+      { q: "What does “kuiltje” mean in “een kuiltje voor de jus”?", options: ["a little well (hole)", "a spoon", "a slice"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Tom wilde nog een bord.", "Tom wilt nog een bord.", "Tom wilden nog een bord."], answer: 0 },
+    ],
+  },
 ];

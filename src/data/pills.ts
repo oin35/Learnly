@@ -603,6 +603,38 @@ export const pills: Pill[] = [
     ],
     tip: "Thing → er + preposition. Person → preposition + pronoun.",
   },
+  {
+    id: "zou",
+    title: "Would and should: zou",
+    summary: "Ik zou graag … willen · U zou … moeten",
+    points: [
+      "Ik zou graag … willen = I would like to … It is the polite way to ask for something: Ik zou graag een afspraak willen maken.",
+      "U zou … moeten = you should … It is soft, polite advice: U zou meer water moeten drinken.",
+      "Forms: ik zou, jij zou, hij zou, u zou, wij zouden, zij zouden.",
+      "The other verbs go to the end, in the infinitive: zou … willen maken, zou … moeten drinken.",
+    ],
+    examples: [
+      { nl: "Ik zou graag een kopje koffie willen.", en: "I would like a cup of coffee." },
+      { nl: "Je zou eerder naar bed moeten gaan.", en: "You should go to bed earlier." },
+    ],
+    tip: "Ik zou graag … is more polite than Ik wil … Use it on the phone, in shops and with the doctor.",
+  },
+  {
+    id: "modpast",
+    title: "Could, wanted, had to: kon, wilde, moest",
+    summary: "kunnen → kon · willen → wilde · moeten → moest · mogen → mocht",
+    points: [
+      "The past of the modal verbs: ik kon (could), ik wilde (wanted), ik moest (had to), ik mocht (was allowed to).",
+      "Plural: wij konden, wilden, moesten, mochten.",
+      "The other verb stays at the end in the infinitive: Vroeger moest Tom stamppot eten.",
+      "moeten lachen = to have to laugh, can't help laughing: Tom moest lachen.",
+    ],
+    examples: [
+      { nl: "Ik kon niet komen.", en: "I could not come." },
+      { nl: "We mochten lang opblijven.", en: "We were allowed to stay up late." },
+    ],
+    tip: "With a time word in the past (vroeger, gisteren) use kon, wilde, moest, mocht.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));
