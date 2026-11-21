@@ -635,6 +635,38 @@ export const pills: Pill[] = [
     ],
     tip: "With a time word in the past (vroeger, gisteren) use kon, wilde, moest, mocht.",
   },
+  {
+    id: "refl",
+    title: "Reflexive verbs: zich haasten",
+    summary: "ik haast me · zij haast zich",
+    points: [
+      "Some verbs need a word that points back to the subject: zich haasten (to hurry), zich vervelen (to be bored), zich omkleden (to change clothes).",
+      "The forms: ik … me, jij … je, hij/zij … zich, wij … ons, jullie … je, zij … zich.",
+      "The reflexive word comes right after the verb: Ze haast zich. Ik verveel me.",
+      "With a separable verb the prefix still goes to the end: Ze kleedt zich om.",
+    ],
+    examples: [
+      { nl: "Ik haast me naar het station.", en: "I hurry to the station." },
+      { nl: "Wij vervelen ons nooit.", en: "We are never bored." },
+    ],
+    tip: "Learn these verbs with zich: zich haasten, zich vervelen, zich omkleden.",
+  },
+  {
+    id: "te",
+    title: "Te + infinitive",
+    summary: "Je hoeft niet te betalen · om … te fietsen",
+    points: [
+      "After some verbs the next verb gets te: hoeven, proberen, vergeten, beginnen. Tom probeert een hert te zien.",
+      "hoeven is used with niet: Je hoeft niet te betalen (you do not have to pay).",
+      "om … te = to, in order to: Het is heerlijk om door het bos te fietsen.",
+      "te stands right before the infinitive, at the end of the sentence.",
+    ],
+    examples: [
+      { nl: "Ik probeer Nederlands te praten.", en: "I try to speak Dutch." },
+      { nl: "Het is leuk om samen te koken.", en: "It is fun to cook together." },
+    ],
+    tip: "Modal verbs (willen, kunnen, moeten, mogen) do NOT take te: Ik wil fietsen.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

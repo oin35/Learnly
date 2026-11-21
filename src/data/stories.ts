@@ -1305,4 +1305,84 @@ export const stories: Story[] = [
       { q: "Which sentence is correct?", options: ["Tom wilde nog een bord.", "Tom wilt nog een bord.", "Tom wilden nog een bord."], answer: 0 },
     ],
   },
+  {
+    id: "fietsen-in-de-regen",
+    title: "Fietsen in de regen",
+    titleEn: "Cycling in the rain",
+    emoji: "🌧️",
+    topic: "Cycling",
+    level: "A2",
+    difficulty: 6,
+    insight: {
+      title: "More bikes than people",
+      text: "The Netherlands has about 23 million bicycles for roughly 17 to 18 million people, according to the Netherlands Institute for Transport Policy Analysis (KiM). Many people simply cycle in the rain, with a rain suit or a raincoat.",
+    },
+    intro: {
+      words: ["regenpak", "haasten", "omkleden", "vervelen", "niemand"],
+      pills: ["refl"],
+    },
+    paragraphs: [
+      {
+        nl: "Het regent hard. Lisa moet om negen uur op haar werk zijn. {{Ze haast zich.|refl}}",
+        en: "It is raining hard. Lisa has to be at work at nine o'clock. She hurries.",
+      },
+      {
+        nl: "Ze trekt haar regenpak aan en stapt op de fiets. Op straat ziet ze veel mensen op de fiets. Niemand blijft thuis voor een beetje water.",
+        en: "She puts on her rain suit and gets on her bike. In the street she sees many people on bikes. Nobody stays at home for a bit of water.",
+      },
+      {
+        nl: "{{Op haar werk kleedt ze zich om.|refl}} Haar haar is nat, maar ze lacht.",
+        en: "At work she changes her clothes. Her hair is wet, but she laughs.",
+      },
+      {
+        nl: "Tom vraagt: \"Waarom neem je niet de bus?\" \"Met de fiets ben ik sneller,\" zegt Lisa. \"{{En ik verveel me nooit op de fiets.|refl}}\"",
+        en: "Tom asks: \"Why don't you take the bus?\" \"By bike I am faster,\" says Lisa. \"And I am never bored on the bike.\"",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits? “Ik verveel ___ nooit op de fiets.”", options: ["me", "zich", "ons"], answer: 0 },
+      { q: "What does “Ze haast zich” mean?", options: ["She hurries", "She rests", "She waits"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Op haar werk kleedt ze zich om.", "Op haar werk ze kleedt zich om.", "Op haar werk kleedt zich ze om."], answer: 0 },
+    ],
+  },
+  {
+    id: "de-witte-fietsen",
+    title: "De witte fietsen",
+    titleEn: "The white bicycles",
+    emoji: "🦌",
+    topic: "Nature",
+    level: "A2",
+    difficulty: 6.5,
+    insight: {
+      title: "Free white bikes in De Hoge Veluwe",
+      text: "In De Hoge Veluwe National Park you pay for the park ticket, and then you can use the white bicycles for free. You cannot book or lock them. The Kröller-Müller Museum inside the park needs its own ticket.",
+    },
+    intro: {
+      words: ["ingang", "hoeven", "proberen", "hert", "grappig"],
+      pills: ["te"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn in het Nationaal Park De Hoge Veluwe. Bij de ingang staan veel witte fietsen.",
+        en: "Tom and Lisa are in De Hoge Veluwe National Park. At the entrance there are many white bikes.",
+      },
+      {
+        nl: "{{Je hoeft niet te betalen voor de fietsen,|te}} maar je hebt wel een kaartje voor het park nodig.",
+        en: "You do not have to pay for the bikes, but you do need a ticket for the park.",
+      },
+      {
+        nl: "{{Het is heerlijk om door het bos te fietsen.|te}} Tom probeert een hert te zien, maar hij ziet alleen bomen.",
+        en: "It is lovely to cycle through the forest. Tom tries to see a deer, but he only sees trees.",
+      },
+      {
+        nl: "Je mag een witte fiets niet op slot zetten. Dat vindt Tom grappig. Voor het museum in het park moeten ze een extra kaartje kopen.",
+        en: "You may not lock a white bike. Tom thinks that is funny. For the museum in the park they have to buy an extra ticket.",
+      },
+    ],
+    quiz: [
+      { q: "Which sentence is correct?", options: ["Het is heerlijk om door het bos te fietsen.", "Het is heerlijk om door het bos fietsen.", "Het is heerlijk te om door het bos fietsen."], answer: 0 },
+      { q: "Which word fits? “Je hoeft niet ___ betalen.”", options: ["te", "om", "voor"], answer: 0 },
+      { q: "What does “hert” mean in “Tom probeert een hert te zien”?", options: ["a deer", "a bird", "a horse"], answer: 0 },
+    ],
+  },
 ];
