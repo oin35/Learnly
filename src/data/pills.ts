@@ -667,6 +667,38 @@ export const pills: Pill[] = [
     ],
     tip: "Modal verbs (willen, kunnen, moeten, mogen) do NOT take te: Ik wil fietsen.",
   },
+  {
+    id: "als",
+    title: "If … then: als … dan",
+    summary: "Als het regent, blijf ik thuis",
+    points: [
+      "als = if or when. In the als part the verb goes to the END: als het regent.",
+      "After the comma the main verb comes FIRST, then the subject: Als het regent, blijf ik thuis.",
+      "You can add dan at the start of the second part: Als je het verzoek krijgt, dan betaal je.",
+      "If the als part comes second, the order is normal: Ik blijf thuis als het regent.",
+    ],
+    examples: [
+      { nl: "Als ik tijd heb, kom ik.", en: "If I have time, I will come." },
+      { nl: "Als het mooi weer is, dan fietsen we.", en: "If the weather is nice, then we cycle." },
+    ],
+    tip: "Als … verb, VERB + subject: Als het regent, blijf ik thuis.",
+  },
+  {
+    id: "dat",
+    title: "That: dat + verb at the end",
+    summary: "Ik denk dat het klopt",
+    points: [
+      "dat = that. It starts a part of the sentence in which the verb goes to the END: Ze legt uit dat ge jij betekent.",
+      "It often comes after verbs like zeggen, denken, uitleggen, weten, blij zijn: Tom is blij dat het hetzelfde is.",
+      "With two verbs both go to the end: Tom dacht dat hij alles zou begrijpen.",
+      "Do not confuse it with dat = that (this thing): Dat is mooi.",
+    ],
+    examples: [
+      { nl: "Ik weet dat je moe bent.", en: "I know that you are tired." },
+      { nl: "Hij zegt dat de trein laat is.", en: "He says that the train is late." },
+    ],
+    tip: "After dat, wait for the verb: it comes at the very end.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

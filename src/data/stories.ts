@@ -1385,4 +1385,84 @@ export const stories: Story[] = [
       { q: "What does “hert” mean in “Tom probeert een hert te zien”?", options: ["a deer", "a bird", "a horse"], answer: 0 },
     ],
   },
+  {
+    id: "de-rekening",
+    title: "De rekening",
+    titleEn: "The bill",
+    emoji: "🧾",
+    topic: "Everyday life",
+    level: "A2",
+    difficulty: 7,
+    insight: {
+      title: "Going Dutch",
+      text: "When friends eat out in the Netherlands, each person often pays their own share. One person pays the whole bill and then sends the others a payment request on their phone; payment-request apps are a standard part of Dutch life.",
+    },
+    intro: {
+      words: ["rekening", "deel", "betaalverzoek", "handig", "restaurant"],
+      pills: ["als"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa eten met vrienden in een restaurant. Het eten is lekker en het is gezellig.",
+        en: "Tom and Lisa eat with friends in a restaurant. The food is tasty and it is cosy.",
+      },
+      {
+        nl: "Aan het eind komt de ober met de rekening. Tom wil voor iedereen betalen, maar Lisa zegt: \"{{Als we samen eten, betaalt iedereen zijn eigen deel.|als}}\"",
+        en: "At the end the waiter comes with the bill. Tom wants to pay for everyone, but Lisa says: \"When we eat together, everyone pays their own share.\"",
+      },
+      {
+        nl: "Lisa betaalt de hele rekening met haar telefoon. Daarna stuurt ze iedereen een betaalverzoek. {{Als je het verzoek krijgt, dan betaal je je deel met één klik.|als}}",
+        en: "Lisa pays the whole bill with her phone. Then she sends everyone a payment request. If you get the request, then you pay your share with one click.",
+      },
+      {
+        nl: "Tom vindt het een beetje vreemd, maar ook handig. \"Dan hoef je nooit te rekenen,\" zegt hij.",
+        en: "Tom finds it a bit strange, but also handy. \"Then you never have to do the sums,\" he says.",
+      },
+    ],
+    quiz: [
+      { q: "Which sentence is correct?", options: ["Als het regent, blijf ik thuis.", "Als het regent, ik blijf thuis.", "Als regent het, blijf ik thuis."], answer: 0 },
+      { q: "What does “betaalverzoek” mean in “Ze stuurt iedereen een betaalverzoek”?", options: ["a payment request", "a receipt", "a tip"], answer: 0 },
+      { q: "Which word fits? “Als we samen eten, ___ iedereen zijn eigen deel.”", options: ["betaalt", "betalen", "betaal"], answer: 0 },
+    ],
+  },
+  {
+    id: "een-weekend-in-gent",
+    title: "Een weekend in Gent",
+    titleEn: "A weekend in Ghent",
+    emoji: "🇧🇪",
+    topic: "Language",
+    level: "A2",
+    difficulty: 7.5,
+    insight: {
+      title: "One language, two countries",
+      text: "Dutch is also the standard language of Flanders in Belgium. The Netherlands and Belgium look after it together in the Dutch Language Union (Taalunie, since 1980; Suriname joined as an associate member in 2004). The grammar, core vocabulary and spelling are shared; differences lie in pronunciation, some everyday words and the informal “you”: many Flemish speakers say gij or ge instead of jij or je.",
+    },
+    intro: {
+      words: ["dat", "begrijpen", "woord", "vriendin", "hetzelfde"],
+      pills: ["dat"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom is een weekend in Gent, in België. Daar spreken de mensen ook Nederlands.",
+        en: "Tom is in Ghent, in Belgium, for a weekend. There the people also speak Dutch.",
+      },
+      {
+        nl: "{{Tom dacht dat hij alles zou begrijpen,|dat}} maar sommige woorden zijn nieuw.",
+        en: "Tom thought that he would understand everything, but some words are new.",
+      },
+      {
+        nl: "Een vriendin uit Gent zegt: \"Ge zijt welkom!\" Tom vraagt wat dat betekent. {{Ze legt uit dat ge in Vlaanderen vaak jij betekent.|dat}}",
+        en: "A friend from Ghent says: \"You are welcome!\" Tom asks what that means. She explains that in Flanders ge often means jij (you).",
+      },
+      {
+        nl: "Tom is blij dat het grootste deel van de taal hetzelfde is. Hij belt Lisa en zegt: \"Ge zijt de beste!\" Lisa lacht.",
+        en: "Tom is glad that the biggest part of the language is the same. He calls Lisa and says: \"You are the best!\" Lisa laughs.",
+      },
+    ],
+    quiz: [
+      { q: "Which sentence is correct?", options: ["Ze legt uit dat ge vaak jij betekent.", "Ze legt uit dat ge betekent vaak jij.", "Ze legt uit dat betekent ge vaak jij."], answer: 0 },
+      { q: "What does “Ge zijt welkom” mean?", options: ["You are welcome", "You were welcome", "We are welcome"], answer: 0 },
+      { q: "Which word fits? “Tom is blij ___ het grootste deel hetzelfde is.”", options: ["dat", "want", "als"], answer: 0 },
+    ],
+  },
 ];
