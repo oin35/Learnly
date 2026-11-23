@@ -1465,4 +1465,84 @@ export const stories: Story[] = [
       { q: "Which word fits? “Tom is blij ___ het grootste deel hetzelfde is.”", options: ["dat", "want", "als"], answer: 0 },
     ],
   },
+  {
+    id: "het-groene-schip",
+    title: "Het groene schip",
+    titleEn: "The green ship",
+    emoji: "🔬",
+    topic: "Museums",
+    level: "A2",
+    difficulty: 8,
+    insight: {
+      title: "NEMO: a science museum shaped like a ship",
+      text: "NEMO in Amsterdam is the largest science centre in the Netherlands, with hands-on exhibitions on five floors. Its green, ship-like building by the architect Renzo Piano opened in 1997, and from the roof square you have a wide view over the city.",
+    },
+    intro: {
+      words: ["gebouw", "schip", "dak", "uitzicht", "prachtig"],
+      pills: ["toen"],
+    },
+    paragraphs: [
+      {
+        nl: "{{Toen Tom tien jaar was, wilde hij alles over techniek weten.|toen}} Hij mocht met zijn vader naar NEMO.",
+        en: "When Tom was ten years old, he wanted to know everything about technology. He was allowed to go to NEMO with his father.",
+      },
+      {
+        nl: "NEMO is een groot museum in Amsterdam. Het groene gebouw lijkt op een schip.",
+        en: "NEMO is a big museum in Amsterdam. The green building looks like a ship.",
+      },
+      {
+        nl: "Vorige week is Tom er weer heen gegaan, met Lisa. {{Toen ze binnen waren, wilde Lisa alles proberen.|toen}}",
+        en: "Last week Tom went there again, with Lisa. When they were inside, Lisa wanted to try everything.",
+      },
+      {
+        nl: "Daarna zijn ze naar het dak gegaan. Toen ze boven waren, was het uitzicht prachtig. Lisa wilde snel weer terugkomen.",
+        en: "After that they went to the roof. When they were up there, the view was wonderful. Lisa wanted to come back again soon.",
+      },
+    ],
+    quiz: [
+      { q: "Which sentence is correct?", options: ["Toen ze binnen waren, wilde Lisa alles proberen.", "Toen ze waren binnen, wilde Lisa alles proberen.", "Toen ze binnen waren, Lisa wilde alles proberen."], answer: 0 },
+      { q: "What does “Het gebouw lijkt op een schip” mean?", options: ["The building looks like a ship", "The building is on a ship", "The building is next to a ship"], answer: 0 },
+      { q: "Which word fits? “___ Tom tien jaar was, wilde hij alles weten.”", options: ["Toen", "Dan", "Want"], answer: 0 },
+    ],
+  },
+  {
+    id: "patat-of-friet",
+    title: "Patat of friet?",
+    titleEn: "Patat or friet?",
+    emoji: "🍟",
+    topic: "Food",
+    level: "A2",
+    difficulty: 8.5,
+    insight: {
+      title: "Patat in the north, friet in the south",
+      text: "Dutch has two words for French fries: most people in the north say patat, in the south (and in Flanders) friet. In Flanders “patat” simply means a potato. A “patatje oorlog” is fries with mayonnaise, peanut sauce and raw chopped onions; where the name comes from is not clear.",
+    },
+    intro: {
+      words: ["snackbar", "toonbank", "bestellen", "pindasaus", "gebruiken"],
+      pills: ["die"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa staan bij een snackbar. Tom bestelt patat. {{De man die achter de toonbank staat, lacht.|die}}",
+        en: "Tom and Lisa are standing at a snack bar. Tom orders chips. The man who is standing behind the counter laughs.",
+      },
+      {
+        nl: "\"In het zuiden zeggen veel mensen friet,\" zegt de man. \"{{Dat is het woord dat ik ook gebruik.|die}}\"",
+        en: "\"In the south many people say friet,\" says the man. \"That is the word that I use too.\"",
+      },
+      {
+        nl: "Lisa bestelt een patatje oorlog. Dat is patat met mayonaise, pindasaus en uitjes.",
+        en: "Lisa orders a patatje oorlog. That is chips with mayonnaise, peanut sauce and chopped onions.",
+      },
+      {
+        nl: "Tom proeft het. \"Dit is de lekkerste patat die ik ooit heb gegeten!\" zegt hij. Lisa lacht, want hij heeft saus op zijn neus.",
+        en: "Tom tastes it. \"These are the tastiest chips I have ever eaten!\" he says. Lisa laughs, because he has sauce on his nose.",
+      },
+    ],
+    quiz: [
+      { q: "Which word fits? “Dat is het woord ___ ik ook gebruik.”", options: ["dat", "die", "wat"], answer: 0 },
+      { q: "Which word fits? “De man ___ achter de toonbank staat, lacht.”", options: ["die", "dat", "wie"], answer: 0 },
+      { q: "What does “uitjes” mean in “patat met mayonaise, pindasaus en uitjes”?", options: ["chopped onions", "pickles", "cheese"], answer: 0 },
+    ],
+  },
 ];

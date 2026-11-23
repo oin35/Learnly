@@ -699,6 +699,38 @@ export const pills: Pill[] = [
     ],
     tip: "After dat, wait for the verb: it comes at the very end.",
   },
+  {
+    id: "toen",
+    title: "When (in the past): toen",
+    summary: "Toen ik klein was, …",
+    points: [
+      "toen = when, for one moment or period in the past: Toen Tom tien jaar was …",
+      "In the toen part the verb goes to the END: toen ze binnen waren.",
+      "After the comma the main verb comes first: Toen ze binnen waren, wilde Lisa alles proberen.",
+      "For the present or the future use als, not toen: Als ik tijd heb, kom ik.",
+    ],
+    examples: [
+      { nl: "Toen ik jong was, woonde ik in Utrecht.", en: "When I was young, I lived in Utrecht." },
+      { nl: "Toen het regende, bleven we thuis.", en: "When it rained, we stayed at home." },
+    ],
+    tip: "Past moment → toen. Present, future or 'every time' → als.",
+  },
+  {
+    id: "die",
+    title: "Who, which, that: die and dat",
+    summary: "de man die … · het woord dat …",
+    points: [
+      "die and dat can link extra information to a noun (who / which / that).",
+      "Use die after a de-word or a plural: de man die achter de toonbank staat, de patat die ik heb gegeten.",
+      "Use dat after a het-word: het woord dat ik gebruik.",
+      "The verb of that part goes to the END: de man die … staat.",
+    ],
+    examples: [
+      { nl: "De vrouw die daar woont, is lerares.", en: "The woman who lives there is a teacher." },
+      { nl: "Het huis dat ik koop, is oud.", en: "The house that I am buying is old." },
+    ],
+    tip: "de-word → die, het-word → dat. Not wat: “het woord dat”, not “het woord wat”.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));
