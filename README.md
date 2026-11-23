@@ -39,6 +39,8 @@ continues there. No accounts. Creating a key that is already in use is refused. 
 a code derived from it. Storage is a free Supabase project: `docs/supabase-setup.sql` creates one closed table and two functions
 (load / save; only a hash is stored). The project URL and publishable key live in `src/lib/syncConfig.ts`. Sync is hidden on
 the claude.ai page. Logic and merge rules: `src/lib/sync.ts` (tests in `src/lib/sync.test.ts`).
+Free Supabase projects are paused after 7 days without activity, so `.github/workflows/keep-sync-awake.yml` writes and
+reads one tiny keep-alive row every day; if that ever fails, GitHub emails the repository owner.
 
 ## Develop
 
