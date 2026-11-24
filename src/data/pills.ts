@@ -731,6 +731,38 @@ export const pills: Pill[] = [
     ],
     tip: "de-word → die, het-word → dat. Not wat: “het woord dat”, not “het woord wat”.",
   },
+  {
+    id: "indirect",
+    title: "Indirect questions: of, hoe, waar",
+    summary: "Hij vraagt of … · Ik weet niet hoe …",
+    points: [
+      "A question inside a sentence is an indirect question: Tom vraagt of ze weer gaan.",
+      "For a yes/no question use of (whether, if): Hij vraagt of het ver is.",
+      "With a question word keep the word: Ik weet niet hoe hoog hij is. Weet jij waar het station is?",
+      "In the indirect question the verb goes to the END: of ze weer gaan, hoe hoog hij is.",
+    ],
+    examples: [
+      { nl: "Ik weet niet waar mijn fiets is.", en: "I do not know where my bike is." },
+      { nl: "Ze vraagt of je komt.", en: "She asks whether you are coming." },
+    ],
+    tip: "Direct: Is het ver? Indirect: Hij vraagt of het ver is.",
+  },
+  {
+    id: "mening",
+    title: "Giving your opinion",
+    summary: "Ik vind dat … · Volgens mij … · Je hebt gelijk",
+    points: [
+      "Ik vind dat … = I think that … (an opinion). The verb goes to the end: Ik vind dat de trap te lang is.",
+      "Volgens mij … = in my opinion, I think …: Volgens mij ben je moe. (Volgens mij counts as the first part, so the verb comes next.)",
+      "Je hebt gelijk = you are right. Je had gelijk = you were right.",
+      "Ik ben het met je eens = I agree with you. Ik ben het niet met je eens = I disagree.",
+    ],
+    examples: [
+      { nl: "Ik vind dat het een mooie stad is.", en: "I think that it is a beautiful city." },
+      { nl: "Ik ben het met je eens.", en: "I agree with you." },
+    ],
+    tip: "Volgens mij + verb + subject: Volgens mij ben je moe.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));

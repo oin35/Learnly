@@ -1545,4 +1545,84 @@ export const stories: Story[] = [
       { q: "What does “uitjes” mean in “patat met mayonaise, pindasaus en uitjes”?", options: ["chopped onions", "pickles", "cheese"], answer: 0 },
     ],
   },
+  {
+    id: "de-hoogste-berg",
+    title: "De hoogste berg",
+    titleEn: "The highest mountain",
+    emoji: "⛰️",
+    topic: "Provinces",
+    level: "A2",
+    difficulty: 9,
+    insight: {
+      title: "Limburg: hills and a three-country point",
+      text: "The Vaalserberg in Limburg, at about 322 metres, is the highest point of the European Netherlands. Its top is the Drielandenpunt, where the Netherlands, Belgium and Germany meet. The capital of Limburg is Maastricht.",
+    },
+    intro: {
+      words: ["heuvel", "berg", "bijzonder", "plek", "land"],
+      pills: ["indirect"],
+    },
+    paragraphs: [
+      {
+        nl: "Vorige zomer zijn Tom en Lisa naar Limburg gegaan. Dat is een provincie in het zuiden. Er zijn daar heuvels, en dat is in Nederland bijzonder.",
+        en: "Last summer Tom and Lisa went to Limburg. That is a province in the south. There are hills there, and that is special in the Netherlands.",
+      },
+      {
+        nl: "Tom vroeg hoe hoog de hoogste berg van Nederland is. {{Lisa wist niet hoe hoog hij is.|indirect}}",
+        en: "Tom asked how high the highest mountain of the Netherlands is. Lisa did not know how high it is.",
+      },
+      {
+        nl: "Ze zijn met de fiets naar de Vaalserberg gegaan. Hij is meer dan driehonderd meter hoog. Op die plek komen drie landen samen: Nederland, België en Duitsland.",
+        en: "They cycled to the Vaalserberg. It is more than three hundred metres high. At that spot three countries meet: the Netherlands, Belgium and Germany.",
+      },
+      {
+        nl: "Nu zijn ze weer thuis. {{Tom vraagt of ze volgend jaar weer gaan.|indirect}} \"Ja,\" zegt Lisa, \"maar dan gaan we ook naar Maastricht, de hoofdstad van Limburg.\"",
+        en: "Now they are home again. Tom asks whether they will go again next year. \"Yes,\" says Lisa, \"but then we will also go to Maastricht, the capital of Limburg.\"",
+      },
+    ],
+    quiz: [
+      { q: "Which sentence is correct?", options: ["Tom vraagt of ze volgend jaar weer gaan.", "Tom vraagt of gaan ze volgend jaar weer.", "Tom vraagt gaan ze of volgend jaar weer."], answer: 0 },
+      { q: "Which word fits? “Lisa weet niet ___ hoog de berg is.”", options: ["hoe", "of", "wat"], answer: 0 },
+      { q: "What does “Op die plek komen drie landen samen” mean?", options: ["Three countries meet at that spot", "Three countries are far away from there", "Three countries have mountains there"], answer: 0 },
+    ],
+  },
+  {
+    id: "de-domtoren",
+    title: "De Domtoren",
+    titleEn: "The Dom Tower",
+    emoji: "🗼",
+    topic: "Provinces",
+    level: "A2",
+    difficulty: 9.5,
+    insight: {
+      title: "The Dom Tower of Utrecht",
+      text: "The Dom Tower in Utrecht, about 112 metres high, is the tallest church tower in the Netherlands. It was built between 1321 and 1382. A storm in 1674 destroyed part of the church next to it, which was never rebuilt, so the tower now stands on its own. On a guided tour you climb 465 steps.",
+    },
+    intro: {
+      words: ["kerktoren", "trap", "trede", "volgens", "gelijk"],
+      pills: ["mening"],
+    },
+    paragraphs: [
+      {
+        nl: "Lisa woont in Utrecht. In het centrum staat de Domtoren. Dat is de hoogste kerktoren van Nederland.",
+        en: "Lisa lives in Utrecht. In the centre stands the Dom Tower. That is the tallest church tower in the Netherlands.",
+      },
+      {
+        nl: "Vandaag gaan Tom en Lisa naar boven. De trap heeft meer dan vierhonderd treden!",
+        en: "Today Tom and Lisa are going up. The staircase has more than four hundred steps!",
+      },
+      {
+        nl: "Halverwege zegt Tom: \"{{Ik vind dat deze trap te lang is.|mening}}\" Lisa lacht. \"{{Volgens mij ben je gewoon moe!|mening}}\"",
+        en: "Halfway Tom says: \"I think that this staircase is too long.\" Lisa laughs. \"I think you are just tired!\"",
+      },
+      {
+        nl: "Boven is het uitzicht prachtig. Tom ziet de hele stad. \"Je had gelijk,\" zegt hij. \"Het was echt de moeite waard.\"",
+        en: "At the top the view is wonderful. Tom sees the whole city. \"You were right,\" he says. \"It was really worth it.\"",
+      },
+    ],
+    quiz: [
+      { q: "What does “Volgens mij ben je gewoon moe” mean?", options: ["I think you are just tired", "Follow me, you are tired", "You think I am tired"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Ik vind dat deze trap te lang is.", "Ik vind dat deze trap is te lang.", "Ik vind deze trap dat te lang is."], answer: 0 },
+      { q: "What does “Je had gelijk” mean?", options: ["You were right", "You were the same", "You were lucky"], answer: 0 },
+    ],
+  },
 ];
