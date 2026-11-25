@@ -1625,4 +1625,84 @@ export const stories: Story[] = [
       { q: "What does “Je had gelijk” mean?", options: ["You were right", "You were the same", "You were lucky"], answer: 0 },
     ],
   },
+  {
+    id: "een-week-in-zeeland",
+    title: "Een week in Zeeland",
+    titleEn: "A week in Zeeland",
+    emoji: "🏖️",
+    topic: "Provinces",
+    level: "A2",
+    difficulty: 10,
+    insight: {
+      title: "Sunny Zeeland",
+      text: "Zeeland, in the south-west, is often called the sunniest province of the Netherlands. Coastal weather stations such as Vlissingen often count the most hours of sunshine, although the sunniest place differs from year to year and there is no official ranking of provinces.",
+    },
+    intro: {
+      words: ["strand", "huisje", "zwemmen", "zonnig", "zeker"],
+      pills: ["terwijl"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom en Lisa zijn een week in Zeeland. Ze hebben een klein huisje bij het strand gehuurd.",
+        en: "Tom and Lisa are in Zeeland for a week. They have rented a small cottage near the beach.",
+      },
+      {
+        nl: "Het is warm en de zon schijnt. {{Terwijl Lisa op het strand een boek leest, zwemt Tom in de zee.|terwijl}}",
+        en: "It is warm and the sun is shining. While Lisa reads a book on the beach, Tom swims in the sea.",
+      },
+      {
+        nl: "\"Volgens mij is het hier zonniger dan in Utrecht,\" zegt Lisa. Tom vraagt of dat echt waar is. Lisa weet het niet zeker, maar ze heeft gelezen dat Zeeland veel zon heeft.",
+        en: "\"I think it is sunnier here than in Utrecht,\" says Lisa. Tom asks whether that is really true. Lisa does not know for sure, but she has read that Zeeland gets a lot of sun.",
+      },
+      {
+        nl: "Die avond eten ze vis in een restaurant aan zee. \"Volgend jaar wil ik hier weer naartoe,\" zegt Tom. Lisa is het met hem eens.",
+        en: "That evening they eat fish in a restaurant by the sea. \"Next year I want to come here again,\" says Tom. Lisa agrees with him.",
+      },
+    ],
+    quiz: [
+      { q: "Which sentence is correct?", options: ["Terwijl Lisa een boek leest, zwemt Tom in de zee.", "Terwijl Lisa leest een boek, zwemt Tom in de zee.", "Terwijl Lisa een boek leest, Tom zwemt in de zee."], answer: 0 },
+      { q: "What does “terwijl” mean in “Terwijl Lisa een boek leest, zwemt Tom”?", options: ["while", "because", "after"], answer: 0 },
+      { q: "What does “Lisa is het met hem eens” mean?", options: ["Lisa agrees with him", "Lisa is angry with him", "Lisa is alone with him"], answer: 0 },
+    ],
+  },
+  {
+    id: "de-bossche-bol",
+    title: "De Bossche bol",
+    titleEn: "The Bossche bol",
+    emoji: "🍫",
+    topic: "Food",
+    level: "A2",
+    difficulty: 10,
+    insight: {
+      title: "The Bossche bol from Den Bosch",
+      text: "A Bossche bol is a large ball of choux pastry filled with whipped cream and covered in chocolate. It comes from Den Bosch (’s-Hertogenbosch), the capital of North Brabant. Who made the first one is disputed; in 2024 the city celebrated a hundred years of the pastry.",
+    },
+    intro: {
+      words: ["slagroom", "deeg", "hap", "hopen", "wens"],
+      pills: ["wens"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom heeft een nieuwe collega uit Den Bosch. Dat is de hoofdstad van Noord-Brabant.",
+        en: "Tom has a new colleague from Den Bosch. That is the capital of North Brabant.",
+      },
+      {
+        nl: "De collega neemt een doos met Bossche bollen mee naar kantoor. Een Bossche bol is een grote bal van deeg met slagroom en chocolade.",
+        en: "The colleague brings a box of Bossche bollen to the office. A Bossche bol is a big ball of pastry with whipped cream and chocolate.",
+      },
+      {
+        nl: "Tom neemt een hap, en de slagroom komt op zijn trui. Iedereen lacht. \"{{Ik hoop dat er morgen nog een is,|wens}}\" zegt Tom.",
+        en: "Tom takes a bite, and the whipped cream lands on his sweater. Everybody laughs. \"I hope there is another one tomorrow,\" says Tom.",
+      },
+      {
+        nl: "\"{{Ik zou willen dat ik ook in Den Bosch woonde,|wens}}\" zegt hij. Zijn collega lacht. \"Kom in het weekend op bezoek. Dan komt je wens uit!\"",
+        en: "\"I wish I lived in Den Bosch too,\" he says. His colleague laughs. \"Come and visit at the weekend. Then your wish comes true!\"",
+      },
+    ],
+    quiz: [
+      { q: "What does “Ik hoop dat er morgen nog een is” mean?", options: ["I hope there is another one tomorrow", "I know there is one tomorrow", "I hope I can bake one tomorrow"], answer: 0 },
+      { q: "Which word fits? “Ik zou willen ___ ik in Den Bosch woonde.”", options: ["dat", "of", "als"], answer: 0 },
+      { q: "What does “slagroom” mean in “een bal van deeg met slagroom en chocolade”?", options: ["whipped cream", "butter", "jam"], answer: 0 },
+    ],
+  },
 ];

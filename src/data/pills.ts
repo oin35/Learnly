@@ -763,6 +763,38 @@ export const pills: Pill[] = [
     ],
     tip: "Volgens mij + verb + subject: Volgens mij ben je moe.",
   },
+  {
+    id: "terwijl",
+    title: "While: terwijl",
+    summary: "Terwijl Lisa leest, zwemt Tom",
+    points: [
+      "terwijl = while: two things happen at the same time.",
+      "In the terwijl part the verb goes to the END: terwijl Lisa een boek leest.",
+      "After the comma the main verb comes first: Terwijl Lisa een boek leest, zwemt Tom in de zee.",
+      "Normal order is also fine: Tom zwemt in de zee, terwijl Lisa een boek leest.",
+    ],
+    examples: [
+      { nl: "Terwijl ik kook, luistert hij naar muziek.", en: "While I cook, he listens to music." },
+      { nl: "Ze praat, terwijl ze fietst.", en: "She talks while she cycles." },
+    ],
+    tip: "terwijl, als, toen, omdat, dat: after all of them the verb goes to the end.",
+  },
+  {
+    id: "wens",
+    title: "Hopes and wishes",
+    summary: "Ik hoop dat … · Ik zou willen dat …",
+    points: [
+      "Ik hoop dat … = I hope that … (something that can really happen). Verb at the end: Ik hoop dat er nog een is.",
+      "Ik zou willen dat … = I wish … (often something that is not true now). Use the past form: Ik zou willen dat ik in Den Bosch woonde.",
+      "Ik zou graag … willen = I would like to …: Ik zou graag naar Zeeland willen.",
+      "de wens = the wish: Mijn grootste wens is een reis naar Zeeland.",
+    ],
+    examples: [
+      { nl: "Ik hoop dat het morgen mooi weer is.", en: "I hope that the weather is nice tomorrow." },
+      { nl: "Ik zou willen dat ik meer tijd had.", en: "I wish I had more time." },
+    ],
+    tip: "hoop = real chance; zou willen dat = a wish, often not true now.",
+  },
 ];
 
 export const pillById = new Map(pills.map((p) => [p.id, p]));
