@@ -1705,4 +1705,84 @@ export const stories: Story[] = [
       { q: "What does “slagroom” mean in “een bal van deeg met slagroom en chocolade”?", options: ["whipped cream", "butter", "jam"], answer: 0 },
     ],
   },
+  {
+    id: "de-vierdaagse",
+    title: "De Vierdaagse",
+    titleEn: "The Four Days Marches",
+    emoji: "🚶",
+    topic: "Provinces",
+    level: "A2",
+    difficulty: 10,
+    insight: {
+      title: "Nijmegen and the Four Days Marches",
+      text: "Nijmegen, in Gelderland, is often called the oldest city of the Netherlands: as the Roman town Noviomagus it received city rights in the year 98. Every July it hosts the Four Days Marches (Vierdaagse), the largest multi-day walking event in the world, with around 40,000 walkers who walk 30, 40 or 50 km a day.",
+    },
+    intro: {
+      words: ["wandeltocht", "kilometer", "trots", "voet", "pijn"],
+      pills: ["toen", "mening"],
+    },
+    paragraphs: [
+      {
+        nl: "Vorig jaar heeft Tom de Vierdaagse in Nijmegen gelopen. Dat is een wandeltocht van vier dagen in juli.",
+        en: "Last year Tom walked the Four Days Marches in Nijmegen. That is a walking event of four days in July.",
+      },
+      {
+        nl: "Elke dag heeft hij veertig kilometer gelopen. {{Toen hij op de laatste dag over de finish liep, was hij moe maar trots.|toen}}",
+        en: "Every day he walked forty kilometres. When he crossed the finish line on the last day, he was tired but proud.",
+      },
+      {
+        nl: "Lisa vraagt of hij het dit jaar weer gaat doen. \"Ik weet het nog niet,\" zegt Tom. \"Mijn voeten doen nog steeds pijn!\"",
+        en: "Lisa asks whether he is going to do it again this year. \"I don't know yet,\" says Tom. \"My feet still hurt!\"",
+      },
+      {
+        nl: "\"{{Volgens mij moet je het samen met mij doen,|mening}}\" zegt Lisa. \"Dan is het gezelliger.\" Tom lacht. \"Goed, als jij meeloopt, loop ik ook!\"",
+        en: "\"I think you should do it together with me,\" says Lisa. \"Then it is more fun.\" Tom laughs. \"OK, if you walk along, I will walk too!\"",
+      },
+    ],
+    quiz: [
+      { q: "Which sentence is correct?", options: ["Toen hij over de finish liep, was hij moe.", "Toen hij liep over de finish, was hij moe.", "Toen hij over de finish liep, hij was moe."], answer: 0 },
+      { q: "What does “Mijn voeten doen nog steeds pijn” mean?", options: ["My feet still hurt", "My feet are still cold", "My feet are still walking"], answer: 0 },
+      { q: "Which word fits? “Als jij meeloopt, ___ ik ook.”", options: ["loop", "lopen", "loopt"], answer: 0 },
+    ],
+  },
+  {
+    id: "een-bakkie-doen",
+    title: "Een bakkie doen",
+    titleEn: "Having a cuppa",
+    emoji: "☕",
+    topic: "Everyday life",
+    level: "A2",
+    difficulty: 10,
+    insight: {
+      title: "Coffee with a biscuit",
+      text: "Coffee is a big part of Dutch daily life: “een bakkie doen” is an informal way to say “have a coffee”, and at home or at work it is often served with a biscuit (“Koekje erbij?”). Historians note that by around 1750 the Dutch were already drinking coffee more often than beer.",
+    },
+    intro: {
+      words: ["bakkie", "koekje", "koffieautomaat", "gewoonte", "iemand"],
+      pills: ["zullen", "indirect"],
+    },
+    paragraphs: [
+      {
+        nl: "Het is half elf op het kantoor van Tom. Een collega vraagt: \"{{Zullen we een bakkie doen?|zullen}}\" Tom weet niet wat dat betekent.",
+        en: "It is half past ten at Tom's office. A colleague asks: \"Shall we have a cuppa?\" Tom does not know what that means.",
+      },
+      {
+        nl: "De collega legt uit dat een bakkie een kopje koffie is. Ze lopen samen naar de koffieautomaat.",
+        en: "The colleague explains that a bakkie is a cup of coffee. They walk to the coffee machine together.",
+      },
+      {
+        nl: "\"Koekje erbij?\" vraagt de collega, en hij houdt de koektrommel voor Tom. Tom pakt een koekje en zegt: \"Lekker!\"",
+        en: "\"Biscuit with it?\" asks the colleague, and he holds the biscuit tin out to Tom. Tom takes a biscuit and says: \"Tasty!\"",
+      },
+      {
+        nl: "Later vertelt Tom het aan Lisa. Lisa lacht. \"Als je in Nederland werkt, moet je weten wat een bakkie is!\" Tom vindt het een leuke gewoonte. {{Morgen vraagt hij zelf of iemand een bakkie wil doen.|indirect}}",
+        en: "Later Tom tells Lisa about it. Lisa laughs. \"If you work in the Netherlands, you have to know what a bakkie is!\" Tom thinks it is a nice habit. Tomorrow he will ask himself whether anyone wants to have a cuppa.",
+      },
+    ],
+    quiz: [
+      { q: "What does “Zullen we een bakkie doen?” mean?", options: ["Shall we have a coffee?", "Shall we do the dishes?", "Shall we bake a cake?"], answer: 0 },
+      { q: "What does “Koekje erbij?” mean?", options: ["Would you like a biscuit with it?", "Is the biscuit ready?", "Did you bake a biscuit?"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Morgen vraagt hij of iemand een bakkie wil doen.", "Morgen vraagt hij of iemand wil een bakkie doen.", "Morgen hij vraagt of iemand een bakkie wil doen."], answer: 0 },
+    ],
+  },
 ];
