@@ -1785,4 +1785,84 @@ export const stories: Story[] = [
       { q: "Which sentence is correct?", options: ["Morgen vraagt hij of iemand een bakkie wil doen.", "Morgen vraagt hij of iemand wil een bakkie doen.", "Morgen hij vraagt of iemand een bakkie wil doen."], answer: 0 },
     ],
   },
+  {
+    id: "de-zaanse-schans",
+    title: "De Zaanse Schans",
+    titleEn: "The Zaanse Schans",
+    emoji: "🏡",
+    topic: "Provinces",
+    level: "A2",
+    difficulty: 10,
+    insight: {
+      title: "Windmills and green houses in Noord-Holland",
+      text: "The Zaanse Schans, near Zaandam in Noord-Holland, is a neighbourhood with historic windmills and green wooden houses. Many buildings were moved there from the Zaan region between about 1961 and 1974; that region once had more than 1,000 windmills. Most houses are ordinary homes where people live.",
+    },
+    intro: {
+      words: ["molen", "houten", "ergens", "woonhuis", "brengen"],
+      pills: ["indirect", "zou"],
+    },
+    paragraphs: [
+      {
+        nl: "Op zaterdag gaan Tom en Lisa naar de Zaanse Schans. Dat ligt in Noord-Holland, niet ver van Amsterdam.",
+        en: "On Saturday Tom and Lisa go to the Zaanse Schans. That is in Noord-Holland, not far from Amsterdam.",
+      },
+      {
+        nl: "Er staan oude molens en groene houten huizen. Vroeger stonden die huizen ergens anders, maar mensen hebben ze naar deze plek gebracht.",
+        en: "There are old windmills and green wooden houses. In the past those houses stood somewhere else, but people brought them to this place.",
+      },
+      {
+        nl: "{{Lisa vraagt of er mensen in de huizen wonen.|indirect}} \"Ja,\" zegt een gids. \"De meeste huizen zijn gewoon woonhuizen.\"",
+        en: "Lisa asks whether people live in the houses. \"Yes,\" says a guide. \"Most houses are just ordinary homes.\"",
+      },
+      {
+        nl: "Tom vindt de molens het mooist. \"{{Ik zou graag in een groen huis willen wonen,|zou}}\" zegt hij. Lisa lacht. Ze denkt dat het daar te druk is met toeristen.",
+        en: "Tom thinks the windmills are the most beautiful. \"I would like to live in a green house,\" he says. Lisa laughs. She thinks it is too busy with tourists there.",
+      },
+    ],
+    quiz: [
+      { q: "What does “Vroeger stonden die huizen ergens anders” mean?", options: ["In the past those houses stood somewhere else", "In the past those houses were bigger", "In the past those houses were green"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Lisa vraagt of er mensen in de huizen wonen.", "Lisa vraagt of wonen er mensen in de huizen.", "Lisa vraagt wonen er of mensen in de huizen."], answer: 0 },
+      { q: "Which word fits? “Ik zou graag in een groen huis willen ___.”", options: ["wonen", "woont", "gewoond"], answer: 0 },
+    ],
+  },
+  {
+    id: "eerlijk-gezegd",
+    title: "Eerlijk gezegd",
+    titleEn: "Honestly said",
+    emoji: "🗣️",
+    topic: "Everyday life",
+    level: "A2",
+    difficulty: 10,
+    insight: {
+      title: "Dutch directness",
+      text: "Many Dutch people value direct, honest feedback with little softening: it is meant to be about the work, not about the person. Many newcomers find it blunt at first. It also differs per person and per region, so not every Dutch person is equally direct.",
+    },
+    intro: {
+      words: ["baas", "gesprek", "duidelijk", "eerlijk", "bedoelen"],
+      pills: ["mening", "als"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom werkt nu twee maanden in Nederland. Gisteren had hij een gesprek met zijn baas.",
+        en: "Tom has been working in the Netherlands for two months now. Yesterday he had a talk with his boss.",
+      },
+      {
+        nl: "Zijn baas zei: \"Je presentatie was te lang en niet duidelijk.\" Tom schrok een beetje.",
+        en: "His boss said: \"Your presentation was too long and not clear.\" Tom was a bit shocked.",
+      },
+      {
+        nl: "Hij vertelt het aan Lisa. Lisa legt uit dat veel Nederlanders direct zijn. \"{{Volgens mij bedoelt je baas het niet slecht,|mening}}\" zegt ze. \"Hij wil dat je presentatie beter wordt.\"",
+        en: "He tells Lisa about it. Lisa explains that many Dutch people are direct. \"I think your boss does not mean it badly,\" she says. \"He wants your presentation to get better.\"",
+      },
+      {
+        nl: "\"{{Als ik eerlijk ben, vind ik dat hij gelijk heeft,|als}}\" zegt Tom. Volgende week geeft hij een kortere presentatie. Daarna zegt zijn baas: \"Dat was goed!\" Tom is blij.",
+        en: "\"If I am honest, I think he is right,\" says Tom. Next week he gives a shorter presentation. Afterwards his boss says: \"That was good!\" Tom is happy.",
+      },
+    ],
+    quiz: [
+      { q: "What does “Volgens mij bedoelt je baas het niet slecht” mean?", options: ["I think your boss does not mean it badly", "I think your boss is not a bad person", "Your boss thinks I am bad"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Als ik eerlijk ben, vind ik dat hij gelijk heeft.", "Als ik eerlijk ben, ik vind dat hij gelijk heeft.", "Als ik ben eerlijk, vind ik dat hij gelijk heeft."], answer: 0 },
+      { q: "What does “duidelijk” mean in “niet duidelijk”?", options: ["clear", "short", "funny"], answer: 0 },
+    ],
+  },
 ];
