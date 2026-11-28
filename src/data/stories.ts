@@ -1865,4 +1865,84 @@ export const stories: Story[] = [
       { q: "What does “duidelijk” mean in “niet duidelijk”?", options: ["clear", "short", "funny"], answer: 0 },
     ],
   },
+  {
+    id: "nederlandse-woorden-in-het-engels",
+    title: "Nederlandse woorden in het Engels",
+    titleEn: "Dutch words in English",
+    emoji: "📖",
+    topic: "Language",
+    level: "A2",
+    difficulty: 10,
+    insight: {
+      title: "English borrowed from Dutch",
+      text: "Several English words come from Dutch: cookie from koekje, boss from baas, skate from schaats and yacht from jacht. Baas was the usual Dutch word sailors used for the captain of a ship, and it entered English in the 17th century.",
+    },
+    intro: {
+      words: ["koekje", "baas", "kapitein", "zeeman", "vanavond"],
+      pills: ["vroeger", "plan"],
+    },
+    paragraphs: [
+      {
+        nl: "Tom heeft een Engelse collega. Ze zegt dat Nederlands een moeilijke taal is.",
+        en: "Tom has an English colleague. She says that Dutch is a difficult language.",
+      },
+      {
+        nl: "Tom lacht. \"Je kent al veel Nederlandse woorden,\" zegt hij. \"Het Engelse woord cookie komt van ons woord koekje.\"",
+        en: "Tom laughs. \"You already know many Dutch words,\" he says. \"The English word cookie comes from our word koekje.\"",
+      },
+      {
+        nl: "\"En boss komt van baas,\" legt Tom uit. \"{{Vroeger zeiden zeelui baas tegen hun kapitein.|vroeger}}\"",
+        en: "\"And boss comes from baas,\" Tom explains. \"In the past sailors called their captain baas.\"",
+      },
+      {
+        nl: "De collega vindt het grappig. \"{{Dan ga ik vanavond een koekje eten,|plan}} en daarna ga ik schaatsen,\" zegt ze. \"Dat zijn al twee Nederlandse woorden!\"",
+        en: "The colleague thinks it is funny. \"Then this evening I am going to eat a cookie, and after that I am going skating,\" she says. \"Those are already two Dutch words!\"",
+      },
+    ],
+    quiz: [
+      { q: "Which English word comes from “koekje”?", options: ["cookie", "coffee", "cook"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Vroeger zeiden zeelui baas tegen hun kapitein.", "Vroeger zeelui zeiden baas tegen hun kapitein.", "Vroeger zeiden baas zeelui tegen hun kapitein."], answer: 0 },
+      { q: "What does “vanavond” mean in “Ik ga vanavond een koekje eten”?", options: ["this evening", "yesterday", "tomorrow morning"], answer: 0 },
+    ],
+  },
+  {
+    id: "vier-en-vijf-mei",
+    title: "Vier en vijf mei",
+    titleEn: "Four and five May",
+    emoji: "🕊️",
+    topic: "Calendar",
+    level: "A2",
+    difficulty: 10,
+    insight: {
+      title: "Remembrance and Liberation",
+      text: "On 4 May at 8 p.m. the Netherlands keeps two minutes of silence for the war dead (Dodenherdenking); even public transport stops. On 5 May, Liberation Day (Bevrijdingsdag) celebrates the liberation of 1945, with festivals and events all over the country.",
+    },
+    intro: {
+      words: ["stil", "vieren", "vrijheid", "festival", "zelfs"],
+      pills: ["toen", "mening"],
+    },
+    paragraphs: [
+      {
+        nl: "Op vier mei is het om acht uur in de avond twee minuten stil in Nederland. Mensen denken dan aan de doden van de oorlog.",
+        en: "On the fourth of May at eight o'clock in the evening it is quiet for two minutes in the Netherlands. People then think of the dead of the war.",
+      },
+      {
+        nl: "Vorig jaar stond Lisa met Tom op een plein. {{Toen het acht uur was, was iedereen stil.|toen}} Zelfs de bussen stopten.",
+        en: "Last year Lisa stood on a square with Tom. When it was eight o'clock, everyone was silent. Even the buses stopped.",
+      },
+      {
+        nl: "De volgende dag, op vijf mei, is het Bevrijdingsdag. Dan vieren mensen de vrijheid. Er zijn overal festivals met muziek.",
+        en: "The next day, on the fifth of May, it is Liberation Day. Then people celebrate freedom. There are festivals with music everywhere.",
+      },
+      {
+        nl: "{{Lisa vindt het mooi dat die twee dagen naast elkaar liggen.|mening}} \"Eerst stil zijn, en daarna samen feest vieren,\" zegt ze. Tom is het met haar eens.",
+        en: "Lisa thinks it is beautiful that those two days are next to each other. \"First being silent, and then celebrating together,\" she says. Tom agrees with her.",
+      },
+    ],
+    quiz: [
+      { q: "What does “Dan vieren mensen de vrijheid” mean?", options: ["Then people celebrate freedom", "Then people work for free", "Then people stay at home"], answer: 0 },
+      { q: "Which sentence is correct?", options: ["Toen het acht uur was, was iedereen stil.", "Toen het was acht uur, was iedereen stil.", "Toen het acht uur was, iedereen was stil."], answer: 0 },
+      { q: "What does “stil” mean in “twee minuten stil”?", options: ["silent", "still (= yet)", "slow"], answer: 0 },
+    ],
+  },
 ];
